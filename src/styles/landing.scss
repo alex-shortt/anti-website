@@ -1,0 +1,371 @@
+.landing {
+  background-color: $containerBG;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+  overflow: hidden;
+}
+
+@mixin no-select {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.welcome {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 999;
+  perspective: 1000px;
+  transform: translate3d(0, 0, 0);
+  cursor: pointer;
+
+  &-logo {
+    height: 250px;
+    width: 200px;
+    transform: translate3d(0, 0, 0);
+
+    & img {
+      height: auto;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 375px) {
+      height: 200px;
+      width: 150px;
+    }
+    @media screen and (max-height: 575px) {
+      width: 175px;
+    }
+  }
+
+  &-text,
+  &-text > * {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  &-text {
+    @include no-select display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: loves;
+    color: white;
+    transform: translateY(300px);
+    width: 100%;
+    height: 40px;
+
+    @media screen and (max-height: 700px) {
+      transform: translateY(200px);
+    }
+    @media screen and (max-height: 700px) {
+      transform: translateY(150px);
+    }
+
+    > * {
+      font-size: 40px;
+      animation: giggle 1s ease infinite;
+      mix-blend-mode: difference;
+      text-align: center;
+    }
+
+    &-r {
+      color: #f00;
+    }
+
+    &-g {
+      color: #0f0;
+      animation-delay: -0.67s;
+    }
+
+    &-b {
+      color: #00f;
+      animation-delay: -0.33s;
+    }
+  }
+
+  &-logo-text {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    height: 0;
+    color: white;
+    transition: height 1s linear;
+
+    &.fade-in {
+      transition: opacity 1s linear, height 1s linear;
+      opacity: 1 !important;
+      visibility: visible;
+    }
+
+    &-anti {
+      font-family: loves;
+      font-size: 100px;
+      text-align: center;
+
+      @media screen and (max-width: 375px) {
+        font-size: 60px;
+      }
+    }
+
+    &-others {
+      font-family: Open Sans;
+      font-size: 13px;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-around;
+      bottom: 0;
+      transform: translateY(125%);
+      color: $secondColor;
+
+      @media screen and (max-width: 600px) {
+        font-size: 10px;
+      }
+
+      &-dot {
+        font-family: Open Sans;
+        line-height: 1em;
+        opacity: 1;
+      }
+
+      &-terms {
+        cursor: pointer;
+        opacity: 0.75;
+        letter-spacing: 0.1em;
+        transition: opacity 0.15s linear;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &-privacy {
+        cursor: pointer;
+        opacity: 0.75;
+        letter-spacing: 0.1em;
+        transition: opacity 0.15s linear;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &-tax {
+        cursor: pointer;
+        opacity: 0.75;
+        letter-spacing: 0.1em;
+        transition: opacity 0.15s linear;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@keyframes giggle {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+.shrink {
+  transition: width 1.5s, height 1.5s, background-color 1.5s;
+  width: 300px;
+  height: 450px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 4px white solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate3d(0, 0, 0);
+  cursor: auto;
+
+  @media screen and (max-width: 600px) {
+    width: 250px;
+    height: 400px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 200px;
+    height: 350px;
+  }
+  @media screen and (max-height: 650px) {
+    height: 400px;
+  }
+  @media screen and (max-height: 575px) {
+    height: 350px;
+  }
+}
+
+.fade {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+#fractal-terrain-top {
+  width: 100vw;
+  height: 50%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform-origin: bottom left;
+  transform: scaleY(2) scaleX(1.4) translateX(-20px);
+}
+
+#fractal-terrain-bottom {
+  width: 100vw;
+  height: 50%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  transform-origin: top left;
+  transform: scaleY(2) scaleX(1.4) translateX(-20px);
+}
+
+.landing-links-style {
+  opacity: 0;
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  color: $secondColor;
+  font-size: 50px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.landing-links {
+  @include no-select opacity: 0;
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  color: $secondColor;
+  font-size: 50px;
+  text-align: center;
+  z-index: 9999;
+
+  &-home-top,
+  &-home-bot,
+  &-home-left,
+  &-home-right {
+    display: flex;
+    position: absolute;
+    @media screen and (max-width: 1500px) {
+      font-size: 0.8em;
+    }
+    @media screen and (max-width: 1300px) {
+      font-size: 0.6em;
+    }
+    @media screen and (max-width: 1000px) {
+      font-size: 0.4em;
+    }
+    @media screen and (max-width: 650px) {
+      font-size: 0.6em;
+    }
+  }
+
+  &-home-top {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-home-bot {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-home-left {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 650px) {
+      left: 0;
+      transform: rotateZ(-90deg) translateY(-50%);
+    }
+  }
+
+  &-home-right {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 650px) {
+      right: -30px;
+      transform: rotateZ(90deg) translateY(-50%);
+    }
+    @media screen and (max-width: 320px) {
+      right: -35px;
+      transform: rotateZ(90deg) translateY(-50%);
+    }
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

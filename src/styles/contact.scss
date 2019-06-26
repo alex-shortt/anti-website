@@ -1,0 +1,851 @@
+$purple: #333366;
+
+.contact {
+  background-color: $containerBG;
+  display: flex;
+}
+
+.contact-left {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  width: 50%;
+}
+
+.contact-right {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.landing-links {
+  &-contact-top {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    width: 35%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    &-left {
+      color: $secondColor;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-right {
+      color: $primaryColor;
+
+      &:hover {
+        //cursor: pointer;
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 50%;
+    }
+    @media screen and (max-width: 900px) {
+      font-size: 40px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 30px;
+    }
+    @media screen and (max-width: 425px) {
+      top: 15px;
+      font-size: 20px;
+      width: 60%;
+    }
+    @media screen and (max-width: 320px) {
+      transform: translateX(-70%);
+      top: auto;
+      bottom: 10px;
+    }
+  }
+}
+
+.contact-main {
+  max-height: 500px;
+  max-width: 1200px;
+  height: 90%;
+  width: 90%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contact-bg {
+  height: 100%;
+  width: 100%;
+  border: 3px white solid;
+  overflow: hidden;
+  position: relative;
+  background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
+}
+
+.contact-message {
+  max-height: 47.5%;
+  max-width: 500px;
+  width: 90%;
+  background-color: $highlightColor;
+  border: 3px black solid;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  &-title,
+  &-name,
+  &-email,
+  &-message {
+    font-family: Open Sans;
+    font-size: 30px;
+    @media screen and (max-width: 400px) {
+      font-size: 22px;
+    }
+  }
+
+  &-title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    &-icon {
+      height: 40px;
+      margin-right: 15px;
+
+      @media screen and (max-width: 400px) {
+        height: 30px;
+      }
+    }
+    &-text {
+    }
+  }
+
+  &-divider {
+    border: black solid 2px;
+    width: 80%;
+    margin-top: 0 !important;
+
+    @media screen and (max-height: 750px) {
+      margin: 0;
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 90%;
+    }
+  }
+
+  &-name {
+    width: 400px;
+
+    &-text {
+      width: 50px;
+      text-align: left;
+    }
+    &-input {
+      line-height: 1em;
+      width: 70%;
+      max-width: 300px;
+
+      input {
+        border-style: border-box;
+        border: none;
+        box-sizing: border-box;
+
+        background: none;
+        width: 100%;
+        height: 100%;
+        font-family: loves;
+        font-size: 0.8em;
+        outline: none !important;
+
+        border-bottom: 2px solid black;
+        border-radius: 0;
+        transition: border-bottom 0.25s, border 0.25s;
+
+        &:focus,
+        &:active {
+          border-bottom: 4px solid black;
+        }
+      }
+    }
+  }
+
+  &-email {
+    width: 400px;
+    &-text {
+      width: 50px;
+      text-align: left;
+    }
+    &-input {
+      height: 50px;
+      line-height: 1em;
+      width: 70%;
+      max-width: 300px;
+
+      input {
+        border-style: border-box;
+        box-sizing: border-box;
+        border: none;
+        background: none;
+        width: 100%;
+        height: 100%;
+        font-family: loves;
+        font-size: 0.8em;
+        outline: none !important;
+
+        border-bottom: 2px solid black;
+        border-radius: 0;
+        transition: border-bottom 0.25s, border 0.25s;
+
+        &:focus,
+        &:active {
+          border-bottom: 4px solid black;
+        }
+      }
+    }
+  }
+
+  &-message {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    width: 400px;
+    height: 175px;
+
+    &-text {
+      width: 400px;
+      text-align: left;
+
+      @media screen and (max-width: 1350px) {
+        width: 350px;
+      }
+      @media screen and (max-width: 425px) {
+        width: 250px;
+      }
+    }
+    &-input {
+      flex: 1;
+      width: 100%;
+      line-height: 1em;
+
+      textarea {
+        border-style: border-box;
+        box-sizing: border-box;
+        border: none;
+        background: none;
+        resize: none;
+        width: 100%;
+        height: 100%;
+        font-family: loves;
+        font-size: 0.8em;
+        outline: none !important;
+        box-sizing: border-box;
+
+        border-bottom: 2px solid black;
+        border-radius: 0;
+        transition: border-bottom 0.25s, border 0.25s;
+
+        &:focus,
+        &:active {
+          border-bottom: 4px solid black;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 350px;
+      height: 100px;
+      margin-bottom: 25px;
+      font-size: 25px;
+    }
+    @media screen and (max-height: 750px) {
+      font-size: 20px;
+    }
+    @media screen and (max-width: 425px) {
+      width: 250px;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &-send {
+    border-radius: 5px;
+    background-color: black;
+    width: 150px;
+    padding: 5px 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 10px 0;
+
+    @media screen and (max-height: 750px) {
+      padding: 0px 10px;
+      margin: 5px 0;
+    }
+
+    &-icon {
+      fill: $highlightColor;
+      height: 30px;
+    }
+
+    &-text {
+      font-family: Open Sans;
+      font-size: 30px;
+      color: $highlightColor;
+    }
+
+    @media screen and (max-height: 675px) {
+      margin: 5px 0px;
+      padding: 0 10px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 0 10px;
+  }
+
+  &-name,
+  &-email {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    @media screen and (max-height: 750px) {
+      margin-bottom: 5px;
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 350px;
+    }
+    @media screen and (max-width: 425px) {
+      justify-content: space-between;
+      width: 250px;
+      margin-bottom: 5px;
+    }
+
+    &-text {
+      @media screen and (max-width: 1350px) {
+        font-size: 25px;
+      }
+      @media screen and (max-height: 750px) {
+        font-size: 20px;
+      }
+      @media screen and (max-width: 425px) {
+        font-size: 15px;
+      }
+    }
+
+    &-input {
+      @media screen and (max-width: 1350px) {
+        width: 250px;
+        height: 30px;
+      }
+      @media screen and (max-height: 750px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 425px) {
+        width: 175px;
+      }
+    }
+  }
+}
+
+.contact-signup {
+  background-color: $purple;
+  border: 3px black solid;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+
+  width: 90%;
+  max-height: 47.5%;
+  max-width: 400px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  &-title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+    background-color: black;
+    font-family: Open Sans;
+    font-size: 35px;
+    color: $purple;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 425px) {
+      font-size: 25px;
+    }
+  }
+
+  &-info {
+    width: 400px;
+    height: 70px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+
+    &-icon {
+      fill: $purple;
+      height: 100%;
+    }
+    &-text {
+      font-family: Open Sans;
+      font-size: 20px;
+      color: black;
+      width: 60%;
+      margin-left: 15px;
+
+      @media screen and (max-width: 1350px) {
+        font-size: 20px;
+      }
+      @media screen and (max-width: 425px) {
+        font-size: 15px;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      width: 100%;
+    }
+  }
+
+  &-email {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 350px;
+    margin-bottom: 20px;
+
+    &-text {
+      font-family: Open Sans;
+      font-size: 25px;
+      color: black;
+      width: 50px;
+      height: 30px;
+      text-align: left;
+
+      @media screen and (max-height: 750px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 425px) {
+        font-size: 20px;
+      }
+    }
+
+    &-input {
+      width: 250px;
+      height: 50px;
+      line-height: 1em;
+
+      @media screen and (max-width: 1350px) {
+        height: 30px;
+      }
+      @media screen and (max-width: 425px) {
+        width: 175px;
+      }
+
+      input {
+        border-style: border-box;
+        box-sizing: border-box;
+        border: none;
+        background: none;
+        width: 100%;
+        height: 100%;
+        font-family: loves;
+        font-size: 1em;
+        outline: none !important;
+
+        border-bottom: 2px solid black;
+        border-radius: 0;
+        transition: border-bottom 0.25s, border 0.25s;
+
+        &:focus,
+        &:active {
+          border-bottom: 4px solid black;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1350px) {
+      margin-bottom: 30px;
+    }
+    @media screen and (max-width: 425px) {
+      width: 250px;
+      margin-bottom: 0;
+    }
+  }
+
+  &-send {
+    border-radius: 5px;
+    background-color: black;
+    width: 350px;
+    height: 50px;
+    margin-top: 25px;
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+
+    &-combo {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-around;
+      width: 40%;
+      height: 100%;
+    }
+
+    &-text {
+      font-family: Open Sans;
+      font-size: 30px;
+      color: $purple;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    &-icon {
+      fill: $purple;
+      height: 70%;
+    }
+
+    @media screen and (max-width: 425px) {
+      width: 250px;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 0 10px;
+  }
+}
+
+.contact-message-send-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 300px;
+  height: 100px;
+
+  border: 3px black solid;
+  background-color: $highlightColor;
+  transform: translate(-50%, -50%);
+  font-family: Open Sans;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  &-message {
+    font-size: 18px;
+    color: black;
+    margin: 15px;
+  }
+
+  &-ok {
+    width: 200px;
+    height: 25px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: black;
+    color: $highlightColor;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.contact-signup-send-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 300px;
+  height: 100px;
+
+  border: 3px black solid;
+  background-color: $purple;
+  transform: translate(-50%, -50%);
+  font-family: Open Sans;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  &-message {
+    font-size: 15px;
+    color: black;
+    margin: 15px;
+  }
+
+  &-ok {
+    width: 200px;
+    height: 25px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: black;
+    color: $purple;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+#mc_embed_signup {
+  width: 100%;
+}
+
+.mc-field-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* MailChimp Form Embed Code - Classic - 12/17/2015 v10.7 */
+#mc_embed_signup h2 {
+  font-weight: bold;
+  padding: 0;
+  margin: 15px 0;
+  font-size: 1.4em;
+}
+#mc_embed_signup input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+#mc_embed_signup input[type="radio"] {
+  -webkit-appearance: radio;
+}
+#mc_embed_signup .button {
+  clear: both;
+  background-color: #aaa;
+  border: 0 none;
+  border-radius: 4px;
+  transition: all 0.23s ease-in-out 0s;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: normal;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 5px 10px 0;
+  padding: 0 22px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: auto;
+}
+#mc_embed_signup .button:hover {
+  background-color: #777;
+}
+#mc_embed_signup .small-meta {
+  font-size: 11px;
+}
+#mc_embed_signup .nowrap {
+  white-space: nowrap;
+}
+
+#mc_embed_signup .mc-field-group {
+}
+#mc_embed_signup .size1of2 {
+  clear: none;
+  float: left;
+  display: inline-block;
+  width: 46%;
+  margin-right: 4%;
+}
+* html #mc_embed_signup .size1of2 {
+  margin-right: 2%; /* Fix for IE6 double margins. */
+}
+#mc_embed_signup .mc-field-group label {
+  display: block;
+  margin-bottom: 3px;
+}
+#mc_embed_signup .mc-field-group input {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#mc_embed_signup .mc-field-group select {
+  display: inline-block;
+  width: 99%;
+  padding: 5px 0;
+  margin-bottom: 2px;
+}
+
+#mc_embed_signup .datefield,
+#mc_embed_signup .phonefield-us {
+  padding: 5px 0;
+}
+#mc_embed_signup .datefield input,
+#mc_embed_signup .phonefield-us input {
+  display: inline;
+  width: 60px;
+  margin: 0 2px;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 5px 0 2px 0;
+}
+#mc_embed_signup .phonefield-us .phonearea input,
+#mc_embed_signup .phonefield-us .phonedetail1 input {
+  width: 40px;
+}
+#mc_embed_signup .datefield .monthfield input,
+#mc_embed_signup .datefield .dayfield input {
+  width: 30px;
+}
+#mc_embed_signup .datefield label,
+#mc_embed_signup .phonefield-us label {
+  display: none;
+}
+
+#mc_embed_signup .indicates-required {
+  text-align: right;
+  font-size: 11px;
+  margin-right: 4%;
+}
+#mc_embed_signup .asterisk {
+  color: #e85c41;
+  font-size: 150%;
+  font-weight: normal;
+  position: relative;
+  top: 5px;
+}
+#mc_embed_signup .clear {
+  clear: both;
+}
+
+#mc_embed_signup .mc-field-group.input-group ul {
+  margin: 0;
+  padding: 5px 0;
+  list-style: none;
+}
+#mc_embed_signup .mc-field-group.input-group ul li {
+  display: block;
+  padding: 3px 0;
+  margin: 0;
+}
+#mc_embed_signup .mc-field-group.input-group label {
+  display: inline;
+}
+#mc_embed_signup .mc-field-group.input-group input {
+  display: inline;
+  width: auto;
+  border: none;
+}
+
+#mc_embed_signup div#mce-responses {
+  float: left;
+  top: -1.4em;
+  padding: 0em 0.5em 0em 0.5em;
+  overflow: hidden;
+  width: 90%;
+  margin: 0 5%;
+  clear: both;
+}
+#mc_embed_signup div.response {
+  margin: 1em 0;
+  padding: 1em 0.5em 0.5em 0;
+  font-weight: bold;
+  float: left;
+  top: -1.5em;
+  z-index: 1;
+  width: 80%;
+}
+#mc_embed_signup #mce-error-response {
+  display: none;
+}
+#mc_embed_signup #mce-success-response {
+  color: #529214;
+  display: none;
+}
+#mc_embed_signup label.error {
+  display: block;
+  float: none;
+  width: auto;
+  margin-left: 1.05em;
+  text-align: left;
+  padding: 0.5em 0;
+}
+
+#mc-embedded-subscribe {
+  clear: both;
+  width: 100%;
+  display: block;
+}
+#mc_embed_signup #num-subscribers {
+  font-size: 1.1em;
+}
+#mc_embed_signup #num-subscribers span {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  margin-right: 0.5em;
+  font-weight: bold;
+}
+
+#mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error {
+  font-family: Open sans;
+  background: none;
+  margin: 0;
+  margin-top: 5px;
+  margin-bottom: -20px;
+  padding: 5px 10px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  z-index: 1;
+  color: #fff;
+}

@@ -1,0 +1,260 @@
+$mobile: 875px;
+
+.popup {
+  background-color: $containerBG;
+}
+
+.popup-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.landing-links {
+  &-popup-right {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    transform: translateY(-50%) rotateZ(90deg);
+    display: flex;
+    width: 35%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    @media screen and (max-width: 1450px) {
+      right: -12%;
+    }
+    @media screen and (max-width: 1250px) {
+      right: -14%;
+      font-size: 40px;
+    }
+    @media screen and (max-width: 850px) {
+      font-size: 30px;
+    }
+    @media screen and (max-width: 650px) {
+      font-size: 25px;
+    }
+    @media screen and (max-width: $mobile) {
+      right: 0;
+      width: 90%;
+      transform: translate(-5%, -750%);
+    }
+
+    &-bot {
+      color: $secondColor;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-top {
+      color: $primaryColor;
+
+      &:hover {
+        //cursor: pointer;
+      }
+    }
+  }
+}
+
+.popup-main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 90%;
+  max-width: 960px;
+  height: 85%;
+  position: relative;
+
+  @media screen and (max-width: $mobile) {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 92.5%;
+  }
+}
+
+.popup-image-container {
+  position: relative;
+  height: 100%;
+  flex: 1;
+
+  @media screen and (max-width: $mobile) {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.popup-image-cover {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.popup-image-container-carousel {
+  height: 100%;
+  width: 100%;
+}
+
+.popup-slide {
+  height: 100%;
+  width: 100%;
+}
+
+.singleSlide {
+  background-size: cover;
+  position: absolute;
+  left: 100%;
+  object-fit: cover;
+}
+@keyframes slideIn {
+  100% {
+    left: 0;
+  }
+}
+
+.slideInRight {
+  left: -100%;
+  -webkit-animation: slideIn 1s forwards;
+  animation: slideIn 1s forwards;
+}
+
+.slideInLeft {
+  left: 100%;
+  -webkit-animation: slideIn 1s forwards;
+  animation: slideIn 1s forwards;
+}
+@keyframes slideOutLeft {
+  100% {
+    left: -100%;
+  }
+}
+
+.slideOutLeft {
+  -webkit-animation: slideOutLeft 1s forwards;
+  animation: slideOutLeft 1s forwards;
+}
+@keyframes slideOutRight {
+  100% {
+    left: 100%;
+  }
+}
+
+.slideOutRight {
+  -webkit-animation: slideOutRight 1s forwards;
+  animation: slideOutRight 1s forwards;
+}
+
+.popup-text {
+  padding-left: 50px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  box-sizing: border-box;
+
+  @media screen and (max-width: $mobile) {
+    width: 90%;
+    padding: 0;
+    border-top: 4px white solid;
+    margin: 20px auto 0;
+  }
+
+  &-title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 38px;
+    color: $highlightColor;
+    text-align: right;
+    line-height: 1em;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 950px) {
+      font-size: 30px;
+    }
+    @media screen and (max-height: 700px) {
+      font-size: 30px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 28px;
+    }
+    @media screen and (max-width: $mobile) {
+      margin: 10px 0;
+      text-align: center;
+    }
+  }
+
+  &-subtitle {
+    font-family: loves;
+    font-size: 24px;
+    color: $secondColor;
+    text-align: right;
+    line-height: 1em;
+    @media screen and (max-width: 950px) {
+      font-size: 22px;
+    }
+    @media screen and (max-height: 700px) {
+      font-size: 22px;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: $mobile) {
+      text-align: center;
+    }
+  }
+
+  &-controller {
+    display: flex;
+    align-items: center;
+    transition: all 0.1s ease-in-out;
+    opacity: 0.8;
+    z-index: 999;
+    font-size: 40px;
+    margin: 10px 0;
+    margin-left: auto;
+
+    @media screen and (max-width: 950px) {
+      font-size: 35px;
+    }
+
+    @media screen and (max-width: $mobile) {
+      margin: 10px auto;
+    }
+
+    &-left,
+    &-right {
+      cursor: pointer;
+      height: 45px;
+      width: 15px;
+      margin: 0 5px;
+
+      @media screen and (max-width: 950px) {
+        height: 35px;
+      }
+
+      polyline {
+        stroke-width: 3px;
+        transition: all 0.1s ease-in-out;
+      }
+
+      &:hover > polyline {
+        stroke-width: 5px;
+        opacity: 1;
+      }
+
+      &:active > polyline {
+        stroke-width: 8px;
+        opacity: 1;
+      }
+    }
+
+    &-counter {
+      font-family: loves;
+      color: $secondColor;
+      width: 110px;
+      text-align: center;
+    }
+  }
+}

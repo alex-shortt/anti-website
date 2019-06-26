@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#clean folder
+rm -rf dist/*
+
+#build and compile css
+npm run build
+node-sass --output-style compressed src/styles/main.scss > dist/main.css
+
+#copy over html and assets
+cp index.html dist
+cp -R assets dist
