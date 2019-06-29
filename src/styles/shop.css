@@ -13,12 +13,37 @@ body, html {
 
 .shop-page__container {
   display: flex;
-  justify-content: center;
   height: 90%;
-  width: 100%;
+  width: 80%;
   color:white;
+}
+
+#return {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  font-size: 48px;
+  transition: .5s;
+}
+
+#return:hover {
+  font-size: 50px;
+  transition: .5s;
 }
 
 .shop-page__column-one {
   width: auto;
+}
+.shop-page__column-two {
+  display: flex;
+  flex-direction: column;
+  font-family: 'VCR', sans-serif;
+  font-weight: lighter;
+  justify-content: center;
+  height: 80%;
+  text-transform: uppercase;
 }
