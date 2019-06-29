@@ -32,7 +32,7 @@ async function loadButtonNav(sphere) {
 
   //HOME
   var buttons = $(".landing-links").children()
-  buttons.click(function() {
+  buttons.click(function () {
     var text = $(this)
       .text()
       .toLowerCase()
@@ -70,7 +70,7 @@ async function loadButtonNav(sphere) {
 
   //SOCIALS
   buttons = $(".landing-links-socials-bot").children()
-  buttons.click(function() {
+  buttons.click(function () {
     var text = $(this)
       .text()
       .toLowerCase()
@@ -87,7 +87,7 @@ async function loadButtonNav(sphere) {
 
   //LOOKBOOK
   buttons = $(".landing-links-lookbook-left").children()
-  buttons.click(function() {
+  buttons.click(function () {
     var text = $(this)
       .text()
       .toLowerCase()
@@ -104,7 +104,7 @@ async function loadButtonNav(sphere) {
 
   //POPUP
   buttons = $(".landing-links-popup-right").children()
-  buttons.click(function() {
+  buttons.click(function () {
     var text = $(this)
       .text()
       .toLowerCase()
@@ -121,7 +121,7 @@ async function loadButtonNav(sphere) {
 
   //CONTACT
   buttons = $(".landing-links-contact-top").children()
-  buttons.click(function() {
+  buttons.click(function () {
     var text = $(this)
       .text()
       .toLowerCase()
@@ -138,3 +138,18 @@ async function loadButtonNav(sphere) {
 }
 
 init(9, 9)
+
+
+$(document).ready(() => {
+  $('body').css('display', 'none')
+  $('body').fadeIn(1000)
+
+  $('#welcome-logo__hyperlink').click(() => {
+    event.preventDefault()
+    var newLocation = $('#welcome-logo__hyperlink').attr('href');
+    $('body').fadeOut(1000, () => pageRedirect(newLocation))
+    function pageRedirect(newLocation) {
+      window.location = newLocation
+    }
+  })
+})

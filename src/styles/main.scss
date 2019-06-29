@@ -124,3 +124,13 @@ body {
     text-align: center;
   }
 }
+
+#welcome-logo__hyperlink {
+  text-decoration: none;
+  color: white;
+  transition: .5s;
+  &:hover {
+    font-size: 120px;
+    transition: .5s;
+  }
+}
