@@ -2,7 +2,7 @@ body, html {
   margin: 0;
   overflow: hidden;
 }
-.shop-page {
+#shop-page {
   background-color: black;
   width: 100%;
   height: 100vh;
@@ -36,8 +36,16 @@ body, html {
 }
 
 .shop-page__column-one {
-  width: auto;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#product {
+  position: absolute;
+}
+
 .shop-page__column-two {
   display: flex;
   flex-direction: column;

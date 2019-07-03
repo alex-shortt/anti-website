@@ -15,28 +15,19 @@
     }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="./index.js"></script>
+  <script src="http://sdks.shopifycdn.com/js-buy-sdk/v2/latest/index.umd.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="./scripts/index.js"></script>
 </head>
-
 <body>
-  <div class="shop-page">
-    <div class="shop-page__container">
-      <a id="return" href="../../../index.html">return</a>
-      <div class="shop-page__column-one">
-        <img class="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png" width="900px"
-          height="95%" />
-      </div>
-      <div class="shop-page__column-two">
-        <div class="shop-page__column-two-section">
-          <h1>Anti Hoodie</h1>
-        </div>
-        <div class="shop-page__column-two-section">
-          <h3>$100</h3>
-          <span>Description</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="shop-page"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+
+  <!-- React Component -->
+  <script src="../scripts/shop.js"></script>
 </body>
 
 </html>
