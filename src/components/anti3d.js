@@ -144,14 +144,6 @@ var initAnti3D = (function() {
                   var x = event.clientX;
                   var y = event.clientY;
 
-                  console.log("x:", x);
-                  console.log(
-                    "y:",
-                    y -
-                      $("#anti3d").get(0).offsetTop -
-                      $(".landing-links-socials-bot").outerHeight(true)
-                  );
-
                   planets[0].pos.y =
                     y -
                     $("#anti3d").get(0).offsetTop -
