@@ -45,15 +45,15 @@ const blurEvent = () => {
   $("html").css("min-height", "");
 };
 
-$("#contact-name").on("focus", focusEvent());
-$("#contact-email").on("focus", focusEvent());
-$("#contact-message").on("focus", focusEvent());
-$("#mce-EMAIL").on("focus", focusEvent());
+$("#contact-name").on("focus", focusEvent);
+$("#contact-email").on("focus", focusEvent);
+$("#contact-message").on("focus", focusEvent);
+$("#mce-EMAIL").on("focus", focusEvent);
 
-$("#contact-name").on("blur", blurEvent());
-$("#contact-email").on("blur", blurEvent());
-$("#contact-message").on("blur", blurEvent());
-$("#mce-EMAIL").on("blur", blurEvent());
+$("#contact-name").on("blur", blurEvent);
+$("#contact-email").on("blur", blurEvent);
+$("#contact-message").on("blur", blurEvent);
+$("#mce-EMAIL").on("blur", blurEvent);
 
 var signup_box = $(".contact-signup");
 var signup_button = $(".contact-signup-send");
