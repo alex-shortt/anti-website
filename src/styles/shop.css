@@ -21,9 +21,10 @@ html {
 
 #return {
   position: absolute;
+  z-index: 2;
   top: 50px;
   left: 50px;
-  font-family: sans-serif;
+  font-family: "VCR", sans-serif;
   font-weight: bold;
   text-decoration: none;
   color: white;
@@ -32,11 +33,12 @@ html {
 }
 
 #return:hover {
-  font-size: 50px;
+  color: rgba(250, 250, 250, .5);
   transition: 0.2s;
 }
 
 .cart {
+  z-index: 3;
   background-color: black;
   outline: none;
   border: white solid 2px;
@@ -78,7 +80,7 @@ html {
 
 .remove-details__button:hover {
   cursor: pointer;
-  font-size: 35px;
+  color: rgba(250, 250, 250, .5);
   transition: 0.3s;
 }
 
@@ -88,14 +90,14 @@ html {
   border: none;
   outline: none;
   color: white;
-  font-family: sans-serif;
+  font-family: "VCR";
   font-weight: bold;
   font-size: 50px;
   transition: 0.5s;
 }
 
 .shop-page__column-one__button:hover {
-  font-size: 52px;
+  color: rgba(250, 250, 250, .5);
   transition: 0.5s;
   cursor: pointer;
 }
@@ -115,6 +117,7 @@ html {
 
 #product {
   position: absolute;
+  transition: 0.5s;
 }
 #product:hover {
   width: 400px;
@@ -123,7 +126,7 @@ html {
 }
 
 .shop-page__column-two {
-  z-index: 3;
+  z-index: 2;
   display: none;
   flex-direction: column;
   font-family: "VCR", sans-serif;
@@ -161,6 +164,20 @@ html {
   transition: .3s;
 }
 
+.selected-variant {
+  padding: 5px;
+  outline: none;
+  border: 2px white solid;
+  font-size: 20px;
+  font-family: "VCR";
+  width: 50px;
+  height: 50px;
+  transition: .3s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
 .shop-other__images {
   width: 425px;
   margin-top: 30px;
@@ -175,13 +192,17 @@ html {
 }
 
 .selected-image {
-  width: 70px;
-  height: 70px;
   opacity: .5;
   transition: .2s;
 }
 
 #buy-button {
+  outline: none;
+  background-color: black;
+  color: white;
+  font-family: "VCR";
+  margin: 20px 0px 20px 0px;
+  width: 100%;
   border: white solid 2px;
   padding: 15px 20px 15px 20px;
   transition: 0.5s;
@@ -210,12 +231,23 @@ html {
   border: white solid 5px;
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .checkout-header {
   text-align: center;
   position: relative;
   font-family: "VCR"
+}
+
+.checkout-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  height: 75%;
+  overflow: auto;
 }
 
 .checkout-exit {
@@ -232,12 +264,60 @@ html {
 
 .checkout-exit:hover {
   cursor: pointer;
-  font-size: 25px;
+  color: rgba(250, 250, 250, .5);
   transition: .3s;
 }
 
 .checkout-header h1 {
   text-transform: uppercase;
+  margin: 10px;
+}
+
+.checkout-footer {
+  color: white;
+  position: absolute;
+  bottom: 5px;
+  width: 95%;
+  font-family: "VCR";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-hyperlink {
+  font-size: 20px;
+  color: rgba(250, 250, 250, .5);
+  transition: .3s;
+  text-decoration: none;
+}
+
+.checkout-hyperlink:hover {
+  color: white;
+  transition: .3s;
+}
+
+.item-line {
+  width: 100%;
+  font-family: "VCR";
+  display: flex;
+  justify-content: space-between;
+  border-bottom: white 1px solid;
+}
+
+.remove-item {
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-family: "VCR";
+  font-size: 20px;
+  transition: .3s;
+}
+
+.remove-item:hover {
+  color: rgba(250, 250, 250, .5);
+  cursor: pointer;
+  transition: .3s;
 }
 
 .visible {
