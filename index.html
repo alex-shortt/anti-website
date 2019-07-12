@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en-US">
+  <head>
+    <title>Anti</title>
+    <script src="/src/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/103/three.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
+    ></script>
+    <script type="text/javascript">
+      (function($) {
+        window.fnames = new Array();
+        window.ftypes = new Array();
+        fnames[0] = "EMAIL";
+        ftypes[0] = "email";
+        fnames[1] = "FNAME";
+        ftypes[1] = "text";
+        fnames[2] = "LNAME";
+        ftypes[2] = "text";
+        fnames[3] = "ADDRESS";
+        ftypes[3] = "address";
+        fnames[4] = "PHONE";
+        ftypes[4] = "phone";
+        fnames[5] = "BIRTHDAY";
+        ftypes[5] = "birthday";
+      })(jQuery);
+      var $mcj = jQuery.noConflict(true);
+    </script>
+    <script>
+      function showBody() {
+        document.body.style.visibility = "visible";
+      }
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-142765691-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <title>Anti</title>
-  <script src="/src/index.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/103/three.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
-  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-  <script type="text/javascript">
-    ; (function ($) {
-      window.fnames = new Array()
-      window.ftypes = new Array()
-      fnames[0] = "EMAIL"
-      ftypes[0] = "email"
-      fnames[1] = "FNAME"
-      ftypes[1] = "text"
-      fnames[2] = "LNAME"
-      ftypes[2] = "text"
-      fnames[3] = "ADDRESS"
-      ftypes[3] = "address"
-      fnames[4] = "PHONE"
-      ftypes[4] = "phone"
-      fnames[5] = "BIRTHDAY"
-      ftypes[5] = "birthday"
-    })(jQuery)
-    var $mcj = jQuery.noConflict(true)
-  </script>
-  <script>
-    function showBody() {
-      document.body.style.visibility = "visible"
-    }
-  </script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=0" />
-  <link rel="shortcut icon" type="image/png" href="assets/pictures/favicon.png" />
-  <link rel="stylesheet" href="src/styles/main.scss"/>
-</head>
-<!--
+      gtag("config", "UA-142765691-1");
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1, user-scalable=0"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="assets/pictures/favicon.png"
+    />
+    <link rel="stylesheet" href="src/styles/main.scss" />
+  </head>
+  <!--
   Alex Shortt
       insta: @alexander.shortt
       twit:  @_alexshortt
@@ -48,278 +75,409 @@
       insta: @stevnotran
   -->
 
-<body style="visibility: hidden;" onload="showBody()">
-  <div class="skybox"></div>
-  <div class="view">
-    <div class="sphere">
-      <div class="column container landing" name="0 0">
-        <div class="frame">
-          <div class="card">
-            <div class="welcome">
-              <div class="welcome-logo-text">
-                <div class="welcome-logo-text-anti">
-                  <a id="welcome-logo__hyperlink" href="./src/pages/shop/">
-                    ANTI
-                  </a>
+  <body style="visibility: hidden;" onload="showBody()">
+    <div class="skybox"></div>
+    <div class="view">
+      <div class="sphere">
+        <div class="column container landing" name="0 0">
+          <div class="frame">
+            <div class="card">
+              <div class="welcome">
+                <div class="welcome-logo-text">
+                  <div class="welcome-logo-text-anti">
+                    <a id="welcome-logo__hyperlink" href="./src/pages/shop/">
+                      ANTI
+                    </a>
+                  </div>
+                  <div class="welcome-logo-text-others">
+                    <div class="welcome-logo-text-others-terms">Terms</div>
+                    <div class="welcome-logo-text-others-dot">&bull;</div>
+                    <div class="welcome-logo-text-others-privacy">Privacy</div>
+                    <div class="welcome-logo-text-others-dot">&bull;</div>
+                    <div class="welcome-logo-text-others-tax">Tax</div>
+                  </div>
                 </div>
-                <div class="welcome-logo-text-others">
-                  <div class="welcome-logo-text-others-terms">Terms</div>
-                  <div class="welcome-logo-text-others-dot">&bull;</div>
-                  <div class="welcome-logo-text-others-privacy">Privacy</div>
-                  <div class="welcome-logo-text-others-dot">&bull;</div>
-                  <div class="welcome-logo-text-others-tax">Tax</div>
+                <div class="welcome-logo">
+                  <img src="assets/pictures/gif/logo.gif" />
+                </div>
+                <div class="welcome-text">
+                  <div class="welcome-text-r">CLICK TO ENTER</div>
+                  <div class="welcome-text-g">CLICK TO ENTER</div>
+                  <div class="welcome-text-b">CLICK TO ENTER</div>
                 </div>
               </div>
-              <div class="welcome-logo">
-                <img src="assets/pictures/gif/logo.gif" />
-              </div>
-              <div class="welcome-text">
-                <div class="welcome-text-r">CLICK TO ENTER</div>
-                <div class="welcome-text-g">CLICK TO ENTER</div>
-                <div class="welcome-text-b">CLICK TO ENTER</div>
-              </div>
             </div>
           </div>
-        </div>
-        <canvas id="fractal-terrain-top" width="110%" height="65%"></canvas>
-        <canvas id="fractal-terrain-bottom" width="110%" height="65%"></canvas>
-        <div class="landing-links">
-          <div class="landing-links-home-top">SOCIALS</div>
-          <div class="landing-links-home-left">POPUP</div>
-          <div class="landing-links-home-bot">CONTACT</div>
-          <div class="landing-links-home-right">LOOKBOOK</div>
-        </div>
-      </div>
-      <div class="column container socials" name="0 -1">
-        <div class="landing-links-socials-bot landing-links-style">
-          <div class="landing-links-socials-bot-left">return</div>
-          <div class="landing-links-socials-bot-right">so &bull; cial</div>
-        </div>
-        <div class="socials-main">
-          <div class="socials-left">
-            <div class="socials-left-instafeed"></div>
+          <canvas id="fractal-terrain-top" width="110%" height="65%"></canvas>
+          <canvas
+            id="fractal-terrain-bottom"
+            width="110%"
+            height="65%"
+          ></canvas>
+          <div class="landing-links">
+            <div class="landing-links-home-top">SOCIALS</div>
+            <div class="landing-links-home-left">POPUP</div>
+            <div class="landing-links-home-bot">CONTACT</div>
+            <div class="landing-links-home-right">LOOKBOOK</div>
           </div>
-          <div class="column socials-right">
-            <div class="socials-anti3d">
-              <canvas id="anti3d"></canvas>
+        </div>
+        <div class="column container socials" name="0 -1">
+          <div class="landing-links-socials-bot landing-links-style">
+            <div class="landing-links-socials-bot-left">return</div>
+            <div class="landing-links-socials-bot-right">so &bull; cial</div>
+          </div>
+          <div class="socials-main">
+            <div class="socials-left">
+              <div class="socials-left-instafeed"></div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="container contact" name="0 1">
-        <div class="landing-links-socials-bot landing-links-style">
-          <div class="landing-links-socials-bot-left">return</div>
-          <div class="landing-links-socials-bot-right">con &bull; tact</div>
-        </div>
-        <div class="contact-wrapper">
-          <div class="contact-main">
-            <div class="contact-bg"></div>
-          </div>
-          <div class="contact-signup">
-            <div class="contact-signup-title">IMPORTANT</div>
-            <div class="contact-signup-info">
-              <img class="contact-signup-info-icon" src="assets/pictures/svg/icon-pillbottles.svg" />
-              <div class="contact-signup-info-text">
-                Subscribe to Anti mailing list!
+            <div class="column socials-right">
+              <div class="socials-anti3d">
+                <canvas id="anti3d"></canvas>
               </div>
             </div>
-            <div class="contact-signup-email">
-              <div id="mc_embed_signup">
-                <form
-                  action="https://gmail.us20.list-manage.com/subscribe/post?u=0c1f5fdadb2563cbd266a05f2&amp;id=5ee2aeb065"
-                  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                  target="_blank" novalidate>
-                  <div id="mc_embed_signup_scroll">
-                    <div class="mc-field-group">
-                      <div class="contact-signup-email-text">EMAIL</div>
-                      <div class="contact-signup-email-input">
-                        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" />
+          </div>
+        </div>
+        <div class="container contact" name="0 1">
+          <div class="landing-links-socials-bot landing-links-style">
+            <div class="landing-links-socials-bot-left">return</div>
+            <div class="landing-links-socials-bot-right">con &bull; tact</div>
+          </div>
+          <div class="contact-wrapper">
+            <div class="contact-main">
+              <div class="contact-bg"></div>
+            </div>
+            <div class="contact-signup">
+              <div class="contact-signup-title">IMPORTANT</div>
+              <div class="contact-signup-info">
+                <img
+                  class="contact-signup-info-icon"
+                  src="assets/pictures/svg/icon-pillbottles.svg"
+                />
+                <div class="contact-signup-info-text">
+                  Subscribe to Anti mailing list!
+                </div>
+              </div>
+              <div class="contact-signup-email">
+                <div id="mc_embed_signup">
+                  <form
+                    action="https://gmail.us20.list-manage.com/subscribe/post?u=0c1f5fdadb2563cbd266a05f2&amp;id=5ee2aeb065"
+                    method="post"
+                    id="mc-embedded-subscribe-form"
+                    name="mc-embedded-subscribe-form"
+                    class="validate"
+                    target="_blank"
+                    novalidate
+                  >
+                    <div id="mc_embed_signup_scroll">
+                      <div class="mc-field-group">
+                        <div class="contact-signup-email-text">EMAIL</div>
+                        <div class="contact-signup-email-input">
+                          <input
+                            type="email"
+                            value=""
+                            name="EMAIL"
+                            class="required email"
+                            id="mce-EMAIL"
+                          />
+                        </div>
+                      </div>
+                      <div id="mce-responses" class="clear">
+                        <div
+                          class="response"
+                          id="mce-error-response"
+                          style="display:none"
+                        ></div>
+                        <div
+                          class="response"
+                          id="mce-success-response"
+                          style="display:none"
+                        ></div>
                       </div>
                     </div>
-                    <div id="mce-responses" class="clear">
-                      <div class="response" id="mce-error-response" style="display:none"></div>
-                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    <div
+                      class="contact-signup-send"
+                      id="mc-embedded-subscribe"
+                      onClick="javascript:document.forms[0].submit();"
+                    >
+                      <div class="contact-signup-send-combo">
+                        <img
+                          class="contact-signup-send-icon"
+                          src="assets/pictures/svg/icon-hand-purple.svg"
+                        />
+                        <div class="contact-signup-send-text">SEND</div>
+                      </div>
                     </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="contact-message">
+              <div class="contact-message-title">
+                <img
+                  class="contact-message-title-icon"
+                  src="assets/pictures/svg/icon-caution.svg"
+                />
+                <div class="contact-message-title-text">CONTACT - ANTI</div>
+              </div>
+              <hr class="contact-message-divider" />
+              <div class="contact-message-name">
+                <div class="contact-message-name-text">Name</div>
+                <div class="contact-message-name-input">
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="message-input-name"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="contact-message-email">
+                <div class="contact-message-email-text">Email</div>
+                <div class="contact-message-email-input">
+                  <input
+                    id="contact-email"
+                    type="text"
+                    name="message-input-email"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="contact-message-message">
+                <div class="contact-message-message-text">Message</div>
+                <div class="contact-message-message-input">
+                  <textarea id="contact-message" placeholder="..."></textarea>
+                </div>
+              </div>
+              <div class="contact-message-send">
+                <img
+                  class="contact-message-send-icon"
+                  src="assets/pictures/svg/icon-hand.svg"
+                />
+                <div class="contact-message-send-text">SEND</div>
+              </div>
+            </div>
+            <div class="contact-message-send-confirmation">
+              <div class="contact-message-send-confirmation-message">
+                Your message has been sent!
+              </div>
+              <div class="contact-message-send-confirmation-ok">OK</div>
+            </div>
+            <div class="contact-signup-send-confirmation">
+              <div class="contact-signup-send-confirmation-message">
+                Thanks for subscribing!
+              </div>
+              <div class="contact-signup-send-confirmation-ok">OK</div>
+            </div>
+          </div>
+        </div>
+        <div class="container lookbook" name="-1 0">
+          <div class="landing-links-socials-bot landing-links-style">
+            <div class="landing-links-socials-bot-left">return</div>
+            <div class="landing-links-socials-bot-right">look &bull; book</div>
+          </div>
+          <div class="lookbook-wrapper">
+            <div class="lookbook-main">
+              <div class="lookbook-info">
+                <div class="lookbook-text-controller">
+                  <svg
+                    class="lookbook-text-controller-left"
+                    width="30px"
+                    height="70px"
+                  >
+                    <polyline
+                      fill="none"
+                      stroke="#f2f2f2"
+                      stroke-width="1"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                      points="
+            25,65 5,35 25,5"
+                    />
+                  </svg>
+                  <div class="lookbook-text-controller-counter">1/10</div>
+                  <svg
+                    class="lookbook-text-controller-right"
+                    width="30px"
+                    height="70px"
+                  >
+                    <polyline
+                      fill="none"
+                      stroke="#f2f2f2"
+                      stroke-width="1"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                      points="
+            5,65 25,35 5,5"
+                    />
+                  </svg>
+                </div>
+                <div class="lookbook-text">
+                  <h1 class="lookbook-text-title">Lorem Ipsum</h1>
+                  <h2 class="lookbook-text-subtitle">
+                    Lorem ipsum dolor sit amet, consectetur.
+                  </h2>
+                </div>
+              </div>
+              <div class="lookbook-gallery"></div>
+            </div>
+          </div>
+        </div>
+        <div class="container popup" name="1 0">
+          <div class="landing-links-socials-bot landing-links-style">
+            <div class="landing-links-socials-bot-left">return</div>
+            <div class="landing-links-socials-bot-right">pop &bull; up</div>
+          </div>
+          <div class="popup-wrapper">
+            <div class="popup-main">
+              <div class="popup-image-container">
+                <div class="popup-image-cover">
+                  <div class="popup-image-container-carousel">
+                    <img
+                      class="popup-slide singleSlide"
+                      src="https://cdn.vox-cdn.com/thumbor/LNXJXSvgWIqaWbZNHV0B1JR0z1o=/0x0:4032x3024/1200x800/filters:focal(1694x1190:2338x1834)/cdn.vox-cdn.com/uploads/chorus_image/image/62783947/Amazon_Go_store_seattle.0.jpeg"
+                    />
+                    <img
+                      class="popup-slide singleSlide"
+                      src="https://techcrunch.com/wp-content/uploads/2018/08/costco.jpg?w=730&crop=1"
+                    />
+                    <img
+                      class="popup-slide singleSlide"
+                      src="https://ichef.bbci.co.uk/news/624/cpsprodpb/1431B/production/_102451728_gettyimages-975968928.jpg"
+                    />
                   </div>
-                  <div class="contact-signup-send" id="mc-embedded-subscribe"
-                    onClick="javascript:document.forms[0].submit();">
-                    <div class="contact-signup-send-combo">
-                      <img class="contact-signup-send-icon" src="assets/pictures/svg/icon-hand-purple.svg" />
-                      <div class="contact-signup-send-text">SEND</div>
-                    </div>
+                </div>
+              </div>
+              <div class="popup-text">
+                <div class="popup-text-controller">
+                  <svg
+                    class="popup-text-controller-left"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    width="30px"
+                    height="100%"
+                  >
+                    <polyline
+                      fill="none"
+                      stroke="#f2f2f2"
+                      stroke-width="1"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                      points="100,0 0,50 100,100"
+                    />
+                  </svg>
+                  <div class="popup-text-controller-counter">1/10</div>
+                  <svg
+                    class="popup-text-controller-right"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    width="30px"
+                    height="100%"
+                  >
+                    <polyline
+                      fill="none"
+                      stroke="#f2f2f2"
+                      stroke-width="1"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                      points="0,0 100,50 0,100"
+                    />
+                  </svg>
+                </div>
+                <div class="popup-text-title">NY POPUP</div>
+                <div class="popup-text-subtitle">
+                  <div class="popup-text-subtitle-time">
+                    4PM-8P, AUG 19, 2019
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="contact-message">
-            <div class="contact-message-title">
-              <img class="contact-message-title-icon" src="assets/pictures/svg/icon-caution.svg" />
-              <div class="contact-message-title-text">CONTACT - ANTI</div>
-            </div>
-            <hr class="contact-message-divider" />
-            <div class="contact-message-name">
-              <div class="contact-message-name-text">Name</div>
-              <div class="contact-message-name-input">
-                <input id="contact-name" type="text" name="message-input-name" value="" />
-              </div>
-            </div>
-            <div class="contact-message-email">
-              <div class="contact-message-email-text">Email</div>
-              <div class="contact-message-email-input">
-                <input id="contact-email" type="text" name="message-input-email" value="" />
-              </div>
-            </div>
-            <div class="contact-message-message">
-              <div class="contact-message-message-text">Message</div>
-              <div class="contact-message-message-input">
-                <textarea id="contact-message" placeholder="..."></textarea>
-              </div>
-            </div>
-            <div class="contact-message-send">
-              <img class="contact-message-send-icon" src="assets/pictures/svg/icon-hand.svg" />
-              <div class="contact-message-send-text">SEND</div>
-            </div>
-          </div>
-          <div class="contact-message-send-confirmation">
-            <div class="contact-message-send-confirmation-message">
-              Your message has been sent!
-            </div>
-            <div class="contact-message-send-confirmation-ok">OK</div>
-          </div>
-          <div class="contact-signup-send-confirmation">
-            <div class="contact-signup-send-confirmation-message">
-              Thanks for subscribing!
-            </div>
-            <div class="contact-signup-send-confirmation-ok">OK</div>
-          </div>
-        </div>
-      </div>
-      <div class="container lookbook" name="-1 0">
-        <div class="landing-links-socials-bot landing-links-style">
-          <div class="landing-links-socials-bot-left">return</div>
-          <div class="landing-links-socials-bot-right">look &bull; book</div>
-        </div>
-        <div class="lookbook-wrapper">
-          <div class="lookbook-main">
-            <div class="lookbook-info">
-              <div class="lookbook-text-controller">
-                <svg class="lookbook-text-controller-left" width="30px" height="70px">
-                  <polyline fill="none" stroke="#f2f2f2" stroke-width="1" stroke-linecap="square"
-                    stroke-linejoin="miter" points="
-            25,65 5,35 25,5" />
-                </svg>
-                <div class="lookbook-text-controller-counter">1/10</div>
-                <svg class="lookbook-text-controller-right" width="30px" height="70px">
-                  <polyline fill="none" stroke="#f2f2f2" stroke-width="1" stroke-linecap="square"
-                    stroke-linejoin="miter" points="
-            5,65 25,35 5,5" />
-                </svg>
-              </div>
-              <div class="lookbook-text">
-                <h1 class="lookbook-text-title">Lorem Ipsum</h1>
-                <h2 class="lookbook-text-subtitle">
-                  Lorem ipsum dolor sit amet, consectetur.
-                </h2>
-              </div>
-            </div>
-            <div class="lookbook-gallery"></div>
-          </div>
-        </div>
-      </div>
-      <div class="container popup" name="1 0">
-        <div class="landing-links-socials-bot landing-links-style">
-          <div class="landing-links-socials-bot-left">return</div>
-          <div class="landing-links-socials-bot-right">pop &bull; up</div>
-        </div>
-        <div class="popup-wrapper">
-          <div class="popup-main">
-            <div class="popup-image-container">
-              <div class="popup-image-cover">
-                <div class="popup-image-container-carousel">
-                  <img class="popup-slide singleSlide"
-                    src="https://cdn.vox-cdn.com/thumbor/LNXJXSvgWIqaWbZNHV0B1JR0z1o=/0x0:4032x3024/1200x800/filters:focal(1694x1190:2338x1834)/cdn.vox-cdn.com/uploads/chorus_image/image/62783947/Amazon_Go_store_seattle.0.jpeg" />
-                  <img class="popup-slide singleSlide"
-                    src="https://techcrunch.com/wp-content/uploads/2018/08/costco.jpg?w=730&crop=1" />
-                  <img class="popup-slide singleSlide"
-                    src="https://ichef.bbci.co.uk/news/624/cpsprodpb/1431B/production/_102451728_gettyimages-975968928.jpg" />
-                </div>
-              </div>
-            </div>
-            <div class="popup-text">
-              <div class="popup-text-controller">
-                <svg class="popup-text-controller-left" viewBox="0 0 100 100" preserveAspectRatio="none" width="30px"
-                  height="100%">
-                  <polyline fill="none" stroke="#f2f2f2" stroke-width="1" stroke-linecap="square"
-                    stroke-linejoin="miter" points="100,0 0,50 100,100" />
-                </svg>
-                <div class="popup-text-controller-counter">1/10</div>
-                <svg class="popup-text-controller-right" viewBox="0 0 100 100" preserveAspectRatio="none" width="30px"
-                  height="100%">
-                  <polyline fill="none" stroke="#f2f2f2" stroke-width="1" stroke-linecap="square"
-                    stroke-linejoin="miter" points="0,0 100,50 0,100" />
-                </svg>
-              </div>
-              <div class="popup-text-title">NY POPUP</div>
-              <div class="popup-text-subtitle">
-                <div class="popup-text-subtitle-time">
-                  4PM-8P, AUG 19, 2019
-                </div>
-                <div class="popup-text-subtitle-location">
-                  620 ATLANTIC AVE, BRO<span>O</span>KLYN, NY
-                </div>
-                <div class="popup-text-subtitle-extra">
-                  COME THROUGH TO SHOP / CHAT
+                  <div class="popup-text-subtitle-location">
+                    620 ATLANTIC AVE, BRO<span>O</span>KLYN, NY
+                  </div>
+                  <div class="popup-text-subtitle-extra">
+                    COME THROUGH TO SHOP / CHAT
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="terms-page">
-      <div id="terms-content" class="privacy-page-content"></div>
-      <div class="terms-page-exit">
-        <svg class="terms-page-exit-svg" width="50px" height="50px">
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          0,0 50,50" />
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          50,0 0,50" />
-        </svg>
+      <div class="terms-page">
+        <div id="terms-content" class="privacy-page-content"></div>
+        <div class="terms-page-exit">
+          <svg class="terms-page-exit-svg" width="50px" height="50px">
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          0,0 50,50"
+            />
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          50,0 0,50"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="privacy-page">
+        <div id="privacy-content" class="privacy-page-content"></div>
+        <div class="privacy-page-exit">
+          <svg class="privacy-page-exit-svg" width="50px" height="50px">
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          0,0 50,50"
+            />
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          50,0 0,50"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="tax-page">
+        <div id="taxes-content" class="privacy-page-content"></div>
+        <div class="tax-page-exit">
+          <svg class="tax-page-exit-svg" width="50px" height="50px">
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          0,0 50,50"
+            />
+            <polyline
+              fill="none"
+              stroke="#f2f2f2"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              points="
+          50,0 0,50"
+            />
+          </svg>
+        </div>
       </div>
     </div>
-    <div class="privacy-page">
-      <div id="privacy-content" class="privacy-page-content"></div>
-      <div class="privacy-page-exit">
-        <svg class="privacy-page-exit-svg" width="50px" height="50px">
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          0,0 50,50" />
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          50,0 0,50" />
-        </svg>
-      </div>
-    </div>
-    <div class="tax-page">
-      <div id="taxes-content" class="privacy-page-content"></div>
-      <div class="tax-page-exit">
-        <svg class="tax-page-exit-svg" width="50px" height="50px">
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          0,0 50,50" />
-          <polyline fill="none" stroke="#f2f2f2" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"
-            points="
-          50,0 0,50" />
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="music-controls"></div>
-  <audio id="music-audio" src="" crossorigin="anonymous" hidden />
-  <script src="./bundle.js"></script>
-</body>
-
+    <div class="music-controls"></div>
+    <audio id="music-audio" src="" crossorigin="anonymous" hidden />
+    <script src="./bundle.js"></script>
+  </body>
 </html>
