@@ -12,6 +12,11 @@ html {
   align-items: center;
 }
 
+.shop-page__content-container {
+  width: 100%;
+  height: 80%;
+}
+
 .nav {
   position: absolute;
   box-sizing: border-box;
@@ -118,6 +123,7 @@ html {
 
 .image-button:hover {
   color: rgba(250, 250, 250, 0.5);
+  cursor: pointer;
 }
 
 .image-button__sub {
@@ -180,7 +186,8 @@ html {
   flex-direction: column;
   font-family: "VCR", sans-serif;
   font-weight: lighter;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 125px;
   height: 80%;
   max-width: 45%;
   text-transform: uppercase;

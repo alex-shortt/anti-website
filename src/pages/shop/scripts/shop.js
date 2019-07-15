@@ -130,7 +130,7 @@ const Shop = () => {
           setCheckout={setCheckout}
           setCheckoutStatus={setCheckoutStatus}
         />
-      </div >
+      </div>
     )
   }
   else {
