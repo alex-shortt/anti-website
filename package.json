@@ -40,7 +40,6 @@
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
-    "jquery-zoom": "^1.7.21",
-    "js-image-zoom": "^0.6.0"
+    "react-image-magnify": "^2.7.4"
   }
 }

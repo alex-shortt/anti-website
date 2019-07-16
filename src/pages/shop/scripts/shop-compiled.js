@@ -89,7 +89,7 @@ var Shop = function Shop() {
     });
     return React.createElement(
       'div',
-      { className: 'shop-page__container', style: { justifyContent: "space-evenly", width: "100%" } },
+      { style: { width: "100%", height: "100vh", overflowY: "auto" } },
       React.createElement(Nav, {
         setCheckoutStatus: setCheckoutStatus,
         setProductVariants: setProductVariants,
@@ -98,94 +98,98 @@ var Shop = function Shop() {
         setDisplayProductDetails: setDisplayProductDetails,
         currentProduct: currentProduct
       }),
-      React.createElement(Checkout, {
-        client: client,
-        checkout: checkout,
-        setCheckout: setCheckout,
-        checkoutStatus: checkoutStatus,
-        setCheckoutStatus: setCheckoutStatus,
-        selectedVariant: selectedVariant,
-        setSelectedVariant: setSelectedVariant,
-        products: products,
-        productIndex: productIndex
-      }),
-      displayProductDetails ? React.createElement(ProductImages, {
-        currentProduct: currentProduct
-      }) : React.createElement(
+      React.createElement(
         'div',
-        { className: 'shop-page__column-one', style: { width: "1000px" } },
-        React.createElement(
-          'button',
-          { className: 'shop-page__column-one__button button__sub',
-            onClick: indexOptions.sub },
-          "<"
-        ),
-        React.createElement(
+        { className: "shop-page__container shop-page__container-responsive", style: { justifyContent: "space-evenly", width: "100%" } },
+        React.createElement(Checkout, {
+          client: client,
+          checkout: checkout,
+          setCheckout: setCheckout,
+          checkoutStatus: checkoutStatus,
+          setCheckoutStatus: setCheckoutStatus,
+          selectedVariant: selectedVariant,
+          setSelectedVariant: setSelectedVariant,
+          products: products,
+          productIndex: productIndex
+        }),
+        displayProductDetails ? React.createElement(ProductImages, {
+          currentProduct: currentProduct
+        }) : React.createElement(
           'div',
-          { className: 'shop-page__column-one__image-container' },
-          React.createElement('img', { className: 'shop-page__column-one__image', src: '../../../assets/pictures/finaltube.png',
-            width: '900px', height: '80%' })
-        ),
-        currentProduct.images.length > 1 ? React.createElement(
-          'div',
-          { className: 'product-container',
-            onClick: function onClick() {
-              currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
-            }
-          },
-          React.createElement('img', { className: 'product', src: images[productIndex], width: '400px', style: { marginTop: "45px" },
-            onClick: function onClick() {
-              currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
-            } })
-        ) : React.createElement('img', { className: 'product', alt: '', width: '300px' }),
-        React.createElement(
-          'button',
-          { className: 'shop-page__column-one__button button__add',
-            onClick: indexOptions.add },
-          ">"
-        ),
-        React.createElement(
-          'h3',
-          { className: 'item-number__identifier' },
-          productIndex + 1,
-          '/',
-          products.length
-        ),
-        React.createElement(
-          'div',
-          { className: 'product-info__absolute' },
+          { className: 'shop-page__column-one column-image' },
           React.createElement(
-            'h1',
-            { className: displayOutOfStock ? "product-info__status-available" : "product-info__status-unavailable" },
-            'Out of Stock'
+            'button',
+            { className: 'shop-page__column-one__button button__sub',
+              onClick: indexOptions.sub },
+            "<"
           ),
           React.createElement(
-            'h2',
-            { className: 'product-info__title' },
-            products[productIndex].title
+            'div',
+            { className: 'shop-page__column-one__image-container' },
+            React.createElement('img', { className: 'shop-page__column-one__image', src: '../../../assets/pictures/finaltube.png',
+              width: '900px', height: '80%' })
+          ),
+          currentProduct.images.length > 1 ? React.createElement(
+            'div',
+            { className: 'product-container',
+              onClick: function onClick() {
+                currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
+              }
+            },
+            React.createElement('img', { className: 'product', src: images[productIndex], width: '400px', style: { marginTop: "45px" },
+              onClick: function onClick() {
+                currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
+              } })
+          ) : React.createElement('img', { className: 'product', alt: '', width: '300px' }),
+          React.createElement(
+            'button',
+            { className: 'shop-page__column-one__button button__add',
+              onClick: indexOptions.add },
+            ">"
           ),
           React.createElement(
             'h3',
-            { className: 'product-info__title' },
-            products[productIndex].variants[0].price
+            { className: 'item-number__identifier' },
+            productIndex + 1,
+            '/',
+            products.length
+          ),
+          React.createElement(
+            'div',
+            { className: 'product-info__absolute' },
+            React.createElement(
+              'h1',
+              { className: displayOutOfStock ? "product-info__status-available" : "product-info__status-unavailable" },
+              'Out of Stock'
+            ),
+            React.createElement(
+              'h2',
+              { className: 'product-info__title' },
+              products[productIndex].title
+            ),
+            React.createElement(
+              'h3',
+              { className: 'product-info__title' },
+              products[productIndex].variants[0].price
+            )
           )
-        )
-      ),
-      React.createElement(Product, {
-        products: products,
-        selectedVariant: selectedVariant,
-        setSelectedVariant: setSelectedVariant,
-        productVariants: productVariants,
-        setProductVariants: setProductVariants,
-        currentProduct: currentProduct,
-        setCurrentProduct: setCurrentProduct,
-        displayProductDetails: displayProductDetails,
-        setDisplayProductDetails: setDisplayProductDetails,
-        client: client,
-        checkout: checkout,
-        setCheckout: setCheckout,
-        setCheckoutStatus: setCheckoutStatus
-      })
+        ),
+        React.createElement(Product, {
+          products: products,
+          selectedVariant: selectedVariant,
+          setSelectedVariant: setSelectedVariant,
+          productVariants: productVariants,
+          setProductVariants: setProductVariants,
+          currentProduct: currentProduct,
+          setCurrentProduct: setCurrentProduct,
+          displayProductDetails: displayProductDetails,
+          setDisplayProductDetails: setDisplayProductDetails,
+          client: client,
+          checkout: checkout,
+          setCheckout: setCheckout,
+          setCheckoutStatus: setCheckoutStatus
+        })
+      )
     );
   } else {
     return React.createElement(
@@ -321,6 +325,10 @@ var Product = function Product(_ref2) {
       selectedVariant = _ref2.selectedVariant,
       setSelectedVariant = _ref2.setSelectedVariant;
 
+  var _React$useState21 = React.useState(false),
+      _React$useState22 = _slicedToArray(_React$useState21, 2),
+      productDescriptionDisplay = _React$useState22[0],
+      setProductDescriptionDisplay = _React$useState22[1];
 
   function checkSelected(id) {
     setSelectedVariant(id);
@@ -339,6 +347,7 @@ var Product = function Product(_ref2) {
     });
     setCheckoutStatus(true);
   }
+
   return React.createElement(
     'div',
     { className: 'shop-page__column-two', style: displayProductDetails ? { display: "flex" } : { display: "none" } },
@@ -379,12 +388,25 @@ var Product = function Product(_ref2) {
       React.createElement(
         'button',
         {
-          id: 'buy-button',
+          className: 'buy-button',
           onClick: function onClick() {
             return addToCheckout();
           } },
         'ADD TO CART'
-      )
+      ),
+      React.createElement(
+        'button',
+        {
+          className: 'buy-button',
+          onClick: function onClick() {
+            return setProductDescriptionDisplay(!productDescriptionDisplay);
+          } },
+        'Description'
+      ),
+      React.createElement('div', {
+        className: productDescriptionDisplay ? "product-description" : "product-description-hidden",
+        dangerouslySetInnerHTML: { __html: currentProduct.descriptionHtml }
+      })
     )
   );
 };
@@ -395,10 +417,10 @@ var ProductImages = function ProductImages(_ref3) {
 
   var currentProductImages = currentProduct.images.slice(1, currentProduct.images.length);
 
-  var _React$useState21 = React.useState(0),
-      _React$useState22 = _slicedToArray(_React$useState21, 2),
-      currentImageIndex = _React$useState22[0],
-      setCurrentImageIndex = _React$useState22[1];
+  var _React$useState23 = React.useState(0),
+      _React$useState24 = _slicedToArray(_React$useState23, 2),
+      currentImageIndex = _React$useState24[0],
+      setCurrentImageIndex = _React$useState24[1];
 
   var imageIndexOptions = {
     add: function add() {
@@ -411,7 +433,7 @@ var ProductImages = function ProductImages(_ref3) {
 
   return React.createElement(
     'div',
-    { className: 'shop-page__column-one zoom', id: 'zoomedImg', style: { flexDirection: "column", width: "35%" } },
+    { className: 'shop-page__column-one zoom', id: 'zoomedImg', style: { flexDirection: "column" } },
     React.createElement(
       'button',
       {

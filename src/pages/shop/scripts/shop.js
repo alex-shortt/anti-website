@@ -47,7 +47,7 @@ const Shop = () => {
   if (mounted) {
     let images = products.map(product => product.images[0].src)
     return (
-      <div className="shop-page__container" style={{ justifyContent: "space-evenly", width: "100%" }}>
+      <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
         <Nav
           setCheckoutStatus={setCheckoutStatus}
           setProductVariants={setProductVariants}
@@ -56,80 +56,82 @@ const Shop = () => {
           setDisplayProductDetails={setDisplayProductDetails}
           currentProduct={currentProduct}
         />
-        <Checkout
-          client={client}
-          checkout={checkout}
-          setCheckout={setCheckout}
-          checkoutStatus={checkoutStatus}
-          setCheckoutStatus={setCheckoutStatus}
-          selectedVariant={selectedVariant}
-          setSelectedVariant={setSelectedVariant}
-          products={products}
-          productIndex={productIndex}
-        />
-        {
-          displayProductDetails ?
-            <ProductImages
-              currentProduct={currentProduct}
-            />
-            : <div className="shop-page__column-one" style={{ width: "1000px" }}>
-              <button className="shop-page__column-one__button button__sub"
-                onClick={indexOptions.sub}>{"<"}</button>
-              <div className="shop-page__column-one__image-container">
-                <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png"
-                  width="900px" height="80%" />
-              </div>
-              {
-                currentProduct.images.length > 1 ?
-                  <div className="product-container"
-                    onClick={() => {
-                      currentProduct.availableForSale ?
-                        selectProduct()
-                        : setDisplayOutOfStock(true)
-                    }}
-                  >
-                    <img className="product" src={images[productIndex]} width="400px" style={{ marginTop: "45px" }}
+        <div className={"shop-page__container shop-page__container-responsive"} style={{ justifyContent: "space-evenly", width: "100%" }}>
+          <Checkout
+            client={client}
+            checkout={checkout}
+            setCheckout={setCheckout}
+            checkoutStatus={checkoutStatus}
+            setCheckoutStatus={setCheckoutStatus}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            products={products}
+            productIndex={productIndex}
+          />
+          {
+            displayProductDetails ?
+              <ProductImages
+                currentProduct={currentProduct}
+              />
+              : <div className="shop-page__column-one column-image">
+                <button className="shop-page__column-one__button button__sub"
+                  onClick={indexOptions.sub}>{"<"}</button>
+                <div className="shop-page__column-one__image-container">
+                  <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png"
+                    width="900px" height="80%" />
+                </div>
+                {
+                  currentProduct.images.length > 1 ?
+                    <div className="product-container"
                       onClick={() => {
                         currentProduct.availableForSale ?
                           selectProduct()
                           : setDisplayOutOfStock(true)
-                      }} />
-                  </div>
-                  : <img className="product" alt="" width="300px" />
-              }
-              <button className="shop-page__column-one__button button__add"
-                onClick={indexOptions.add}>{">"}</button>
-              <h3 className="item-number__identifier">{productIndex + 1}/{products.length}</h3>
-              <div className="product-info__absolute">
-                <h1 className={displayOutOfStock
-                  ? "product-info__status-available"
-                  : "product-info__status-unavailable"}>
-                  Out of Stock
+                      }}
+                    >
+                      <img className="product" src={images[productIndex]} width="400px" style={{ marginTop: "45px" }}
+                        onClick={() => {
+                          currentProduct.availableForSale ?
+                            selectProduct()
+                            : setDisplayOutOfStock(true)
+                        }} />
+                    </div>
+                    : <img className="product" alt="" width="300px" />
+                }
+                <button className="shop-page__column-one__button button__add"
+                  onClick={indexOptions.add}>{">"}</button>
+                <h3 className="item-number__identifier">{productIndex + 1}/{products.length}</h3>
+                <div className="product-info__absolute">
+                  <h1 className={displayOutOfStock
+                    ? "product-info__status-available"
+                    : "product-info__status-unavailable"}>
+                    Out of Stock
                 </h1>
-                <h2 className="product-info__title">
-                  {products[productIndex].title}
-                </h2>
-                <h3 className="product-info__title">
-                  {products[productIndex].variants[0].price}
-                </h3>
+                  <h2 className="product-info__title">
+                    {products[productIndex].title}
+                  </h2>
+                  <h3 className="product-info__title">
+                    {products[productIndex].variants[0].price}
+                  </h3>
+                </div>
               </div>
-            </div>
-        }
-        <Product
-          products={products}
-          selectedVariant={selectedVariant}
-          setSelectedVariant={setSelectedVariant}
-          productVariants={productVariants}
-          setProductVariants={setProductVariants}
-          currentProduct={currentProduct}
-          setCurrentProduct={setCurrentProduct}
-          displayProductDetails={displayProductDetails}
-          setDisplayProductDetails={setDisplayProductDetails}
-          client={client}
-          checkout={checkout}
-          setCheckout={setCheckout}
-          setCheckoutStatus={setCheckoutStatus}
-        />
+          }
+          <Product
+            products={products}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            productVariants={productVariants}
+            setProductVariants={setProductVariants}
+            currentProduct={currentProduct}
+            setCurrentProduct={setCurrentProduct}
+            displayProductDetails={displayProductDetails}
+            setDisplayProductDetails={setDisplayProductDetails}
+            client={client}
+            checkout={checkout}
+            setCheckout={setCheckout}
+            setCheckoutStatus={setCheckoutStatus}
+          />
+        </div>
       </div>
     )
   }
@@ -222,6 +224,7 @@ const Product = ({
   selectedVariant,
   setSelectedVariant
 }) => {
+  const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
 
   function checkSelected(id) {
     setSelectedVariant(id)
@@ -240,6 +243,7 @@ const Product = ({
     })
     setCheckoutStatus(true)
   }
+
   return (
     <div className="shop-page__column-two" style={displayProductDetails ?
       { display: "flex" }
@@ -274,10 +278,19 @@ const Product = ({
           }
         </div>
         <button
-          id="buy-button"
+          className="buy-button"
           onClick={() => addToCheckout()}>
           ADD TO CART
           </button>
+        <button
+          className="buy-button"
+          onClick={() => setProductDescriptionDisplay(!productDescriptionDisplay)}>
+          Description
+        </button>
+        <div
+          className={productDescriptionDisplay ? "product-description" : "product-description-hidden"}
+          dangerouslySetInnerHTML={{ __html: currentProduct.descriptionHtml }}
+        />
       </div>
     </div >
   )
@@ -302,7 +315,7 @@ const ProductImages = ({ currentProduct }) => {
   }
 
   return (
-    <div className="shop-page__column-one zoom" id="zoomedImg" style={{ flexDirection: "column", width: "35%" }}>
+    <div className="shop-page__column-one zoom" id="zoomedImg" style={{ flexDirection: "column" }}>
       <button
         onClick={imageIndexOptions.sub}
         className="image-button image-button__sub"

@@ -40,7 +40,7 @@ html {
 }
 
 .cart:hover {
-  opacity: .5;
+  opacity: 0.5;
   transition: 0.3s;
   cursor: pointer;
 }
@@ -89,6 +89,23 @@ html {
   display: none;
 }
 
+.product-description-hidden {
+  display: none;
+}
+
+.product-description {
+  height: 200px;
+  overflow: auto;
+}
+
+.product-description p {
+  margin: 0;
+}
+
+.product-description table {
+  width: 100%;
+}
+
 .product-container {
   position: absolute;
   display: flex;
@@ -109,6 +126,14 @@ html {
   align-items: center;
   z-index: 1;
   position: relative;
+}
+
+.zoom {
+  width: 35%;
+}
+
+.column-image {
+  width: 1000px;
 }
 
 .image-button {
@@ -189,8 +214,12 @@ html {
   justify-content: flex-start;
   margin-top: 125px;
   height: 80%;
-  max-width: 45%;
+  max-width: 35%;
   text-transform: uppercase;
+}
+
+.shop-page__column-two-section {
+  height: auto;
 }
 
 .variant-button__container {
@@ -265,12 +294,12 @@ html {
   transition: 0.2s;
 }
 
-#buy-button {
+.buy-button {
   outline: none;
   background-color: black;
   color: white;
   font-family: "VCR";
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 5px 0px;
   width: 100%;
   border: white solid 2px;
   padding: 15px 20px 15px 20px;
@@ -278,7 +307,7 @@ html {
   text-align: center;
 }
 
-#buy-button:hover {
+.buy-button:hover {
   background-color: white;
   transition: 0.5s;
   color: black;
@@ -405,4 +434,62 @@ html {
 
 .invisible {
   display: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1220px) {
+  .product-info__absolute {
+    left: 30px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .product-info__absolute {
+    left: 30px;
+  }
+  .shop-page__column-two {
+    margin-top: 100px;
+    max-width: 30%;
+    justify-content: center;
+  }
+  .shop-page__column-one {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .button__add {
+    right: 5px;
+    z-index: 5;
+  }
+  .button__sub {
+    left: 5px;
+    z-index: 5;
+  }
+  .column-image {
+    width: 100%;
+  }
+  .product-info__absolute {
+    display: none;
+  }
+  .shop-page__container-responsive {
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    height: auto;
+  }
+  .nav {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75)
+  }
+  .item-number__identifier {
+    bottom: 0px;
+  }
+  .shop-page__column-two {
+    max-width: 90%;
+    margin-top: 0;
+  }
+  .zoom {
+    width: 90%
+  }
 }
