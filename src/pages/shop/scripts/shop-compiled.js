@@ -51,6 +51,11 @@ var Shop = function Shop() {
       displayOutOfStock = _React$useState20[0],
       setDisplayOutOfStock = _React$useState20[1];
 
+  var _React$useState21 = React.useState(false),
+      _React$useState22 = _slicedToArray(_React$useState21, 2),
+      productDescriptionDisplay = _React$useState22[0],
+      setProductDescriptionDisplay = _React$useState22[1];
+
   var indexOptions = {
     add: function add() {
       productIndex !== products.length - 1 ? setProductIndex(productIndex + 1) : setProductIndex(0);
@@ -91,6 +96,8 @@ var Shop = function Shop() {
       'div',
       { style: { width: "100%", height: "100vh", overflowY: "auto" } },
       React.createElement(Nav, {
+        productDescriptionDisplay: productDescriptionDisplay,
+        setProductDescriptionDisplay: setProductDescriptionDisplay,
         setCheckoutStatus: setCheckoutStatus,
         setProductVariants: setProductVariants,
         setSelectedVariant: setSelectedVariant,
@@ -177,6 +184,8 @@ var Shop = function Shop() {
         React.createElement(Product, {
           products: products,
           selectedVariant: selectedVariant,
+          productDescriptionDisplay: productDescriptionDisplay,
+          setProductDescriptionDisplay: setProductDescriptionDisplay,
           setSelectedVariant: setSelectedVariant,
           productVariants: productVariants,
           setProductVariants: setProductVariants,
@@ -313,22 +322,16 @@ var Checkout = function Checkout(_ref) {
 var Product = function Product(_ref2) {
   var checkout = _ref2.checkout,
       setCheckout = _ref2.setCheckout,
-      productVariants = _ref2.productVariants,
-      setProductVariants = _ref2.setProductVariants,
-      checkoutStatus = _ref2.checkoutStatus,
       setCheckoutStatus = _ref2.setCheckoutStatus,
       client = _ref2.client,
+      productDescriptionDisplay = _ref2.productDescriptionDisplay,
+      setProductDescriptionDisplay = _ref2.setProductDescriptionDisplay,
       currentProduct = _ref2.currentProduct,
       setCurrentProduct = _ref2.setCurrentProduct,
       displayProductDetails = _ref2.displayProductDetails,
-      setDisplayProductDetails = _ref2.setDisplayProductDetails,
       selectedVariant = _ref2.selectedVariant,
       setSelectedVariant = _ref2.setSelectedVariant;
 
-  var _React$useState21 = React.useState(false),
-      _React$useState22 = _slicedToArray(_React$useState21, 2),
-      productDescriptionDisplay = _React$useState22[0],
-      setProductDescriptionDisplay = _React$useState22[1];
 
   function checkSelected(id) {
     setSelectedVariant(id);
@@ -470,7 +473,9 @@ var ProductImages = function ProductImages(_ref3) {
 };
 
 var Nav = function Nav(_ref4) {
-  var setProductVariants = _ref4.setProductVariants,
+  var productDescriptionDisplay = _ref4.productDescriptionDisplay,
+      setProductDescriptionDisplay = _ref4.setProductDescriptionDisplay,
+      setProductVariants = _ref4.setProductVariants,
       currentProduct = _ref4.currentProduct,
       setSelectedVariant = _ref4.setSelectedVariant,
       displayProductDetails = _ref4.displayProductDetails,
@@ -483,6 +488,7 @@ var Nav = function Nav(_ref4) {
     }));
     setSelectedVariant("");
     setDisplayProductDetails(false);
+    setProductDescriptionDisplay(false);
   }
   return React.createElement(
     'div',

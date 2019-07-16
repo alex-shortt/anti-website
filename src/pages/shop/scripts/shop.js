@@ -9,6 +9,7 @@ const Shop = () => {
   const [checkout, setCheckout] = React.useState({})
   const [selectedVariant, setSelectedVariant] = React.useState("")
   const [displayOutOfStock, setDisplayOutOfStock] = React.useState(false)
+  const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
   const indexOptions = {
     add: () => {
       productIndex !== products.length - 1 ?
@@ -49,6 +50,8 @@ const Shop = () => {
     return (
       <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
         <Nav
+          productDescriptionDisplay={productDescriptionDisplay}
+          setProductDescriptionDisplay={setProductDescriptionDisplay}
           setCheckoutStatus={setCheckoutStatus}
           setProductVariants={setProductVariants}
           setSelectedVariant={setSelectedVariant}
@@ -119,6 +122,8 @@ const Shop = () => {
           <Product
             products={products}
             selectedVariant={selectedVariant}
+            productDescriptionDisplay={productDescriptionDisplay}
+            setProductDescriptionDisplay={setProductDescriptionDisplay}
             setSelectedVariant={setSelectedVariant}
             productVariants={productVariants}
             setProductVariants={setProductVariants}
@@ -212,19 +217,16 @@ const Checkout = ({
 const Product = ({
   checkout,
   setCheckout,
-  productVariants,
-  setProductVariants,
-  checkoutStatus,
   setCheckoutStatus,
   client,
+  productDescriptionDisplay,
+  setProductDescriptionDisplay,
   currentProduct,
   setCurrentProduct,
   displayProductDetails,
-  setDisplayProductDetails,
   selectedVariant,
   setSelectedVariant
 }) => {
-  const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
 
   function checkSelected(id) {
     setSelectedVariant(id)
@@ -345,6 +347,8 @@ const ProductImages = ({ currentProduct }) => {
 }
 
 const Nav = ({
+  productDescriptionDisplay,
+  setProductDescriptionDisplay,
   setProductVariants,
   currentProduct,
   setSelectedVariant,
@@ -358,6 +362,7 @@ const Nav = ({
     )
     setSelectedVariant("")
     setDisplayProductDetails(false)
+    setProductDescriptionDisplay(false)
   }
   return (
     <div className="nav">
