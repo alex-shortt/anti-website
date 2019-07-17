@@ -38,7 +38,7 @@ contact_button.click(async () => {
 });
 
 const focusEvent = () => {
-  $("html").css("min-height", `${window.outerHeight}px`);
+  $("html").css("min-height", `${window.innerHeight}px`);
 };
 
 const blurEvent = () => {

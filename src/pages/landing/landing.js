@@ -9,9 +9,8 @@ async function clickToEnter() {
 
     var songsFolder = "assets/music/"
     var songs = [
-      songsFolder + "song1.mp3",
-      songsFolder + "song2.mp3",
-      songsFolder + "song3.mp3"
+        songsFolder + "energybea.mp3",
+        songsFolder + "speeding colby 150.m4a"
     ]
     var songVols = [1, 0.015, 0.5]
 
@@ -111,7 +110,11 @@ function printCredits() {
 
   Steven Huynh-Tran
       https://instagram.com/stevnotran
-      https://www.linkedin.com/in/stevenht/`
+      https://www.linkedin.com/in/stevenht/
+      
+   Rael Bernardino
+      https://www.linkedin.com/in/rael-bernardino-290447168/
+  `
   console.log(credits)
 }
 
