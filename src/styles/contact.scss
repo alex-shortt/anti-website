@@ -96,13 +96,41 @@ $purple: #333366;
 .contact-bg {
   height: 100%;
   width: 100%;
-  border: 3px white solid;
   overflow: hidden;
   position: relative;
-  background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/gif/flower.gif");
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto 50%;
+
+
+  @media screen and (max-width: 900px) {
+    background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/gif/flower.gif");
+  }
+}
+
+.contact-flower{
+  height: 50%;
+  width: calc(100% - 500px - 20px);
+  position: absolute;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+
+  &.top{
+    top: 0;
+    right: 0;
+  }
+
+  &.bottom{
+    bottom: 0;
+    left: 0;
+  }
+
+  background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/gif/flower.gif");
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 }
 
 .contact-message {
@@ -111,6 +139,7 @@ $purple: #333366;
   width: 90%;
   background-color: $highlightColor;
   border: 3px black solid;
+  border-radius: 15px;
 
   position: absolute;
   top: 0;
@@ -181,7 +210,6 @@ $purple: #333366;
       max-width: 300px;
 
       input {
-        border-style: border-box;
         border: none;
         box-sizing: border-box;
 
@@ -217,7 +245,6 @@ $purple: #333366;
       max-width: 300px;
 
       input {
-        border-style: border-box;
         box-sizing: border-box;
         border: none;
         background: none;
@@ -265,7 +292,6 @@ $purple: #333366;
       line-height: 1em;
 
       textarea {
-        border-style: border-box;
         box-sizing: border-box;
         border: none;
         background: none;
@@ -339,7 +365,7 @@ $purple: #333366;
   }
 
   @media screen and (max-width: 700px) {
-    margin: 0 10px;
+    margin: 0 5%;
   }
 
   &-name,
@@ -394,6 +420,7 @@ $purple: #333366;
 .contact-signup {
   background-color: $purple;
   border: 3px black solid;
+  border-radius: 15px;
 
   position: absolute;
   bottom: 0;
@@ -402,7 +429,7 @@ $purple: #333366;
 
   width: 90%;
   max-height: 47.5%;
-  max-width: 400px;
+  max-width: 500px;
 
   display: flex;
   flex-flow: column nowrap;
@@ -434,7 +461,7 @@ $purple: #333366;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    margin: 15px 0;
+    margin: 4vh 0;
 
     &-icon {
       fill: $purple;
@@ -498,7 +525,6 @@ $purple: #333366;
       }
 
       input {
-        border-style: border-box;
         box-sizing: border-box;
         border: none;
         background: none;
@@ -533,7 +559,7 @@ $purple: #333366;
     background-color: black;
     width: 350px;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 5vh;
     display: flex !important;
     flex-flow: row nowrap;
     align-items: center;
@@ -570,7 +596,7 @@ $purple: #333366;
   }
 
   @media screen and (max-width: 700px) {
-    margin: 0 10px;
+    margin: 0 5%;
   }
 }
 
