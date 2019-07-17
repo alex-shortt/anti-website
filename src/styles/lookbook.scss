@@ -10,6 +10,10 @@ $mobile: 650px;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+
+  & > * {
+    font-family: VCR, Open Sans, sans-serif;
+  }
 }
 
 .landing-links {
@@ -162,7 +166,6 @@ $mobile: 650px;
   }
 
   &-title {
-    font-family: "Open Sans", sans-serif;
     color: $highlightColor;
     line-height: 1em;
     margin-bottom: 10px;
@@ -174,7 +177,6 @@ $mobile: 650px;
   }
 
   &-subtitle {
-    font-family: loves;
     color: $secondColor;
     line-height: 1em;
 
@@ -228,7 +230,6 @@ $mobile: 650px;
     }
 
     &-counter {
-      font-family: loves;
       color: $secondColor;
     }
   }
