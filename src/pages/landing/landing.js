@@ -110,7 +110,11 @@ function printCredits() {
 
   Steven Huynh-Tran
       https://instagram.com/stevnotran
-      https://www.linkedin.com/in/stevenht/`
+      https://www.linkedin.com/in/stevenht/
+      
+   Rael Bernardino
+      https://www.linkedin.com/in/rael-bernardino-290447168/
+  `
   console.log(credits)
 }
 
