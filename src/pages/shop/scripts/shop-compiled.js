@@ -155,7 +155,7 @@ var Shop = function Shop() {
             ">"
           ),
           React.createElement(
-            'h3',
+            'h2',
             { className: 'item-number__identifier' },
             productIndex + 1,
             '/',
@@ -175,7 +175,7 @@ var Shop = function Shop() {
               products[productIndex].title
             ),
             React.createElement(
-              'h3',
+              'h2',
               { className: 'product-info__title' },
               products[productIndex].variants[0].price
             )
@@ -348,7 +348,7 @@ var Product = function Product(_ref2) {
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(function (checkout) {
       setCheckout(checkout);
     });
-    setCheckoutStatus(true);
+    selectedVariant !== "" ? setCheckoutStatus(true) : setCheckoutStatus(false);
   }
 
   return React.createElement(
@@ -400,11 +400,11 @@ var Product = function Product(_ref2) {
       React.createElement(
         'button',
         {
-          className: 'buy-button',
+          className: 'buy-button dimensions',
           onClick: function onClick() {
-            return setProductDescriptionDisplay(!productDescriptionDisplay);
+            setProductDescriptionDisplay(!productDescriptionDisplay);
           } },
-        'Description'
+        'DIMENSIONS'
       ),
       React.createElement('div', {
         className: productDescriptionDisplay ? "product-description" : "product-description-hidden",
@@ -437,37 +437,40 @@ var ProductImages = function ProductImages(_ref3) {
   return React.createElement(
     'div',
     { className: 'shop-page__column-one zoom', id: 'zoomedImg', style: { flexDirection: "column" } },
-    React.createElement(
-      'button',
-      {
-        onClick: imageIndexOptions.sub,
-        className: 'image-button image-button__sub'
-      },
-      "<"
-    ),
     React.createElement('img', { src: currentProductImages[currentImageIndex].src,
       width: '400px',
       style: { objectFit: "cover", "objectPosition": "center top" }
     }),
     React.createElement(
-      'button',
-      {
-        onClick: imageIndexOptions.add,
-        className: 'image-button image-button__add'
-      },
-      ">"
-    ),
-    React.createElement(
       'div',
       { className: 'shop-other__images' },
+      React.createElement(
+        'button',
+        {
+          onClick: imageIndexOptions.sub,
+          className: 'image-button image-button__sub'
+        },
+        "<"
+      ),
       currentProductImages.map(function (image, i) {
         return React.createElement('img', { key: i,
           src: image.src,
           width: '65px',
           height: '65px',
-          className: i === currentImageIndex ? 'selected-image' : 'unselected-image'
+          className: i === currentImageIndex ? 'selected-image' : 'unselected-image',
+          onClick: function onClick() {
+            return setCurrentImageIndex(i);
+          }
         });
-      })
+      }),
+      React.createElement(
+        'button',
+        {
+          onClick: imageIndexOptions.add,
+          className: 'image-button image-button__add'
+        },
+        ">"
+      )
     )
   );
 };

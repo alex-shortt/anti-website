@@ -103,7 +103,7 @@ const Shop = () => {
                 }
                 <button className="shop-page__column-one__button button__add"
                   onClick={indexOptions.add}>{">"}</button>
-                <h3 className="item-number__identifier">{productIndex + 1}/{products.length}</h3>
+                <h2 className="item-number__identifier">{productIndex + 1}/{products.length}</h2>
                 <div className="product-info__absolute">
                   <h1 className={displayOutOfStock
                     ? "product-info__status-available"
@@ -113,9 +113,9 @@ const Shop = () => {
                   <h2 className="product-info__title">
                     {products[productIndex].title}
                   </h2>
-                  <h3 className="product-info__title">
+                  <h2 className="product-info__title">
                     {products[productIndex].variants[0].price}
-                  </h3>
+                  </h2>
                 </div>
               </div>
           }
@@ -243,7 +243,9 @@ const Product = ({
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then((checkout) => {
       setCheckout(checkout)
     })
-    setCheckoutStatus(true)
+    selectedVariant !== "" ?
+      setCheckoutStatus(true) :
+      setCheckoutStatus(false)
   }
 
   return (
@@ -285,9 +287,11 @@ const Product = ({
           ADD TO CART
           </button>
         <button
-          className="buy-button"
-          onClick={() => setProductDescriptionDisplay(!productDescriptionDisplay)}>
-          Description
+          className="buy-button dimensions"
+          onClick={() => {
+            setProductDescriptionDisplay(!productDescriptionDisplay)
+          }}>
+          DIMENSIONS
         </button>
         <div
           className={productDescriptionDisplay ? "product-description" : "product-description-hidden"}
@@ -318,19 +322,15 @@ const ProductImages = ({ currentProduct }) => {
 
   return (
     <div className="shop-page__column-one zoom" id="zoomedImg" style={{ flexDirection: "column" }}>
-      <button
-        onClick={imageIndexOptions.sub}
-        className="image-button image-button__sub"
-      >{"<"}</button>
       <img src={currentProductImages[currentImageIndex].src}
         width="400px"
         style={{ objectFit: "cover", "objectPosition": "center top" }}
       />
-      <button
-        onClick={imageIndexOptions.add}
-        className="image-button image-button__add"
-      >{">"}</button>
       <div className="shop-other__images">
+        <button
+          onClick={imageIndexOptions.sub}
+          className="image-button image-button__sub"
+        >{"<"}</button>
         {
           currentProductImages.map((image, i) => {
             return <img key={i}
@@ -338,9 +338,15 @@ const ProductImages = ({ currentProduct }) => {
               width="65px"
               height="65px"
               className={i === currentImageIndex ? 'selected-image' : 'unselected-image'}
+              onClick={() =>
+                setCurrentImageIndex(i)}
             />
           })
         }
+        <button
+          onClick={imageIndexOptions.add}
+          className="image-button image-button__add"
+        >{">"}</button>
       </div>
     </div>
   )
