@@ -51,12 +51,6 @@ async function initGlitch(src) {
           const newWidth = img.width * scale;
           const newHeight = img.height * scale;
 
-          console.log("====================")
-          console.log(`parent: ${parentWidth} x ${parentHeight}`);
-          console.log(`old img: ${img.width} x ${img.height}`);
-          console.log(`new img: ${newWidth} x ${newHeight}`);
-          console.log("====================")
-
           img.resize(newWidth, newHeight);
         }
 
