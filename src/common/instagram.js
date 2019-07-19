@@ -18,4 +18,25 @@ async function getPostInfo(shortcode) {
   }
 }
 
-export default getPostInfo
+export async function getPosts(){
+  try {
+    const response = await axios.get(
+        `https://instagram.com/antiofficial/?__a=1`
+    )
+    const data = response.data.graphql.user
+    const rawPosts = data.edge_owner_to_timeline_media.edges
+
+    const posts = []
+    for(const rawPost of rawPosts){
+      posts.push({
+        img: rawPost.node.display_url,
+        url: `https://instagram.com/p/${rawPost.node.shortcode}/`
+      })
+    }
+
+    return posts
+  } catch (e) {
+    console.log("error ||", e)
+    return null
+  }
+}

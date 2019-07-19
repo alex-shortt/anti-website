@@ -118,13 +118,16 @@ async function initAnti3D() {
   function mousemove(event) {
     let x = event.clientX
     let y = event.clientY
-    if ($(window).width < 800) {
-      planets[0].pos.x = x
-      planets[0].pos.y = y + $("#anti3d").get(0).offsetTop
+
+    planets[0].pos.y =
+        y -
+        $("#anti3d").get(0).offsetTop -
+        $(".landing-links-socials-bot").outerHeight(true);
+
+    if ($(window).width() < 800) {
+      planets[0].pos.x = x;
     } else {
-      planets[0].pos.x = x - $(window).width() / 2
-      planets[0].pos.y =
-          y - ($(".socials-anti3d").height() - $("#anti3d").height()) / 2
+      planets[0].pos.x = x - $(window).width() / 2;
     }
   }
 
