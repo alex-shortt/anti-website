@@ -129,9 +129,7 @@ html {
   position: relative;
 }
 
-.zoom {
-  width: 35%;
-}
+
 
 .column-image {
   width: 1000px;
@@ -160,10 +158,6 @@ html {
   right: 5px;
 }
 
-.zoom {
-  position: relative;
-  overflow: hidden;
-}
 
 .shop-page__column-one__button {
   position: absolute;
@@ -189,10 +183,12 @@ html {
 .button__sub {
   left: 120px;
 }
+.product-info__title{
+  margin: 5px 0;
+}
 
 .item-number__identifier {
   position: absolute;
-  bottom: 20px;
   font-family: "VCR";
 }
 
@@ -518,6 +514,5 @@ table, td {
     margin-top: 0;
   }
   .zoom {
-    width: 90%
   }
 }
