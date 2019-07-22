@@ -29,27 +29,45 @@ async function initGlitch(src) {
       glitch[neighbor] = null;
     }
 
-    function loadCurr() {
-      p.loadImage(imgSrc[img_num], function(img) {
-        glitch[img_num] = new Glitch(img);
+    function loadImage(index) {
+      let parentWidth = parent_container.width();
+      let parentHeight = parent_container.height();
+
+
+      p.loadImage(imgSrc[index], function(img) {
+        let scale = 1;
+
+        if (img.width > parentWidth) {
+          let locScale = parentWidth / img.width;
+          if (locScale < scale) scale = locScale;
+        }
+
+        if (img.height > parentHeight) {
+          let locScale = parentHeight / img.height;
+          if (locScale < scale) scale = locScale;
+        }
+
+        if (scale < 1) {
+          const newWidth = img.width * scale;
+          const newHeight = img.height * scale;
+
+          img.resize(newWidth, newHeight);
+        }
+
+        glitch[index] = new Glitch(img);
       });
+    }
+
+    function loadCurr() {
+      loadImage(img_num);
     }
 
     function loadNeighbors() {
       const prev = img_num == 0 ? img_count - 1 : img_num - 1;
       const next = img_num == img_count - 1 ? 0 : img_num + 1;
 
-      if (!glitch[prev]) {
-        p.loadImage(imgSrc[prev], function(img) {
-          glitch[prev] = new Glitch(img);
-        });
-      }
-
-      if (!glitch[next]) {
-        p.loadImage(imgSrc[next], function(img) {
-          glitch[next] = new Glitch(img);
-        });
-      }
+      loadImage(prev);
+      loadImage(next);
     }
 
     p.setup = async function() {

@@ -146,6 +146,7 @@ html {
   position: relative;
 }
 
+<<<<<<< HEAD
 .shop-page__column-one__image {
   width: 800px;
   height: 80%;
@@ -174,6 +175,9 @@ html {
 .zoom {
   width: 35%;
 }
+=======
+
+>>>>>>> cd3144329cd93b250e0b638dcf6d4282918afa4f
 
 .column-image {
   width: 1000px;
@@ -202,10 +206,6 @@ html {
   right: 3px;
 }
 
-.zoom {
-  position: relative;
-  overflow: hidden;
-}
 
 .shop-page__column-one__button {
   position: absolute;
@@ -231,10 +231,12 @@ html {
 .button__sub {
   left: 200px;
 }
+.product-info__title{
+  margin: 5px 0;
+}
 
 /* .item-number__identifier {
   position: absolute;
-  bottom: 20px;
   font-family: "VCR";
 } */
 
@@ -681,6 +683,7 @@ td {
     margin-top: 0;
   }
   .zoom {
+<<<<<<< HEAD
     width: 90%;
     margin-top: 75px;
   }
@@ -693,6 +696,8 @@ td {
   .checkout-container {
     width: 100%;
     height: 100vh;
+=======
+>>>>>>> cd3144329cd93b250e0b638dcf6d4282918afa4f
   }
   .checkout-row {
     display: none;

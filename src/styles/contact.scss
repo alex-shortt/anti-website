@@ -85,32 +85,6 @@ $purple: #333366;
   }
 }
 
-.contact-main {
-  max-height: 500px;
-  max-width: 1200px;
-  height: 90%;
-  width: 90%;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.contact-bg {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 50%;
-
-  @media screen and (max-width: 900px) {
-    background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/gif/flower.gif");
-  }
-}
-
 .contact-flower {
   height: 50%;
   width: calc(100% - 500px - 20px);
@@ -143,6 +117,7 @@ $purple: #333366;
   background-color: $highlightColor;
   border: 3px black solid;
   border-radius: 15px;
+  box-sizing: border-box;
 
   position: absolute;
   top: 0;
@@ -152,6 +127,11 @@ $purple: #333366;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
+  @media screen and (max-width: 700px) {
+    margin: 0;
+    left: 5%;
+  }
 
   &-title,
   &-name,
@@ -365,10 +345,6 @@ $purple: #333366;
     }
   }
 
-  @media screen and (max-width: 700px) {
-    margin: 0 5%;
-  }
-
   &-name,
   &-email {
     display: flex;
@@ -422,6 +398,7 @@ $purple: #333366;
   background-color: $purple;
   border: 3px black solid;
   border-radius: 15px;
+  box-sizing: border-box;
 
   position: absolute;
   bottom: 0;
@@ -435,6 +412,11 @@ $purple: #333366;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
+  @media screen and (max-width: 700px) {
+    margin: 0;
+    right: 5%;
+  }
 
   &-title {
     display: flex;
@@ -590,10 +572,6 @@ $purple: #333366;
       width: 250px;
       margin-bottom: 10px;
     }
-  }
-
-  @media screen and (max-width: 700px) {
-    margin: 0 5%;
   }
 }
 
