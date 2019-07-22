@@ -1,9 +1,3 @@
-// let Router = ReactRouter.Router;
-// let Route = ReactRouter.Route;
-// let IndexRoute = ReactRouter.IndexRoute;
-// let Link = ReactRouter.Link;
-// let browserHistory = ReactRouter.browserHistory;
-
 const Shop = () => {
   const [products, setProducts] = React.useState([])
   const [productIndex, setProductIndex] = React.useState(0)
@@ -77,6 +71,7 @@ const Shop = () => {
 
     return (
       <div style={{ width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" }}>
+        <Player />
         <Nav
           productDescriptionDisplay={productDescriptionDisplay}
           setProductDescriptionDisplay={setProductDescriptionDisplay}
@@ -123,12 +118,12 @@ const Shop = () => {
                           selectProduct()
                           : setDisplayOutOfStock(true)
                       }}>
-                        <img className="product" src={images[productIndex]}
-                          onClick={() => {
-                            currentProduct.availableForSale ?
-                              selectProduct()
-                              : setDisplayOutOfStock(true)
-                          }} />
+                      <img className="product" src={images[productIndex]}
+                        onClick={() => {
+                          currentProduct.availableForSale ?
+                            selectProduct()
+                            : setDisplayOutOfStock(true)
+                        }} />
                     </div>
                     : <img className="product" alt="" width="300px" />
                 }
@@ -177,6 +172,32 @@ const Shop = () => {
       <h1 style={{ fontFamily: "VCR", color: "white" }}>Loading...</h1>
     )
   }
+}
+
+const useAudio = () => {
+  const [audio] = React.useState(new Audio('../../../assets/music/speeding+looped.mp3'));
+  const [playing, setPlaying] = React.useState(true);
+
+  const toggle = () => setPlaying(!playing);
+
+  React.useEffect(
+    () => {
+      playing ? audio.play() : audio.pause()
+    },
+    [playing]
+  )
+
+  return [playing, toggle];
+}
+
+const Player = ({ url }) => {
+  const [playing, toggle] = useAudio(url);
+
+  return (
+    <div>
+      <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
+    </div>
+  )
 }
 
 const Nav = ({
@@ -437,4 +458,4 @@ ReactDOM.render(
   // <Router history={browserHistory}>
   //   <Route path="/shop" component={Shop}/>
   // </Router>
-  <Shop />,domContainer)
+  <Shop />, domContainer)

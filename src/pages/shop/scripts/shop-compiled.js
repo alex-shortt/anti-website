@@ -1,11 +1,5 @@
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-// let Router = ReactRouter.Router;
-// let Route = ReactRouter.Route;
-// let IndexRoute = ReactRouter.IndexRoute;
-// let Link = ReactRouter.Link;
-// let browserHistory = ReactRouter.browserHistory;
-
 var Shop = function Shop() {
   var _React$useState = React.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -128,6 +122,7 @@ var Shop = function Shop() {
     return React.createElement(
       'div',
       { style: { width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" } },
+      React.createElement(Player, null),
       React.createElement(Nav, {
         productDescriptionDisplay: productDescriptionDisplay,
         setProductDescriptionDisplay: setProductDescriptionDisplay,
@@ -241,15 +236,55 @@ var Shop = function Shop() {
   }
 };
 
-var Nav = function Nav(_ref) {
-  var productDescriptionDisplay = _ref.productDescriptionDisplay,
-      setProductDescriptionDisplay = _ref.setProductDescriptionDisplay,
-      setProductVariants = _ref.setProductVariants,
-      currentProduct = _ref.currentProduct,
-      setSelectedVariant = _ref.setSelectedVariant,
-      displayProductDetails = _ref.displayProductDetails,
-      setDisplayProductDetails = _ref.setDisplayProductDetails,
-      setCheckoutStatus = _ref.setCheckoutStatus;
+var useAudio = function useAudio() {
+  var _React$useState27 = React.useState(new Audio('../../../assets/music/speeding+looped.mp3')),
+      _React$useState28 = _slicedToArray(_React$useState27, 1),
+      audio = _React$useState28[0];
+
+  var _React$useState29 = React.useState(true),
+      _React$useState30 = _slicedToArray(_React$useState29, 2),
+      playing = _React$useState30[0],
+      setPlaying = _React$useState30[1];
+
+  var toggle = function toggle() {
+    return setPlaying(!playing);
+  };
+
+  React.useEffect(function () {
+    playing ? audio.play() : audio.pause();
+  }, [playing]);
+
+  return [playing, toggle];
+};
+
+var Player = function Player(_ref) {
+  var url = _ref.url;
+
+  var _useAudio = useAudio(url),
+      _useAudio2 = _slicedToArray(_useAudio, 2),
+      playing = _useAudio2[0],
+      toggle = _useAudio2[1];
+
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'button',
+      { className: 'player-toggle', onClick: toggle },
+      playing ? React.createElement('i', { className: 'fas fa-pause' }) : React.createElement('i', { className: 'fas fa-play' })
+    )
+  );
+};
+
+var Nav = function Nav(_ref2) {
+  var productDescriptionDisplay = _ref2.productDescriptionDisplay,
+      setProductDescriptionDisplay = _ref2.setProductDescriptionDisplay,
+      setProductVariants = _ref2.setProductVariants,
+      currentProduct = _ref2.currentProduct,
+      setSelectedVariant = _ref2.setSelectedVariant,
+      displayProductDetails = _ref2.displayProductDetails,
+      setDisplayProductDetails = _ref2.setDisplayProductDetails,
+      setCheckoutStatus = _ref2.setCheckoutStatus;
 
   function returnToView() {
     setProductVariants(currentProduct.variants.map(function (v) {
@@ -288,19 +323,19 @@ var Nav = function Nav(_ref) {
   );
 };
 
-var Product = function Product(_ref2) {
-  var prodDescription = _ref2.prodDescription,
-      checkout = _ref2.checkout,
-      setCheckout = _ref2.setCheckout,
-      setCheckoutStatus = _ref2.setCheckoutStatus,
-      client = _ref2.client,
-      productDescriptionDisplay = _ref2.productDescriptionDisplay,
-      setProductDescriptionDisplay = _ref2.setProductDescriptionDisplay,
-      currentProduct = _ref2.currentProduct,
-      setCurrentProduct = _ref2.setCurrentProduct,
-      displayProductDetails = _ref2.displayProductDetails,
-      selectedVariant = _ref2.selectedVariant,
-      setSelectedVariant = _ref2.setSelectedVariant;
+var Product = function Product(_ref3) {
+  var prodDescription = _ref3.prodDescription,
+      checkout = _ref3.checkout,
+      setCheckout = _ref3.setCheckout,
+      setCheckoutStatus = _ref3.setCheckoutStatus,
+      client = _ref3.client,
+      productDescriptionDisplay = _ref3.productDescriptionDisplay,
+      setProductDescriptionDisplay = _ref3.setProductDescriptionDisplay,
+      currentProduct = _ref3.currentProduct,
+      setCurrentProduct = _ref3.setCurrentProduct,
+      displayProductDetails = _ref3.displayProductDetails,
+      selectedVariant = _ref3.selectedVariant,
+      setSelectedVariant = _ref3.setSelectedVariant;
 
 
   function checkSelected(id) {
@@ -389,15 +424,15 @@ var Product = function Product(_ref2) {
   );
 };
 
-var ProductImages = function ProductImages(_ref3) {
-  var currentProduct = _ref3.currentProduct;
+var ProductImages = function ProductImages(_ref4) {
+  var currentProduct = _ref4.currentProduct;
 
   var currentProductImages = currentProduct.images.slice(1, currentProduct.images.length);
 
-  var _React$useState27 = React.useState(0),
-      _React$useState28 = _slicedToArray(_React$useState27, 2),
-      currentImageIndex = _React$useState28[0],
-      setCurrentImageIndex = _React$useState28[1];
+  var _React$useState31 = React.useState(0),
+      _React$useState32 = _slicedToArray(_React$useState31, 2),
+      currentImageIndex = _React$useState32[0],
+      setCurrentImageIndex = _React$useState32[1];
 
   var imageIndexOptions = {
     add: function add() {
@@ -448,15 +483,15 @@ var ProductImages = function ProductImages(_ref3) {
   );
 };
 
-var Checkout = function Checkout(_ref4) {
-  var products = _ref4.products,
-      productIndex = _ref4.productIndex,
-      client = _ref4.client,
-      checkout = _ref4.checkout,
-      setCheckout = _ref4.setCheckout,
-      selectedVariant = _ref4.selectedVariant,
-      checkoutStatus = _ref4.checkoutStatus,
-      setCheckoutStatus = _ref4.setCheckoutStatus;
+var Checkout = function Checkout(_ref5) {
+  var products = _ref5.products,
+      productIndex = _ref5.productIndex,
+      client = _ref5.client,
+      checkout = _ref5.checkout,
+      setCheckout = _ref5.setCheckout,
+      selectedVariant = _ref5.selectedVariant,
+      checkoutStatus = _ref5.checkoutStatus,
+      setCheckoutStatus = _ref5.setCheckoutStatus;
 
 
   function removeFromCheckout(itemId) {

@@ -52,6 +52,7 @@ html {
   color: white;
   justify-content: space-evenly;
   width: 100%;
+  overflow: hidden;
 }
 
 .shop-page__container-responsive {
@@ -148,6 +149,21 @@ html {
 .shop-page__column-one__image {
   width: 800px;
   height: 80%;
+}
+
+.player-toggle {
+  z-index: 3;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.player-toggle:hover {
+  cursor: pointer;
 }
 
 .product {
@@ -605,6 +621,10 @@ td {
 @media screen and (max-width: 700) {
   .product-info__absolute {
     bottom: 0;
+  }
+  .player-toggle {
+    left: 200px;
+    bottom: 20px;
   }
 }
 

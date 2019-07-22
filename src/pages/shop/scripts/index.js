@@ -12,33 +12,3 @@ $(document).ready(() => {
     }
   })
 })
-
-import MusicPlayer from '../src/pages/view/music'
-
-var songsFolder = "../assets/music/"
-var songs = [
-  songsFolder + "energybea.mp3",
-  songsFolder + "speeding colby 150.m4a"
-]
-var songVols = [1, 0.015, 0.5]
-
-var music = new MusicPlayer("#music-audio", songs, songVols)
-music.element.on("ended", function () {
-  //nextSong() method from music
-  music.currSong++
-  if (music.currSong == music.songs.length) {
-    music.currSong = 0
-  }
-  var songSrc = music.songs[music.currSong]
-  music.element.attr("src", songSrc)
-  music.element.get(0).volume = music.songVols[music.currSong]
-  music.element.get(0).load()
-  music.updatePlay()
-})
-
-$(".music-controls").click(function () {
-  music.togglePlay()
-})
-
-// $(".music-controls").click(function() {
-//   music
