@@ -19,23 +19,21 @@
   <script src="https://sdks.shopifycdn.com/js-buy-sdk/2.6.0/index.umd.min.js"></script>
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script type="module" src="../src/pages/shop/scripts/index.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/4.0.0-0/react-router.js" crossorigin></script> -->
+  <script src="../src/pages/shop/scripts/index.js"></script>
 </head>
 
 <body>
   <div id="shop-page">
-    <script>
-      $(document).ready(function () {
-        $('#zoomedImg').zoom()
-      })
-    </script>
+    <div className="music-controls"></div>
+    <audio id="music-audio" src="" crossorigin="anonymous" hidden />
   </div>
 
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
 
   <!-- React Component -->
-  <script src="../src/pages/shop/scripts/shop-compiled.js"></script>
+  <script type="module" src="../src/pages/shop/scripts/shop-compiled.js"></script>
 </body>
 
 </html>

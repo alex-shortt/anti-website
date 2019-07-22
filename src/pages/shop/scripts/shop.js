@@ -1,3 +1,9 @@
+// let Router = ReactRouter.Router;
+// let Route = ReactRouter.Route;
+// let IndexRoute = ReactRouter.IndexRoute;
+// let Link = ReactRouter.Link;
+// let browserHistory = ReactRouter.browserHistory;
+
 const Shop = () => {
   const [products, setProducts] = React.useState([])
   const [productIndex, setProductIndex] = React.useState(0)
@@ -10,6 +16,8 @@ const Shop = () => {
   const [selectedVariant, setSelectedVariant] = React.useState("")
   const [displayOutOfStock, setDisplayOutOfStock] = React.useState(false)
   const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
+  const [prodDescription, setProdDescription] = React.useState('')
+  const [gifs, setGifs] = React.useState([])
   const indexOptions = {
     add: () => {
       productIndex !== products.length - 1 ?
@@ -31,6 +39,7 @@ const Shop = () => {
       setProducts(shopifyProducts)
       setCurrentProduct(shopifyProducts[0])
       setMounted(true)
+      findGifs(shopifyProducts)
       console.log(shopifyProducts)
     })
     client.checkout.create().then(checkout => {
@@ -38,17 +47,36 @@ const Shop = () => {
     })
   }, [])
 
-  function selectProduct() {
-    setCurrentProduct(products[productIndex])
-    setProductVariants(
-      currentProduct.variants.map(v => v = { ...v, selected: false }))
-    setDisplayProductDetails(true)
+  function findGifs(products) {
+    const tempProducts = products
+    let tempArr = []
+    tempProducts.map((product) => {
+      tempArr.push(product.images[product.images.length - 1].src)
+    })
+    setGifs(tempArr)
   }
 
+  function selectProduct() {
+    setDisplayProductDetails(true)
+    setCurrentProduct(products[productIndex])
+    justProductDescription()
+    setProductVariants(
+      currentProduct.variants.map(v => v = { ...v, selected: false }))
+  }
+
+  function justProductDescription() {
+    const productDesc = products[productIndex].description.split(' ')
+    const cutOffNum = productDesc.indexOf('Dimensions')
+    const returnProductDesc = productDesc.splice(0, cutOffNum).join(' ')
+    setProdDescription(returnProductDesc)
+  }
+
+
   if (mounted) {
-    let images = products.map(product => product.images[0].src)
+    let images = gifs
+
     return (
-      <div style={{ width: "100%", height: "100vh", overflowY: "auto" }}>
+      <div style={{ width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" }}>
         <Nav
           productDescriptionDisplay={productDescriptionDisplay}
           setProductDescriptionDisplay={setProductDescriptionDisplay}
@@ -59,7 +87,12 @@ const Shop = () => {
           setDisplayProductDetails={setDisplayProductDetails}
           currentProduct={currentProduct}
         />
-        <div className={"shop-page__container shop-page__container-responsive"} style={{ justifyContent: "space-evenly", width: "100%" }}>
+        <div className={
+          window.innerWidth < 651 ?
+            !displayProductDetails
+              ? "shop-page__container"
+              : "shop-page__container-responsive"
+            : "shop-page__container"}>
           <Checkout
             client={client}
             checkout={checkout}
@@ -80,8 +113,7 @@ const Shop = () => {
                 <button className="shop-page__column-one__button button__sub"
                   onClick={indexOptions.sub}>{"<"}</button>
                 <div className="shop-page__column-one__image-container">
-                  <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png"
-                    width="900px" height="80%" />
+                  <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png" />
                 </div>
                 {
                   currentProduct.images.length > 1 ?
@@ -90,20 +122,18 @@ const Shop = () => {
                         currentProduct.availableForSale ?
                           selectProduct()
                           : setDisplayOutOfStock(true)
-                      }}
-                    >
-                      <img className="product" src={images[productIndex]} width="400px" style={{ marginTop: "45px" }}
-                        onClick={() => {
-                          currentProduct.availableForSale ?
-                            selectProduct()
-                            : setDisplayOutOfStock(true)
-                        }} />
+                      }}>
+                        <img className="product" src={images[productIndex]}
+                          onClick={() => {
+                            currentProduct.availableForSale ?
+                              selectProduct()
+                              : setDisplayOutOfStock(true)
+                          }} />
                     </div>
                     : <img className="product" alt="" width="300px" />
                 }
                 <button className="shop-page__column-one__button button__add"
                   onClick={indexOptions.add}>{">"}</button>
-                <h2 className="item-number__identifier">{productIndex + 1}/{products.length}</h2>
                 <div className="product-info__absolute">
                   <h1 className={displayOutOfStock
                     ? "product-info__status-available"
@@ -116,10 +146,12 @@ const Shop = () => {
                   <h2 className="product-info__title">
                     {products[productIndex].variants[0].price}
                   </h2>
+                  <h2 className="item-number__identifier">{productIndex + 1}/{products.length}</h2>
                 </div>
               </div>
           }
           <Product
+            prodDescription={prodDescription}
             products={products}
             selectedVariant={selectedVariant}
             productDescriptionDisplay={productDescriptionDisplay}
@@ -147,74 +179,51 @@ const Shop = () => {
   }
 }
 
-// Checkout
-const Checkout = ({
-  products,
-  productIndex,
-  client,
-  checkout,
-  setCheckout,
-  selectedVariant,
-  checkoutStatus,
+const Nav = ({
+  productDescriptionDisplay,
+  setProductDescriptionDisplay,
+  setProductVariants,
+  currentProduct,
+  setSelectedVariant,
+  displayProductDetails,
+  setDisplayProductDetails,
   setCheckoutStatus
 }) => {
-
-  function removeFromCheckout(itemId) {
-    const checkoutId = checkout.id
-    let lineItemsToRemove = itemId
-    client.checkout.removeLineItems(checkoutId, lineItemsToRemove).then((checkout) => {
-      setCheckout(checkout)
-    })
+  function returnToView() {
+    setProductVariants(
+      currentProduct.variants.map(v => v = { ...v, selected: false })
+    )
+    setSelectedVariant("")
+    setDisplayProductDetails(false)
+    setProductDescriptionDisplay(false)
   }
-
   return (
-    <div className={checkoutStatus ? "checkout visible" : "checkout invisible"}>
-      <div className="checkout-container">
-        <div className="checkout-header">
-          <button
-            className="checkout-exit"
-            onClick={() => {
-              setCheckoutStatus(false)
-            }}>
-            x
-          </button>
-          <h1>Cart</h1>
-        </div>
-        <div className="checkout-content">
-          <div className="checkout-list">
-            {
-              checkout.lineItems.map(item => {
-                return (
-                  <div className="item-line" key={item.id}>
-                    <button className="remove-item"
-                      onClick={() => removeFromCheckout(item.id)}
-                    >x</button>
-                    <img className="checkout-img" src={item.variant.image.src} />
-                    <h4 className="item-size">{item.variant.title}</h4>
-                    <h4 className="item-title">{item.title}</h4>
-                    <h4 className="item-quantity">{item.quantity}</h4>
-                    <h4 className="item-price">{item.variant.price}</h4>
-                  </div>
-                )
-              })
-            }
-          </div>
-        </div>
-        <div className="checkout-footer">
-          <h4 className="subtotal">Subtotal: ${checkout.subtotalPrice}</h4>
-          <a href={`https://antiofficial.myshopify.com/cart/${checkout.id}`}
-            className="checkout-hyperlink">
-            CHECKOUT
-            </a>
-        </div>
-      </div>
-    </div>
+    <div className="nav">
+      <a className={
+        !displayProductDetails
+          ? "return"
+          : "return__invisible"
+      }
+        href="../../../index.html">return</a>
+      <button
+        onClick={() => returnToView()}
+        className={
+          displayProductDetails
+            ? "return"
+            : "return__invisible"
+        }
+      >return</button>
+      <img
+        className="cart"
+        onClick={() => setCheckoutStatus(true)}
+        src={'../assets/pictures/svg/cart-white.svg'}
+      />
+    </div >
   )
 }
 
-// Product
-
 const Product = ({
+  prodDescription,
   checkout,
   setCheckout,
   setCheckoutStatus,
@@ -293,6 +302,7 @@ const Product = ({
           }}>
           DIMENSIONS
         </button>
+        <p>{prodDescription}</p>
         <div
           className={productDescriptionDisplay ? "product-description" : "product-description-hidden"}
           dangerouslySetInnerHTML={{ __html: currentProduct.descriptionHtml }}
@@ -302,7 +312,6 @@ const Product = ({
   )
 }
 
-// Product Images
 const ProductImages = ({ currentProduct }) => {
   const currentProductImages = currentProduct.images.slice(1, currentProduct.images.length)
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0)
@@ -322,9 +331,10 @@ const ProductImages = ({ currentProduct }) => {
 
   return (
     <div className="shop-page__column-one zoom" id="zoomedImg" style={{ flexDirection: "column" }}>
-      <img src={currentProductImages[currentImageIndex].src}
-        width="400px"
-        style={{ objectFit: "cover", "objectPosition": "center top" }}
+      <img
+        className="product-image"
+        src={currentProductImages[currentImageIndex].src}
+      // style={{ objectFit: "cover", "objectPosition": "center top" }}
       />
       <div className="shop-other__images">
         <button
@@ -335,8 +345,6 @@ const ProductImages = ({ currentProduct }) => {
           currentProductImages.map((image, i) => {
             return <img key={i}
               src={image.src}
-              width="65px"
-              height="65px"
               className={i === currentImageIndex ? 'selected-image' : 'unselected-image'}
               onClick={() =>
                 setCurrentImageIndex(i)}
@@ -352,49 +360,81 @@ const ProductImages = ({ currentProduct }) => {
   )
 }
 
-const Nav = ({
-  productDescriptionDisplay,
-  setProductDescriptionDisplay,
-  setProductVariants,
-  currentProduct,
-  setSelectedVariant,
-  displayProductDetails,
-  setDisplayProductDetails,
+const Checkout = ({
+  products,
+  productIndex,
+  client,
+  checkout,
+  setCheckout,
+  selectedVariant,
+  checkoutStatus,
   setCheckoutStatus
 }) => {
-  function returnToView() {
-    setProductVariants(
-      currentProduct.variants.map(v => v = { ...v, selected: false })
-    )
-    setSelectedVariant("")
-    setDisplayProductDetails(false)
-    setProductDescriptionDisplay(false)
-  }
-  return (
-    <div className="nav">
-      <a className={
-        !displayProductDetails
-          ? "return"
-          : "return__invisible"
-      }
-        href="../../../index.html">return</a>
-      <button
-        onClick={() => returnToView()}
-        className={
-          displayProductDetails
-            ? "return"
-            : "return__invisible"
-        }
-      >return</button>
-      <img
-        className="cart"
-        onClick={() => setCheckoutStatus(true)}
-        src={'../assets/pictures/svg/cart-white.svg'}
-      />
-    </div >
-  )
 
+  function removeFromCheckout(itemId) {
+    const checkoutId = checkout.id
+    let lineItemsToRemove = itemId
+    client.checkout.removeLineItems(checkoutId, lineItemsToRemove).then((checkout) => {
+      setCheckout(checkout)
+    })
+  }
+
+  return (
+    <div className={checkoutStatus ? "checkout visible" : "checkout invisible"}>
+      <div className="checkout-container">
+        <div className="checkout-header">
+          <button
+            className="checkout-exit"
+            onClick={() => {
+              setCheckoutStatus(false)
+            }}>
+            x
+          </button>
+          <h1>Cart</h1>
+          <div className="checkout-row">
+            <p>ANTI</p>
+            <p>IMAGE</p>
+            <p>SIZE</p>
+            <p>PRODUCT NAME</p>
+            <p>QUANTITY</p>
+            <p>PRICE</p>
+          </div>
+        </div>
+        <div className="checkout-content">
+          <div className="checkout-list">
+            {
+              checkout.lineItems.map(item => {
+                return (
+                  <div className="item-line" key={item.id}>
+                    <button className="remove-item"
+                      onClick={() => removeFromCheckout(item.id)}
+                    >x</button>
+                    <img className="checkout-img" src={item.variant.image.src} />
+                    <h4 className="item-size">{item.variant.title}</h4>
+                    <h4 className="item-title">{item.title}</h4>
+                    <h4 className="item-quantity">{item.quantity}</h4>
+                    <h4 className="item-price">${item.variant.price}</h4>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+        <div className="checkout-footer">
+          <h4 className="subtotal">Subtotal: ${checkout.subtotalPrice}</h4>
+          <a href={checkout.webUrl}
+            className="checkout-hyperlink">
+            CHECKOUT
+            </a>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const domContainer = document.querySelector('#shop-page')
-ReactDOM.render(<Shop />, domContainer)
+ReactDOM.render(
+  // <Router history={browserHistory}>
+  //   <Route path="/shop" component={Shop}/>
+  // </Router>
+  <Shop />,domContainer)

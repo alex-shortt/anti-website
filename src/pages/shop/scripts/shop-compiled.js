@@ -1,5 +1,11 @@
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+// let Router = ReactRouter.Router;
+// let Route = ReactRouter.Route;
+// let IndexRoute = ReactRouter.IndexRoute;
+// let Link = ReactRouter.Link;
+// let browserHistory = ReactRouter.browserHistory;
+
 var Shop = function Shop() {
   var _React$useState = React.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -56,6 +62,16 @@ var Shop = function Shop() {
       productDescriptionDisplay = _React$useState22[0],
       setProductDescriptionDisplay = _React$useState22[1];
 
+  var _React$useState23 = React.useState(''),
+      _React$useState24 = _slicedToArray(_React$useState23, 2),
+      prodDescription = _React$useState24[0],
+      setProdDescription = _React$useState24[1];
+
+  var _React$useState25 = React.useState([]),
+      _React$useState26 = _slicedToArray(_React$useState25, 2),
+      gifs = _React$useState26[0],
+      setGifs = _React$useState26[1];
+
   var indexOptions = {
     add: function add() {
       productIndex !== products.length - 1 ? setProductIndex(productIndex + 1) : setProductIndex(0);
@@ -73,6 +89,7 @@ var Shop = function Shop() {
       setProducts(shopifyProducts);
       setCurrentProduct(shopifyProducts[0]);
       setMounted(true);
+      findGifs(shopifyProducts);
       console.log(shopifyProducts);
     });
     client.checkout.create().then(function (checkout) {
@@ -80,21 +97,37 @@ var Shop = function Shop() {
     });
   }, []);
 
+  function findGifs(products) {
+    var tempProducts = products;
+    var tempArr = [];
+    tempProducts.map(function (product) {
+      tempArr.push(product.images[product.images.length - 1].src);
+    });
+    setGifs(tempArr);
+  }
+
   function selectProduct() {
+    setDisplayProductDetails(true);
     setCurrentProduct(products[productIndex]);
+    justProductDescription();
     setProductVariants(currentProduct.variants.map(function (v) {
       return v = Object.assign({}, v, { selected: false });
     }));
-    setDisplayProductDetails(true);
+  }
+
+  function justProductDescription() {
+    var productDesc = products[productIndex].description.split(' ');
+    var cutOffNum = productDesc.indexOf('Dimensions');
+    var returnProductDesc = productDesc.splice(0, cutOffNum).join(' ');
+    setProdDescription(returnProductDesc);
   }
 
   if (mounted) {
-    var images = products.map(function (product) {
-      return product.images[0].src;
-    });
+    var images = gifs;
+
     return React.createElement(
       'div',
-      { style: { width: "100%", height: "100vh", overflowY: "auto" } },
+      { style: { width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" } },
       React.createElement(Nav, {
         productDescriptionDisplay: productDescriptionDisplay,
         setProductDescriptionDisplay: setProductDescriptionDisplay,
@@ -107,7 +140,7 @@ var Shop = function Shop() {
       }),
       React.createElement(
         'div',
-        { className: "shop-page__container shop-page__container-responsive", style: { justifyContent: "space-evenly", width: "100%" } },
+        { className: window.innerWidth < 651 ? !displayProductDetails ? "shop-page__container" : "shop-page__container-responsive" : "shop-page__container" },
         React.createElement(Checkout, {
           client: client,
           checkout: checkout,
@@ -133,17 +166,15 @@ var Shop = function Shop() {
           React.createElement(
             'div',
             { className: 'shop-page__column-one__image-container' },
-            React.createElement('img', { className: 'shop-page__column-one__image', src: '../../../assets/pictures/finaltube.png',
-              width: '900px', height: '80%' })
+            React.createElement('img', { className: 'shop-page__column-one__image', src: '../../../assets/pictures/finaltube.png' })
           ),
           currentProduct.images.length > 1 ? React.createElement(
             'div',
             { className: 'product-container',
               onClick: function onClick() {
                 currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
-              }
-            },
-            React.createElement('img', { className: 'product', src: images[productIndex], width: '400px', style: { marginTop: "45px" },
+              } },
+            React.createElement('img', { className: 'product', src: images[productIndex],
               onClick: function onClick() {
                 currentProduct.availableForSale ? selectProduct() : setDisplayOutOfStock(true);
               } })
@@ -153,13 +184,6 @@ var Shop = function Shop() {
             { className: 'shop-page__column-one__button button__add',
               onClick: indexOptions.add },
             ">"
-          ),
-          React.createElement(
-            'h2',
-            { className: 'item-number__identifier' },
-            productIndex + 1,
-            '/',
-            products.length
           ),
           React.createElement(
             'div',
@@ -178,10 +202,18 @@ var Shop = function Shop() {
               'h2',
               { className: 'product-info__title' },
               products[productIndex].variants[0].price
+            ),
+            React.createElement(
+              'h2',
+              { className: 'item-number__identifier' },
+              productIndex + 1,
+              '/',
+              products.length
             )
           )
         ),
         React.createElement(Product, {
+          prodDescription: prodDescription,
           products: products,
           selectedVariant: selectedVariant,
           productDescriptionDisplay: productDescriptionDisplay,
@@ -209,118 +241,56 @@ var Shop = function Shop() {
   }
 };
 
-// Checkout
-var Checkout = function Checkout(_ref) {
-  var products = _ref.products,
-      productIndex = _ref.productIndex,
-      client = _ref.client,
-      checkout = _ref.checkout,
-      setCheckout = _ref.setCheckout,
-      selectedVariant = _ref.selectedVariant,
-      checkoutStatus = _ref.checkoutStatus,
+var Nav = function Nav(_ref) {
+  var productDescriptionDisplay = _ref.productDescriptionDisplay,
+      setProductDescriptionDisplay = _ref.setProductDescriptionDisplay,
+      setProductVariants = _ref.setProductVariants,
+      currentProduct = _ref.currentProduct,
+      setSelectedVariant = _ref.setSelectedVariant,
+      displayProductDetails = _ref.displayProductDetails,
+      setDisplayProductDetails = _ref.setDisplayProductDetails,
       setCheckoutStatus = _ref.setCheckoutStatus;
 
-
-  function removeFromCheckout(itemId) {
-    var checkoutId = checkout.id;
-    var lineItemsToRemove = itemId;
-    client.checkout.removeLineItems(checkoutId, lineItemsToRemove).then(function (checkout) {
-      setCheckout(checkout);
-    });
+  function returnToView() {
+    setProductVariants(currentProduct.variants.map(function (v) {
+      return v = Object.assign({}, v, { selected: false });
+    }));
+    setSelectedVariant("");
+    setDisplayProductDetails(false);
+    setProductDescriptionDisplay(false);
   }
-
   return React.createElement(
     'div',
-    { className: checkoutStatus ? "checkout visible" : "checkout invisible" },
+    { className: 'nav' },
     React.createElement(
-      'div',
-      { className: 'checkout-container' },
-      React.createElement(
-        'div',
-        { className: 'checkout-header' },
-        React.createElement(
-          'button',
-          {
-            className: 'checkout-exit',
-            onClick: function onClick() {
-              setCheckoutStatus(false);
-            } },
-          'x'
-        ),
-        React.createElement(
-          'h1',
-          null,
-          'Cart'
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'checkout-content' },
-        React.createElement(
-          'div',
-          { className: 'checkout-list' },
-          checkout.lineItems.map(function (item) {
-            return React.createElement(
-              'div',
-              { className: 'item-line', key: item.id },
-              React.createElement(
-                'button',
-                { className: 'remove-item',
-                  onClick: function onClick() {
-                    return removeFromCheckout(item.id);
-                  }
-                },
-                'x'
-              ),
-              React.createElement('img', { className: 'checkout-img', src: item.variant.image.src }),
-              React.createElement(
-                'h4',
-                { className: 'item-size' },
-                item.variant.title
-              ),
-              React.createElement(
-                'h4',
-                { className: 'item-title' },
-                item.title
-              ),
-              React.createElement(
-                'h4',
-                { className: 'item-quantity' },
-                item.quantity
-              ),
-              React.createElement(
-                'h4',
-                { className: 'item-price' },
-                item.variant.price
-              )
-            );
-          })
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'checkout-footer' },
-        React.createElement(
-          'h4',
-          { className: 'subtotal' },
-          'Subtotal: $',
-          checkout.subtotalPrice
-        ),
-        React.createElement(
-          'a',
-          { href: 'https://antiofficial.myshopify.com/cart/' + checkout.id,
-            className: 'checkout-hyperlink' },
-          'CHECKOUT'
-        )
-      )
-    )
+      'a',
+      { className: !displayProductDetails ? "return" : "return__invisible",
+        href: '../../../index.html' },
+      'return'
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: function onClick() {
+          return returnToView();
+        },
+        className: displayProductDetails ? "return" : "return__invisible"
+      },
+      'return'
+    ),
+    React.createElement('img', {
+      className: 'cart',
+      onClick: function onClick() {
+        return setCheckoutStatus(true);
+      },
+      src: '../assets/pictures/svg/cart-white.svg'
+    })
   );
 };
 
-// Product
-
 var Product = function Product(_ref2) {
-  var checkout = _ref2.checkout,
+  var prodDescription = _ref2.prodDescription,
+      checkout = _ref2.checkout,
       setCheckout = _ref2.setCheckout,
       setCheckoutStatus = _ref2.setCheckoutStatus,
       client = _ref2.client,
@@ -406,6 +376,11 @@ var Product = function Product(_ref2) {
           } },
         'DIMENSIONS'
       ),
+      React.createElement(
+        'p',
+        null,
+        prodDescription
+      ),
       React.createElement('div', {
         className: productDescriptionDisplay ? "product-description" : "product-description-hidden",
         dangerouslySetInnerHTML: { __html: currentProduct.descriptionHtml }
@@ -414,16 +389,15 @@ var Product = function Product(_ref2) {
   );
 };
 
-// Product Images
 var ProductImages = function ProductImages(_ref3) {
   var currentProduct = _ref3.currentProduct;
 
   var currentProductImages = currentProduct.images.slice(1, currentProduct.images.length);
 
-  var _React$useState23 = React.useState(0),
-      _React$useState24 = _slicedToArray(_React$useState23, 2),
-      currentImageIndex = _React$useState24[0],
-      setCurrentImageIndex = _React$useState24[1];
+  var _React$useState27 = React.useState(0),
+      _React$useState28 = _slicedToArray(_React$useState27, 2),
+      currentImageIndex = _React$useState28[0],
+      setCurrentImageIndex = _React$useState28[1];
 
   var imageIndexOptions = {
     add: function add() {
@@ -437,9 +411,10 @@ var ProductImages = function ProductImages(_ref3) {
   return React.createElement(
     'div',
     { className: 'shop-page__column-one zoom', id: 'zoomedImg', style: { flexDirection: "column" } },
-    React.createElement('img', { src: currentProductImages[currentImageIndex].src,
-      width: '400px',
-      style: { objectFit: "cover", "objectPosition": "center top" }
+    React.createElement('img', {
+      className: 'product-image',
+      src: currentProductImages[currentImageIndex].src
+      // style={{ objectFit: "cover", "objectPosition": "center top" }}
     }),
     React.createElement(
       'div',
@@ -455,8 +430,6 @@ var ProductImages = function ProductImages(_ref3) {
       currentProductImages.map(function (image, i) {
         return React.createElement('img', { key: i,
           src: image.src,
-          width: '65px',
-          height: '65px',
           className: i === currentImageIndex ? 'selected-image' : 'unselected-image',
           onClick: function onClick() {
             return setCurrentImageIndex(i);
@@ -475,52 +448,151 @@ var ProductImages = function ProductImages(_ref3) {
   );
 };
 
-var Nav = function Nav(_ref4) {
-  var productDescriptionDisplay = _ref4.productDescriptionDisplay,
-      setProductDescriptionDisplay = _ref4.setProductDescriptionDisplay,
-      setProductVariants = _ref4.setProductVariants,
-      currentProduct = _ref4.currentProduct,
-      setSelectedVariant = _ref4.setSelectedVariant,
-      displayProductDetails = _ref4.displayProductDetails,
-      setDisplayProductDetails = _ref4.setDisplayProductDetails,
+var Checkout = function Checkout(_ref4) {
+  var products = _ref4.products,
+      productIndex = _ref4.productIndex,
+      client = _ref4.client,
+      checkout = _ref4.checkout,
+      setCheckout = _ref4.setCheckout,
+      selectedVariant = _ref4.selectedVariant,
+      checkoutStatus = _ref4.checkoutStatus,
       setCheckoutStatus = _ref4.setCheckoutStatus;
 
-  function returnToView() {
-    setProductVariants(currentProduct.variants.map(function (v) {
-      return v = Object.assign({}, v, { selected: false });
-    }));
-    setSelectedVariant("");
-    setDisplayProductDetails(false);
-    setProductDescriptionDisplay(false);
+
+  function removeFromCheckout(itemId) {
+    var checkoutId = checkout.id;
+    var lineItemsToRemove = itemId;
+    client.checkout.removeLineItems(checkoutId, lineItemsToRemove).then(function (checkout) {
+      setCheckout(checkout);
+    });
   }
+
   return React.createElement(
     'div',
-    { className: 'nav' },
+    { className: checkoutStatus ? "checkout visible" : "checkout invisible" },
     React.createElement(
-      'a',
-      { className: !displayProductDetails ? "return" : "return__invisible",
-        href: '../../../index.html' },
-      'return'
-    ),
-    React.createElement(
-      'button',
-      {
-        onClick: function onClick() {
-          return returnToView();
-        },
-        className: displayProductDetails ? "return" : "return__invisible"
-      },
-      'return'
-    ),
-    React.createElement('img', {
-      className: 'cart',
-      onClick: function onClick() {
-        return setCheckoutStatus(true);
-      },
-      src: '../assets/pictures/svg/cart-white.svg'
-    })
+      'div',
+      { className: 'checkout-container' },
+      React.createElement(
+        'div',
+        { className: 'checkout-header' },
+        React.createElement(
+          'button',
+          {
+            className: 'checkout-exit',
+            onClick: function onClick() {
+              setCheckoutStatus(false);
+            } },
+          'x'
+        ),
+        React.createElement(
+          'h1',
+          null,
+          'Cart'
+        ),
+        React.createElement(
+          'div',
+          { className: 'checkout-row' },
+          React.createElement(
+            'p',
+            null,
+            'ANTI'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'IMAGE'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'SIZE'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'PRODUCT NAME'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'QUANTITY'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'PRICE'
+          )
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'checkout-content' },
+        React.createElement(
+          'div',
+          { className: 'checkout-list' },
+          checkout.lineItems.map(function (item) {
+            return React.createElement(
+              'div',
+              { className: 'item-line', key: item.id },
+              React.createElement(
+                'button',
+                { className: 'remove-item',
+                  onClick: function onClick() {
+                    return removeFromCheckout(item.id);
+                  }
+                },
+                'x'
+              ),
+              React.createElement('img', { className: 'checkout-img', src: item.variant.image.src }),
+              React.createElement(
+                'h4',
+                { className: 'item-size' },
+                item.variant.title
+              ),
+              React.createElement(
+                'h4',
+                { className: 'item-title' },
+                item.title
+              ),
+              React.createElement(
+                'h4',
+                { className: 'item-quantity' },
+                item.quantity
+              ),
+              React.createElement(
+                'h4',
+                { className: 'item-price' },
+                '$',
+                item.variant.price
+              )
+            );
+          })
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'checkout-footer' },
+        React.createElement(
+          'h4',
+          { className: 'subtotal' },
+          'Subtotal: $',
+          checkout.subtotalPrice
+        ),
+        React.createElement(
+          'a',
+          { href: checkout.webUrl,
+            className: 'checkout-hyperlink' },
+          'CHECKOUT'
+        )
+      )
+    )
   );
 };
 
 var domContainer = document.querySelector('#shop-page');
-ReactDOM.render(React.createElement(Shop, null), domContainer);
+ReactDOM.render(
+// <Router history={browserHistory}>
+//   <Route path="/shop" component={Shop}/>
+// </Router>
+React.createElement(Shop, null), domContainer);
