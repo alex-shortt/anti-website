@@ -194,9 +194,7 @@ const Player = ({ url }) => {
   const [playing, toggle] = useAudio(url);
 
   return (
-    <div>
-      <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
-    </div>
+    <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
   )
 }
 

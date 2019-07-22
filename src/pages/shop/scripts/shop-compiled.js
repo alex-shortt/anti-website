@@ -266,13 +266,9 @@ var Player = function Player(_ref) {
       toggle = _useAudio2[1];
 
   return React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'button',
-      { className: 'player-toggle', onClick: toggle },
-      playing ? React.createElement('i', { className: 'fas fa-pause' }) : React.createElement('i', { className: 'fas fa-play' })
-    )
+    'button',
+    { className: 'player-toggle', onClick: toggle },
+    playing ? React.createElement('i', { className: 'fas fa-pause' }) : React.createElement('i', { className: 'fas fa-play' })
   );
 };
 
