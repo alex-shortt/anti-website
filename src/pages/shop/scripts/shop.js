@@ -42,10 +42,10 @@ const Shop = () => {
   }, [])
 
   function findGifs(products) {
-    const tempProducts = products
-    let tempArr = []
-    tempProducts.map((product) => {
-      tempArr.push(product.images[product.images.length - 1].src)
+    let tempArr = products.map(product => product.images[product.images.length - 1].src)
+    tempArr.forEach(picture => {
+      const img = new Image()
+      img.src = picture
     })
     setGifs(tempArr)
   }
@@ -83,12 +83,11 @@ const Shop = () => {
           currentProduct={currentProduct}
         />
         <div className={
-          window.innerWidth < 651 ?
-            !displayProductDetails
-              ? "shop-page__container"
-              : "shop-page__container-responsive"
-            : "shop-page__container"}>
+          !displayProductDetails
+            ? "shop-page__container"
+            : "shop-page__container-responsive"}>
           <Checkout
+            gifs={gifs}
             client={client}
             checkout={checkout}
             setCheckout={setCheckout}
@@ -199,7 +198,6 @@ const Player = ({ url }) => {
 }
 
 const Nav = ({
-  productDescriptionDisplay,
   setProductDescriptionDisplay,
   setProductVariants,
   currentProduct,
@@ -276,6 +274,16 @@ const Product = ({
       setCheckoutStatus(false)
   }
 
+  function displayDimensions() {
+    const dimensions = document.getElementsByClassName("dimensions-shopify")
+    if (dimensions[0].style.display === "none") {
+      dimensions[0].style.display = "inherit"
+    } else {
+      dimensions[0].style.display = "none"
+    }
+    console.log(dimensions[0].style.display)
+  }
+
   return (
     <div className="shop-page__column-two" style={displayProductDetails ?
       { display: "flex" }
@@ -317,22 +325,20 @@ const Product = ({
         <button
           className="buy-button dimensions"
           onClick={() => {
-            setProductDescriptionDisplay(!productDescriptionDisplay)
+            displayDimensions()
           }}>
           DIMENSIONS
         </button>
-        <p>{prodDescription}</p>
         <div
-          className={productDescriptionDisplay ? "product-description" : "product-description-hidden"}
-          dangerouslySetInnerHTML={{ __html: currentProduct.descriptionHtml }}
-        />
+          dangerouslySetInnerHTML={{ __html: currentProduct.descriptionHtml }}>
+        </div>
       </div>
     </div >
   )
 }
 
 const ProductImages = ({ currentProduct }) => {
-  const currentProductImages = currentProduct.images.slice(1, currentProduct.images.length)
+  const currentProductImages = currentProduct.images
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0)
 
   const imageIndexOptions = {
@@ -380,12 +386,10 @@ const ProductImages = ({ currentProduct }) => {
 }
 
 const Checkout = ({
-  products,
-  productIndex,
+  gifs,
   client,
   checkout,
   setCheckout,
-  selectedVariant,
   checkoutStatus,
   setCheckoutStatus
 }) => {
@@ -422,13 +426,13 @@ const Checkout = ({
         <div className="checkout-content">
           <div className="checkout-list">
             {
-              checkout.lineItems.map(item => {
+              checkout.lineItems.map((item, i) => {
                 return (
                   <div className="item-line" key={item.id}>
                     <button className="remove-item"
                       onClick={() => removeFromCheckout(item.id)}
                     >x</button>
-                    <img className="checkout-img" src={item.variant.image.src} />
+                    <img className="checkout-img" src={gifs[i]} />
                     <h4 className="item-size">{item.variant.title}</h4>
                     <h4 className="item-title">{item.title}</h4>
                     <h4 className="item-quantity">{item.quantity}</h4>

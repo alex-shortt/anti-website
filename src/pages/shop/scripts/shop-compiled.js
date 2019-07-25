@@ -92,10 +92,12 @@ var Shop = function Shop() {
   }, []);
 
   function findGifs(products) {
-    var tempProducts = products;
-    var tempArr = [];
-    tempProducts.map(function (product) {
-      tempArr.push(product.images[product.images.length - 1].src);
+    var tempArr = products.map(function (product) {
+      return product.images[product.images.length - 1].src;
+    });
+    tempArr.forEach(function (picture) {
+      var img = new Image();
+      img.src = picture;
     });
     setGifs(tempArr);
   }
@@ -135,8 +137,9 @@ var Shop = function Shop() {
       }),
       React.createElement(
         'div',
-        { className: window.innerWidth < 651 ? !displayProductDetails ? "shop-page__container" : "shop-page__container-responsive" : "shop-page__container" },
+        { className: !displayProductDetails ? "shop-page__container" : "shop-page__container-responsive" },
         React.createElement(Checkout, {
+          gifs: gifs,
           client: client,
           checkout: checkout,
           setCheckout: setCheckout,
@@ -273,8 +276,7 @@ var Player = function Player(_ref) {
 };
 
 var Nav = function Nav(_ref2) {
-  var productDescriptionDisplay = _ref2.productDescriptionDisplay,
-      setProductDescriptionDisplay = _ref2.setProductDescriptionDisplay,
+  var setProductDescriptionDisplay = _ref2.setProductDescriptionDisplay,
       setProductVariants = _ref2.setProductVariants,
       currentProduct = _ref2.currentProduct,
       setSelectedVariant = _ref2.setSelectedVariant,
@@ -352,6 +354,16 @@ var Product = function Product(_ref3) {
     selectedVariant !== "" ? setCheckoutStatus(true) : setCheckoutStatus(false);
   }
 
+  function displayDimensions() {
+    var dimensions = document.getElementsByClassName("dimensions-shopify");
+    if (dimensions[0].style.display === "none") {
+      dimensions[0].style.display = "inherit";
+    } else {
+      dimensions[0].style.display = "none";
+    }
+    console.log(dimensions[0].style.display);
+  }
+
   return React.createElement(
     'div',
     { className: 'shop-page__column-two', style: displayProductDetails ? { display: "flex" } : { display: "none" } },
@@ -403,19 +415,12 @@ var Product = function Product(_ref3) {
         {
           className: 'buy-button dimensions',
           onClick: function onClick() {
-            setProductDescriptionDisplay(!productDescriptionDisplay);
+            displayDimensions();
           } },
         'DIMENSIONS'
       ),
-      React.createElement(
-        'p',
-        null,
-        prodDescription
-      ),
       React.createElement('div', {
-        className: productDescriptionDisplay ? "product-description" : "product-description-hidden",
-        dangerouslySetInnerHTML: { __html: currentProduct.descriptionHtml }
-      })
+        dangerouslySetInnerHTML: { __html: currentProduct.descriptionHtml } })
     )
   );
 };
@@ -423,7 +428,7 @@ var Product = function Product(_ref3) {
 var ProductImages = function ProductImages(_ref4) {
   var currentProduct = _ref4.currentProduct;
 
-  var currentProductImages = currentProduct.images.slice(1, currentProduct.images.length);
+  var currentProductImages = currentProduct.images;
 
   var _React$useState31 = React.useState(0),
       _React$useState32 = _slicedToArray(_React$useState31, 2),
@@ -480,12 +485,10 @@ var ProductImages = function ProductImages(_ref4) {
 };
 
 var Checkout = function Checkout(_ref5) {
-  var products = _ref5.products,
-      productIndex = _ref5.productIndex,
+  var gifs = _ref5.gifs,
       client = _ref5.client,
       checkout = _ref5.checkout,
       setCheckout = _ref5.setCheckout,
-      selectedVariant = _ref5.selectedVariant,
       checkoutStatus = _ref5.checkoutStatus,
       setCheckoutStatus = _ref5.setCheckoutStatus;
 
@@ -562,7 +565,7 @@ var Checkout = function Checkout(_ref5) {
         React.createElement(
           'div',
           { className: 'checkout-list' },
-          checkout.lineItems.map(function (item) {
+          checkout.lineItems.map(function (item, i) {
             return React.createElement(
               'div',
               { className: 'item-line', key: item.id },
@@ -575,7 +578,7 @@ var Checkout = function Checkout(_ref5) {
                 },
                 'x'
               ),
-              React.createElement('img', { className: 'checkout-img', src: item.variant.image.src }),
+              React.createElement('img', { className: 'checkout-img', src: gifs[i] }),
               React.createElement(
                 'h4',
                 { className: 'item-size' },
