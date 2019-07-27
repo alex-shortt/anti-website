@@ -1,3 +1,9 @@
+const Router = ReactRouterDOM.BrowserRouter
+const Route = ReactRouterDOM.Route
+const Link = ReactRouterDOM.Link
+const Switch = ReactRouterDOM.Switch
+const BrowserHistory = ReactRouterDOM.BrowserHistory
+
 const Shop = () => {
   const [products, setProducts] = React.useState([])
   const [productIndex, setProductIndex] = React.useState(0)
@@ -12,18 +18,6 @@ const Shop = () => {
   const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
   const [prodDescription, setProdDescription] = React.useState('')
   const [gifs, setGifs] = React.useState([])
-  const indexOptions = {
-    add: () => {
-      productIndex !== products.length - 1 ?
-        setProductIndex(productIndex + 1)
-        : setProductIndex(0)
-    },
-    sub: () => {
-      productIndex > 0 ?
-        setProductIndex(productIndex - 1)
-        : setProductIndex(products.length - 1)
-    }
-  }
   const client = ShopifyBuy.buildClient({
     domain: 'antiofficial.myshopify.com',
     storefrontAccessToken: '122b2bd77196392552b87dab7ec18d58'
@@ -49,15 +43,6 @@ const Shop = () => {
     })
     setGifs(tempArr)
   }
-
-  function selectProduct() {
-    setDisplayProductDetails(true)
-    setCurrentProduct(products[productIndex])
-    justProductDescription()
-    setProductVariants(
-      currentProduct.variants.map(v => v = { ...v, selected: false }))
-  }
-
   function justProductDescription() {
     const productDesc = products[productIndex].description.split(' ')
     const cutOffNum = productDesc.indexOf('Dimensions')
@@ -67,27 +52,23 @@ const Shop = () => {
 
 
   if (mounted) {
-    let images = gifs
-
     return (
-      <div style={{ width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" }}>
-        <Player />
-        <Nav
-          productDescriptionDisplay={productDescriptionDisplay}
-          setProductDescriptionDisplay={setProductDescriptionDisplay}
-          setCheckoutStatus={setCheckoutStatus}
-          setProductVariants={setProductVariants}
-          setSelectedVariant={setSelectedVariant}
-          displayProductDetails={displayProductDetails}
-          setDisplayProductDetails={setDisplayProductDetails}
-          currentProduct={currentProduct}
-        />
-        <div className={
-          !displayProductDetails
-            ? "shop-page__container"
-            : "shop-page__container-responsive"}>
+      <Router history={BrowserHistory}>
+        <div style={{ width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" }}>
+          <Player />
+          <Nav
+            productDescriptionDisplay={productDescriptionDisplay}
+            setProductDescriptionDisplay={setProductDescriptionDisplay}
+            setCheckoutStatus={setCheckoutStatus}
+            setProductVariants={setProductVariants}
+            setSelectedVariant={setSelectedVariant}
+            displayProductDetails={displayProductDetails}
+            setDisplayProductDetails={setDisplayProductDetails}
+            currentProduct={currentProduct}
+          />
           <Checkout
             gifs={gifs}
+            currentProduct={currentProduct}
             client={client}
             checkout={checkout}
             setCheckout={setCheckout}
@@ -98,72 +79,50 @@ const Shop = () => {
             products={products}
             productIndex={productIndex}
           />
-          {
-            displayProductDetails ?
-              <ProductImages
-                currentProduct={currentProduct}
-              />
-              : <div className="shop-page__column-one column-image">
-                <button className="shop-page__column-one__button button__sub"
-                  onClick={indexOptions.sub}>{"<"}</button>
-                <div className="shop-page__column-one__image-container">
-                  <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png" />
-                </div>
-                {
-                  currentProduct.images.length > 1 ?
-                    <div className="product-container"
-                      onClick={() => {
-                        currentProduct.availableForSale ?
-                          selectProduct()
-                          : setDisplayOutOfStock(true)
-                      }}>
-                      <img className="product" src={images[productIndex]}
-                        onClick={() => {
-                          currentProduct.availableForSale ?
-                            selectProduct()
-                            : setDisplayOutOfStock(true)
-                        }} />
-                    </div>
-                    : <img className="product" alt="" width="300px" />
-                }
-                <button className="shop-page__column-one__button button__add"
-                  onClick={indexOptions.add}>{">"}</button>
-                <div className="product-info__absolute">
-                  <h1 className={displayOutOfStock
-                    ? "product-info__status-available"
-                    : "product-info__status-unavailable"}>
-                    Out of Stock
-                </h1>
-                  <h2 className="product-info__title">
-                    {products[productIndex].title}
-                  </h2>
-                  <h2 className="product-info__title">
-                    {products[productIndex].variants[0].price}
-                  </h2>
-                  <h2 className="item-number__identifier">{productIndex + 1}/{products.length}</h2>
-                </div>
-              </div>
-          }
-          <Product
-            prodDescription={prodDescription}
-            products={products}
-            selectedVariant={selectedVariant}
-            productDescriptionDisplay={productDescriptionDisplay}
-            setProductDescriptionDisplay={setProductDescriptionDisplay}
-            setSelectedVariant={setSelectedVariant}
-            productVariants={productVariants}
-            setProductVariants={setProductVariants}
-            currentProduct={currentProduct}
-            setCurrentProduct={setCurrentProduct}
-            displayProductDetails={displayProductDetails}
-            setDisplayProductDetails={setDisplayProductDetails}
-            client={client}
-            checkout={checkout}
-            setCheckout={setCheckout}
-            setCheckoutStatus={setCheckoutStatus}
-          />
+          <div className={
+            !displayProductDetails
+              ? "shop-page__container"
+              : "shop-page__container-responsive"}>
+            <Switch>
+              <Route exact path="/shop" render={() =>
+                <TubeHologram
+                  products={products}
+                  productIndex={productIndex}
+                  displayOutOfStock={displayOutOfStock}
+                  currentProduct={currentProduct}
+                  setCurrentProduct={setCurrentProduct}
+                  gifs={gifs}
+                  setProductIndex={setProductIndex}
+                  setDisplayProductDetails={setDisplayProductDetails}
+                  justProductDescription={justProductDescription}
+                  setProductVariants={setProductVariants}
+                />
+              }>
+              </Route>
+              <Route path="/:id" render={() =>
+                <ProductPage
+                  products={products}
+                  productVariants={productVariants}
+                  prodDescription={prodDescription}
+                  checkout={checkout}
+                  setCheckout={setCheckout}
+                  setCheckoutStatus={setCheckoutStatus}
+                  client={client}
+                  productDescriptionDisplay={productDescriptionDisplay}
+                  setProductVariants={setProductVariants}
+                  setProductDescriptionDisplay={setProductDescriptionDisplay}
+                  currentProduct={currentProduct}
+                  setCurrentProduct={setCurrentProduct}
+                  displayProductDetails={displayProductDetails}
+                  selectedVariant={selectedVariant}
+                  setSelectedVariant={setSelectedVariant}
+                  setDisplayProductDetails={setDisplayProductDetails}
+                />
+              } />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     )
   }
   else {
@@ -171,30 +130,6 @@ const Shop = () => {
       <h1 style={{ fontFamily: "VCR", color: "white" }}>Loading...</h1>
     )
   }
-}
-
-const useAudio = () => {
-  const [audio] = React.useState(new Audio('../../../assets/music/speeding+looped.mp3'));
-  const [playing, setPlaying] = React.useState(true);
-
-  const toggle = () => setPlaying(!playing);
-
-  React.useEffect(
-    () => {
-      playing ? audio.play() : audio.pause()
-    },
-    [playing]
-  )
-
-  return [playing, toggle];
-}
-
-const Player = ({ url }) => {
-  const [playing, toggle] = useAudio(url);
-
-  return (
-    <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
-  )
 }
 
 const Nav = ({
@@ -213,6 +148,7 @@ const Nav = ({
     setSelectedVariant("")
     setDisplayProductDetails(false)
     setProductDescriptionDisplay(false)
+    document.getElementsByClassName("dimensions-shopify")[0].style.display = "none"
   }
   return (
     <div className="nav">
@@ -222,14 +158,16 @@ const Nav = ({
           : "return__invisible"
       }
         href="../../../index.html">return</a>
-      <button
-        onClick={() => returnToView()}
-        className={
-          displayProductDetails
-            ? "return"
-            : "return__invisible"
-        }
-      >return</button>
+      <Link to="/shop">
+        <button
+          onClick={() => returnToView()}
+          className={
+            displayProductDetails
+              ? "return"
+              : "return__invisible"
+          }
+        >return</button>
+      </Link>
       <img
         className="cart"
         onClick={() => setCheckoutStatus(true)}
@@ -239,7 +177,91 @@ const Nav = ({
   )
 }
 
-const Product = ({
+const TubeHologram = ({
+  products,
+  productIndex,
+  displayOutOfStock,
+  currentProduct,
+  setCurrentProduct,
+  gifs,
+  setProductIndex,
+  setDisplayProductDetails,
+  justProductDescription,
+  setProductVariants,
+  selectedVariant,
+  setSelectedVariant
+
+}) => {
+  const indexOptions = {
+    add: () => {
+      productIndex !== products.length - 1 ?
+        setProductIndex(productIndex + 1)
+        : setProductIndex(0)
+    },
+    sub: () => {
+      productIndex > 0 ?
+        setProductIndex(productIndex - 1)
+        : setProductIndex(products.length - 1)
+    }
+  }
+
+  function selectProduct() {
+    setDisplayProductDetails(true)
+    setCurrentProduct(products[productIndex])
+    justProductDescription()
+    setProductVariants(
+      currentProduct.variants.map(v => v = { ...v, selected: false }))
+  }
+  let images = gifs
+  return (
+    <div className="shop-page__column-one column-image">
+      <button className="shop-page__column-one__button button__sub"
+        onClick={indexOptions.sub}>{"<"}</button>
+      <div className="shop-page__column-one__image-container">
+        <img className="shop-page__column-one__image" src="../../../assets/pictures/finaltube.png" />
+      </div>
+      {
+        currentProduct.images.length > 1 ?
+          <div className="product-container"
+            onClick={() => {
+              currentProduct.availableForSale ?
+                selectProduct()
+                : setDisplayOutOfStock(true)
+            }}>
+            <Link to={`/shop/${currentProduct.id}`}>
+              <img className="product" src={images[productIndex]}
+                onClick={() => {
+                  currentProduct.availableForSale ?
+                    selectProduct()
+                    : setDisplayOutOfStock(true)
+                }} />
+            </Link>
+          </div>
+          : <img className="product" alt="" width="300px" />
+      }
+      <button className="shop-page__column-one__button button__add"
+        onClick={indexOptions.add}>{">"}</button>
+      <div className="product-info__absolute">
+        <h1 className={displayOutOfStock
+          ? "product-info__status-available"
+          : "product-info__status-unavailable"}>
+          Out of Stock
+                </h1>
+        <h2 className="product-info__title">
+          {products[productIndex].title}
+        </h2>
+        <h2 className="product-info__title">
+          {`$${products[productIndex].variants[0].price}`}
+        </h2>
+        <h2 className="item-number__identifier">{productIndex + 1}/{products.length}</h2>
+      </div>
+    </div>
+  )
+}
+
+const ProductPage = ({
+  products,
+  productVariants,
   prodDescription,
   checkout,
   setCheckout,
@@ -247,9 +269,43 @@ const Product = ({
   client,
   productDescriptionDisplay,
   setProductDescriptionDisplay,
+  setProductVariants,
   currentProduct,
   setCurrentProduct,
   displayProductDetails,
+  setDisplayProductDetails,
+  selectedVariant,
+  setSelectedVariant
+}) => {
+
+  const [product, setProduct]
+
+  return (
+    <div className="shop-page__container-responsive-product">
+      <ProductImages
+        currentProduct={currentProduct}
+      />
+      <Product
+        checkout={checkout}
+        setCheckout={setCheckout}
+        setCheckoutStatus={setCheckoutStatus}
+        client={client}
+        currentProduct={currentProduct}
+        setCurrentProduct={setCurrentProduct}
+        selectedVariant={selectedVariant}
+        setSelectedVariant={setSelectedVariant}
+      />
+    </div>
+  )
+}
+
+const Product = ({
+  checkout,
+  setCheckout,
+  setCheckoutStatus,
+  client,
+  currentProduct,
+  setCurrentProduct,
   selectedVariant,
   setSelectedVariant
 }) => {
@@ -275,19 +331,14 @@ const Product = ({
   }
 
   function displayDimensions() {
-    const dimensions = document.getElementsByClassName("dimensions-shopify")
-    if (dimensions[0].style.display === "none") {
-      dimensions[0].style.display = "inherit"
-    } else {
-      dimensions[0].style.display = "none"
-    }
-    console.log(dimensions[0].style.display)
+    const dimensionsClass = document.getElementsByClassName("dimensions-shopify")
+    dimensionsClass[0].style.display === "block" ?
+      dimensionsClass[0].style.display = "none"
+      : dimensionsClass[0].style.display = "block"
   }
 
   return (
-    <div className="shop-page__column-two" style={displayProductDetails ?
-      { display: "flex" }
-      : { display: "none" }}>
+    <div className="shop-page__column-two">
       <div className="shop-page__column-two-section">
         <h1>{currentProduct.title}</h1>
       </div>
@@ -324,9 +375,7 @@ const Product = ({
           </button>
         <button
           className="buy-button dimensions"
-          onClick={() => {
-            displayDimensions()
-          }}>
+          onClick={() => displayDimensions()}>
           DIMENSIONS
         </button>
         <div
@@ -355,7 +404,7 @@ const ProductImages = ({ currentProduct }) => {
   }
 
   return (
-    <div className="shop-page__column-one zoom" id="zoomedImg" style={{ flexDirection: "column" }}>
+    <div className="shop-page__product-column zoom" id="zoomedImg" style={{ flexDirection: "column" }}>
       <img
         className="product-image"
         src={currentProductImages[currentImageIndex].src}
@@ -432,7 +481,7 @@ const Checkout = ({
                     <button className="remove-item"
                       onClick={() => removeFromCheckout(item.id)}
                     >x</button>
-                    <img className="checkout-img" src={gifs[i]} />
+                    <img className="checkout-img" src={item.variant.image.src} />
                     <h4 className="item-size">{item.variant.title}</h4>
                     <h4 className="item-title">{item.title}</h4>
                     <h4 className="item-quantity">{item.quantity}</h4>
@@ -455,9 +504,28 @@ const Checkout = ({
   )
 }
 
+const useAudio = () => {
+  const [audio] = React.useState(new Audio('../../../assets/music/speeding+looped.mp3'));
+  const [playing, setPlaying] = React.useState(true);
+
+  const toggle = () => setPlaying(!playing);
+
+  React.useEffect(
+    () => {
+      playing ? audio.play() : audio.pause()
+    },
+    [playing]
+  )
+
+  return [playing, toggle];
+}
+
+const Player = ({ url }) => {
+  const [playing, toggle] = useAudio(url);
+
+  return (
+    <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
+  )
+}
 const domContainer = document.querySelector('#shop-page')
-ReactDOM.render(
-  // <Router history={browserHistory}>
-  //   <Route path="/shop" component={Shop}/>
-  // </Router>
-  <Shop />, domContainer)
+ReactDOM.render(<Shop />, domContainer)

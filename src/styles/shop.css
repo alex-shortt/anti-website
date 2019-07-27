@@ -55,13 +55,18 @@ html {
   overflow: hidden;
 }
 
-.shop-page__container-responsive {
+.shop-page__container-responsive,
+.shop-page__container-responsive-product {
   display: flex;
   height: 100%;
   width: 80%;
   color: white;
   justify-content: space-evenly;
   width: 100%;
+}
+
+.shop-page__container-responsive-product {
+  height: 100%;
 }
 
 .return {
@@ -138,7 +143,8 @@ html {
   cursor: pointer;
 }
 
-.shop-page__column-one {
+.shop-page__column-one,
+.shop-page__product-column {
   width: 700px;
   display: flex;
   justify-content: center;
@@ -169,7 +175,7 @@ html {
 
 .product {
   width: 400px;
-  margin-top: 45px;
+  margin-top: 100px;
 }
 .product:hover {
   width: 425px;
@@ -243,7 +249,7 @@ html {
 } */
 
 .product {
-  position: absolute;
+  /* position: absolute; */
   transition: 0.5s;
 }
 
@@ -269,7 +275,7 @@ html {
 
 .shop-page__column-two {
   z-index: 2;
-  display: none;
+  display: flex;
   flex-direction: column;
   font-family: "VCR", sans-serif;
   font-weight: lighter;
@@ -385,6 +391,7 @@ html {
 
 table {
   border-collapse: collapse;
+  text-align: center;
 }
 
 table,
@@ -409,6 +416,7 @@ td {
   padding: 20px;
   box-sizing: border-box;
   position: relative;
+  color: white;
 }
 
 .checkout-header {
@@ -573,12 +581,16 @@ td {
     max-width: 30%;
     justify-content: center;
   }
-  .shop-page__column-one {
+  .shop-page__column-one,
+  .shop-page__product-column {
     width: 50%;
   }
 }
 
 @media screen and (max-width: 1050px) {
+  .dimensions-shopify {
+    font-size: 13px;
+  }
   .checkout-container {
     width: 90%;
   }
@@ -603,9 +615,10 @@ td {
     width: 300px;
   }
   .shop-page__column-two {
-    margin-top: 60px;
+    margin-top: 0px;
   }
-  .shop-page__container-responsive {
+  .shop-page__container-responsive,
+  .shop-page__container-responsive-product {
     flex-direction: column;
     align-items: center;
     overflow: auto;
@@ -613,9 +626,11 @@ td {
     display: flex;
     color: white;
   }
-  .prod {
-    display: none;
+
+  .shop-page__container-responsive-product {
+    height: auto;
   }
+
   .checkout {
     position: absolute;
     top: 0;

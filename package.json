@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "build": "webpack",
-    "sass": "node-sass /src/main.scss /src/main.css"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,6 +22,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
@@ -31,13 +31,12 @@
     "prettier": "1.16.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.29.6",
+    "webpack": "^4.38.0",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.3.4",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
