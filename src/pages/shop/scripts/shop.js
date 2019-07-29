@@ -1,8 +1,8 @@
-const Router = ReactRouterDOM.BrowserRouter
+const Router = ReactRouterDOM.HashRouter
 const Route = ReactRouterDOM.Route
 const Link = ReactRouterDOM.Link
 const Switch = ReactRouterDOM.Switch
-const BrowserHistory = ReactRouterDOM.BrowserHistory
+const history = History.createBrowserHistory()
 
 const Shop = () => {
   const [products, setProducts] = React.useState([])
@@ -17,6 +17,8 @@ const Shop = () => {
   const [displayOutOfStock, setDisplayOutOfStock] = React.useState(false)
   const [productDescriptionDisplay, setProductDescriptionDisplay] = React.useState(false)
   const [prodDescription, setProdDescription] = React.useState('')
+  const [onProductPage, setOnProductPage] = React.useState(false)
+  // const [checkoutGifs, setCheckoutGifs] = React.useState([])
   const [gifs, setGifs] = React.useState([])
   const client = ShopifyBuy.buildClient({
     domain: 'antiofficial.myshopify.com',
@@ -29,11 +31,23 @@ const Shop = () => {
       setMounted(true)
       findGifs(shopifyProducts)
       console.log(shopifyProducts)
+      // _setCheckoutGifs(shopifyProducts)
     })
     client.checkout.create().then(checkout => {
       setCheckout(checkout)
     })
   }, [])
+
+  // function _setCheckoutGifs(products) {
+  //   let tempArr = []
+  //   products.map(product => {
+  //     tempArr.push({
+  //       gifSrc: product.images[product.images.length - 1].src,
+  //       title: product.title
+  //     })
+  //   })
+  //   setCheckoutGifs(tempArr)
+  // }
 
   function findGifs(products) {
     let tempArr = products.map(product => product.images[product.images.length - 1].src)
@@ -43,6 +57,7 @@ const Shop = () => {
     })
     setGifs(tempArr)
   }
+
   function justProductDescription() {
     const productDesc = products[productIndex].description.split(' ')
     const cutOffNum = productDesc.indexOf('Dimensions')
@@ -50,13 +65,16 @@ const Shop = () => {
     setProdDescription(returnProductDesc)
   }
 
+  // console.log(checkoutGifs)
 
   if (mounted) {
     return (
-      <Router history={BrowserHistory}>
+      <Router history={history}>
         <div style={{ width: "100%", height: "100vh", overflowY: "auto", overflowX: "hidden" }}>
           <Player />
           <Nav
+            onProductPage={onProductPage}
+            setOnProductPage={setOnProductPage}
             productDescriptionDisplay={productDescriptionDisplay}
             setProductDescriptionDisplay={setProductDescriptionDisplay}
             setCheckoutStatus={setCheckoutStatus}
@@ -68,6 +86,7 @@ const Shop = () => {
           />
           <Checkout
             gifs={gifs}
+            // checkoutGifs={checkoutGifs}
             currentProduct={currentProduct}
             client={client}
             checkout={checkout}
@@ -76,16 +95,16 @@ const Shop = () => {
             setCheckoutStatus={setCheckoutStatus}
             selectedVariant={selectedVariant}
             setSelectedVariant={setSelectedVariant}
-            products={products}
-            productIndex={productIndex}
+            currentProduct={currentProduct}
           />
           <div className={
-            !displayProductDetails
+            !onProductPage
               ? "shop-page__container"
               : "shop-page__container-responsive"}>
             <Switch>
-              <Route exact path="/shop" render={() =>
+              <Route exact path="/" render={(props) =>
                 <TubeHologram
+                  {...props}
                   products={products}
                   productIndex={productIndex}
                   displayOutOfStock={displayOutOfStock}
@@ -99,8 +118,11 @@ const Shop = () => {
                 />
               }>
               </Route>
-              <Route path="/:id" render={() =>
+              <Route path="/:id" render={(props) =>
                 <ProductPage
+                  {...props}
+                  onProductPage={onProductPage}
+                  setOnProductPage={setOnProductPage}
                   products={products}
                   productVariants={productVariants}
                   prodDescription={prodDescription}
@@ -133,6 +155,8 @@ const Shop = () => {
 }
 
 const Nav = ({
+  onProductPage,
+  setOnProductPage,
   setProductDescriptionDisplay,
   setProductVariants,
   currentProduct,
@@ -145,6 +169,7 @@ const Nav = ({
     setProductVariants(
       currentProduct.variants.map(v => v = { ...v, selected: false })
     )
+    setOnProductPage(!onProductPage)
     setSelectedVariant("")
     setDisplayProductDetails(false)
     setProductDescriptionDisplay(false)
@@ -152,22 +177,20 @@ const Nav = ({
   }
   return (
     <div className="nav">
-      <a className={
-        !displayProductDetails
-          ? "return"
-          : "return__invisible"
+      {
+        onProductPage ?
+          <Link to="/" className="return">
+            <button
+              onClick={() => returnToView()}
+              className="return">
+              return</button>
+          </Link>
+          :
+          <a href="../index.html"
+            className="return">
+            return
+          </a>
       }
-        href="../../../index.html">return</a>
-      <Link to="/shop">
-        <button
-          onClick={() => returnToView()}
-          className={
-            displayProductDetails
-              ? "return"
-              : "return__invisible"
-          }
-        >return</button>
-      </Link>
       <img
         className="cart"
         onClick={() => setCheckoutStatus(true)}
@@ -188,10 +211,9 @@ const TubeHologram = ({
   setDisplayProductDetails,
   justProductDescription,
   setProductVariants,
-  selectedVariant,
-  setSelectedVariant
-
+  match
 }) => {
+
   const indexOptions = {
     add: () => {
       productIndex !== products.length - 1 ?
@@ -228,7 +250,7 @@ const TubeHologram = ({
                 selectProduct()
                 : setDisplayOutOfStock(true)
             }}>
-            <Link to={`/shop/${currentProduct.id}`}>
+            <Link to={`/${products[productIndex].id}`}>
               <img className="product" src={images[productIndex]}
                 onClick={() => {
                   currentProduct.availableForSale ?
@@ -260,26 +282,27 @@ const TubeHologram = ({
 }
 
 const ProductPage = ({
+  setOnProductPage,
   products,
-  productVariants,
-  prodDescription,
   checkout,
   setCheckout,
   setCheckoutStatus,
   client,
-  productDescriptionDisplay,
-  setProductDescriptionDisplay,
-  setProductVariants,
   currentProduct,
   setCurrentProduct,
-  displayProductDetails,
-  setDisplayProductDetails,
   selectedVariant,
-  setSelectedVariant
+  setProductVariants,
+  setSelectedVariant,
+  match
 }) => {
-
-  const [product, setProduct]
-
+  React.useEffect(() => {
+    setOnProductPage(true)
+    products.map((p, i) => {
+      if (p.id === match.params.id) {
+        setCurrentProduct(p)
+      }
+    })
+  }, [])
   return (
     <div className="shop-page__container-responsive-product">
       <ProductImages
@@ -435,7 +458,7 @@ const ProductImages = ({ currentProduct }) => {
 }
 
 const Checkout = ({
-  gifs,
+  checkoutGifs,
   client,
   checkout,
   setCheckout,
@@ -475,20 +498,22 @@ const Checkout = ({
         <div className="checkout-content">
           <div className="checkout-list">
             {
-              checkout.lineItems.map((item, i) => {
-                return (
-                  <div className="item-line" key={item.id}>
-                    <button className="remove-item"
-                      onClick={() => removeFromCheckout(item.id)}
-                    >x</button>
-                    <img className="checkout-img" src={item.variant.image.src} />
-                    <h4 className="item-size">{item.variant.title}</h4>
-                    <h4 className="item-title">{item.title}</h4>
-                    <h4 className="item-quantity">{item.quantity}</h4>
-                    <h4 className="item-price">${item.variant.price}</h4>
-                  </div>
-                )
-              })
+              checkout.lineItems.length > 0 ?
+                checkout.lineItems.map((item, i) => {
+                  return (
+                    <div className="item-line" key={item.id}>
+                      <button className="remove-item"
+                        onClick={() => removeFromCheckout(item.id)}
+                      >x</button>
+                      <img className="checkout-img" src={item.variant.image.src} />
+                      <h4 className="item-size">{item.variant.title}</h4>
+                      <h4 className="item-title">{item.title}</h4>
+                      <h4 className="item-quantity">{item.quantity}</h4>
+                      <h4 className="item-price">${item.variant.price}</h4>
+                    </div>
+                  )
+                })
+                : <h4 className="checkout-empty"> YOUR CART IS EMPTY</h4>
             }
           </div>
         </div>
@@ -522,7 +547,6 @@ const useAudio = () => {
 
 const Player = ({ url }) => {
   const [playing, toggle] = useAudio(url);
-
   return (
     <button className="player-toggle" onClick={toggle}>{playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
   )

@@ -441,6 +441,11 @@ td {
   overflow: auto;
 }
 
+.checkout-empty {
+  text-align: center;
+  font-family: "VCR", sans-serif;
+}
+
 .checkout-exit {
   font-family: "VCR";
   color: white;

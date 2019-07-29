@@ -1,11 +1,13 @@
 const path = require("path")
 var webpack = require("webpack")
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const siteConfig = {
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -37,10 +39,14 @@ const siteConfig = {
 }
 
 const shopConfig = {
-  entry: "./shop",
+  entry: "./src/pages/shop/scripts/shop.js",
   output: {
+    path: path.resolve(__dirname, "dist"),
     filename: "./shop/shop_bundle.js",
-    path: path.resolve(__dirname, "dist")
+    publicPath: '/'
+  },
+  devServer: {
+    historyApiFallback: true
   },
   module: {
     rules: [
