@@ -1,5 +1,6 @@
 import { delay } from "../common/promises.js";
 import loadChecks from "../pages/view/pageLoadChecks.js";
+import captions from "./lookbookCaptions";
 
 async function initGlitch(src) {
   let img_count = src.length;
@@ -32,7 +33,6 @@ async function initGlitch(src) {
     function loadImage(index) {
       let parentWidth = parent_container.width();
       let parentHeight = parent_container.height();
-
 
       p.loadImage(imgSrc[index], function(img) {
         let scale = 1;
@@ -70,6 +70,14 @@ async function initGlitch(src) {
       loadImage(next);
     }
 
+    function updateCaption() {
+      const caption = captions[img_num];
+      $(".lookbook-text-title").html(caption.model);
+      $(".lookbook-text-subtitle").html(
+        `${caption.location}<br/>${caption.piece}`
+      );
+    }
+
     p.setup = async function() {
       let windowW = parent_container.width();
       let windowH = parent_container.height();
@@ -89,6 +97,9 @@ async function initGlitch(src) {
 
       let counter = img_num + 1;
       $(".lookbook-text-controller-counter").html(`${counter}/${img_count}`);
+
+      updateCaption();
+
       var left = $(".lookbook-text-controller-left");
       var right = $(".lookbook-text-controller-right");
 
@@ -103,6 +114,7 @@ async function initGlitch(src) {
         checkImageLoop();
         let counter = img_num + 1;
         $(".lookbook-text-controller-counter").html(`${counter}/${img_count}`);
+        updateCaption();
         await delay(750);
         static_timing[0] *= transition_ratio[0];
         static_timing[1] *= transition_ratio[1];
@@ -120,6 +132,7 @@ async function initGlitch(src) {
         checkImageLoop();
         let counter = img_num + 1;
         $(".lookbook-text-controller-counter").html(`${counter}/${img_count}`);
+        updateCaption();
         await delay(750);
         static_timing[0] *= transition_ratio[0];
         static_timing[1] *= transition_ratio[1];
