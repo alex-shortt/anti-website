@@ -22,7 +22,6 @@
 
 .socials-left {
   display: flex;
-  flex-flow: colum nowrap;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -87,6 +86,10 @@
   transform: scale(0.75);
   pointer-events: none;
   */
+}
+
+#anti3d {
+  cursor: pointer;
 }
 
 .socials-left-instafeed {
