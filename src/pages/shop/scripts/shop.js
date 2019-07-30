@@ -206,7 +206,10 @@ const Nav = ({
           </button>
         </Link>
       ) : (
-        <a href="../index.html" className="return">
+        <a
+          href={window.location.pathname.replace("/shop", "")}
+          className="return"
+        >
           return
         </a>
       )}
@@ -265,7 +268,7 @@ const TubeHologram = ({
       <div className="shop-page__column-one__image-container">
         <img
           className="shop-page__column-one__image"
-          src="../../../assets/pictures/finaltube.png"
+          src="../assets/pictures/finaltube.png"
         />
       </div>
       {currentProduct.images.length > 1 ? (

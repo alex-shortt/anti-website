@@ -10,3 +10,7 @@ node-sass --output-style compressed src/styles/main.scss > dist/main.css
 #copy over html and assets
 cp index.html dist
 cp -R assets dist
+
+#copy over shop html
+cp shop/index.html dist/shop/
+cp src/styles/shop.css dist/shop/
