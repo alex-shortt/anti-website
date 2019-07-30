@@ -72,9 +72,9 @@ async function initGlitch(src) {
 
     function updateCaption() {
       const caption = captions[img_num];
-      $(".lookbook-text-title").html(caption.model);
+      $(".lookbook-text-title").html(caption.location);
       $(".lookbook-text-subtitle").html(
-        `${caption.location}<br/>${caption.piece}`
+        `${caption.model}<br/><br/>${caption.piece}`
       );
     }
 
