@@ -206,10 +206,7 @@ const Nav = ({
           </button>
         </Link>
       ) : (
-        <a
-          href={window.location.pathname.replace("/shop", "")}
-          className="return"
-        >
+        <a href="/index.html" className="return">
           return
         </a>
       )}

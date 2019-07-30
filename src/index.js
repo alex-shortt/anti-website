@@ -45,10 +45,7 @@ async function loadButtonNav(sphere) {
         sphere.moveTo(sphere.currX, sphere.currY);
         break;
       case "shop":
-        window.location.href = `${window.location.href.replace(
-          "/index.html",
-          ""
-        )}/shop/index.html`;
+        window.location.href = "shop/index.html";
         break;
       case "contact":
         sphere.zoomOut();
