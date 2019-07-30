@@ -529,7 +529,7 @@ var Product = function Product(_ref4) {
 var ProductImages = function ProductImages(_ref5) {
   var currentProduct = _ref5.currentProduct;
 
-  var currentProductImages = currentProduct.images;
+  var currentProductImages = currentProduct.images.slice(0, currentProduct.images.length - 1);
 
   var _React$useState29 = React.useState(0),
       _React$useState30 = _slicedToArray(_React$useState29, 2),
