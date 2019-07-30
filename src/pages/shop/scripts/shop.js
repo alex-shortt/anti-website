@@ -410,7 +410,7 @@ const Product = ({
 }
 
 const ProductImages = ({ currentProduct }) => {
-  const currentProductImages = currentProduct.images
+  const currentProductImages = currentProduct.images.slice(0, currentProduct.images.length - 1)
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0)
 
   const imageIndexOptions = {
