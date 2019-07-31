@@ -18,7 +18,9 @@ html {
 }
 
 .nav {
-  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   box-sizing: border-box;
   padding: 30px;
   display: flex;
@@ -168,7 +170,8 @@ html {
   border: none;
   outline: none;
   color: white;
-  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
   bottom: 20px;
   left: 20px;
 }
@@ -567,7 +570,22 @@ td {
   }
 }
 
+@media screen and (max-width: 1380px) {
+  .image-button__add {
+    right: -20px;
+  }
+  .image-button__sub {
+    left: -20px;
+  }
+}
+
 @media screen and (max-width: 1220px) {
+  .image-button__add {
+    right: -45px;
+  }
+  .image-button__sub {
+    left: -45px;
+  }
   .product-info__absolute {
     left: 85px;
     width: 180px;
@@ -602,9 +620,6 @@ td {
 }
 
 @media screen and (max-width: 1050px) {
-  .image-button {
-    display: none;
-  }
   .dimensions-shopify {
     font-size: 13px;
   }
@@ -749,7 +764,7 @@ td {
   }
   .checkout-container {
     width: 100%;
-    height: 100vh;
+    height: 75vh;
   }
   .checkout-row {
     display: none;
@@ -759,6 +774,7 @@ td {
   }
   .item-line h4 {
     width: 110px;
+    font-size: 12px;
   }
   .checkout-hyperlink {
     font-size: 15px;
