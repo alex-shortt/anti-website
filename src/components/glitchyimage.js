@@ -1,6 +1,7 @@
 import { delay } from "../common/promises.js";
 import loadChecks from "../pages/view/pageLoadChecks.js";
 import captions from "./lookbookCaptions";
+import "../common/jquery.swipe";
 
 async function initGlitch(src) {
   let img_count = src.length;
@@ -76,6 +77,13 @@ async function initGlitch(src) {
       $(".lookbook-text-subtitle").html(
         `${caption.model}<br/><br/>${caption.piece}`
       );
+
+      let windowW = parent_container.width();
+      let windowH = parent_container.height();
+      $("#defaultCanvas0").css("width", windowW + "px");
+      $("#defaultCanvas0").css("height", windowH + "px");
+      loadCurr();
+      loadNeighbors();
     }
 
     p.setup = async function() {
@@ -103,7 +111,7 @@ async function initGlitch(src) {
       var left = $(".lookbook-text-controller-left");
       var right = $(".lookbook-text-controller-right");
 
-      left.click(async function() {
+      async function goPrev() {
         unloadNeighbor(1);
         static_timing[0] /= transition_ratio[0];
         static_timing[1] /= transition_ratio[1];
@@ -112,16 +120,16 @@ async function initGlitch(src) {
         await delay(750);
         img_num--;
         checkImageLoop();
+        updateCaption();
         let counter = img_num + 1;
         $(".lookbook-text-controller-counter").html(`${counter}/${img_count}`);
-        updateCaption();
         await delay(750);
         static_timing[0] *= transition_ratio[0];
         static_timing[1] *= transition_ratio[1];
         loadNeighbors();
-      });
+      }
 
-      right.click(async function() {
+      async function goNext() {
         unloadNeighbor(-1);
         static_timing[0] /= transition_ratio[0];
         static_timing[1] /= transition_ratio[1];
@@ -130,13 +138,30 @@ async function initGlitch(src) {
         await delay(750);
         img_num++;
         checkImageLoop();
+        updateCaption();
         let counter = img_num + 1;
         $(".lookbook-text-controller-counter").html(`${counter}/${img_count}`);
-        updateCaption();
         await delay(750);
         static_timing[0] *= transition_ratio[0];
         static_timing[1] *= transition_ratio[1];
         loadNeighbors();
+      }
+
+      left.click(goPrev);
+      right.click(goNext);
+
+      $(".lookbook-gallery").swipe({
+        swipe: function(
+          event,
+          direction
+        ) {
+          if (direction === "right") {
+            goPrev()
+          }
+          if (direction === "left") {
+            goNext()
+          }
+        }
       });
     };
 
