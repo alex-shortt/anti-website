@@ -9,8 +9,7 @@ async function clickToEnter() {
 
     var songsFolder = "assets/music/";
     var songs = [
-      songsFolder + "energybea.mp3",
-      songsFolder + "speeding colby 150.m4a"
+      songsFolder + "energybea.mp3"
     ];
     var songVols = [1, 0.015, 0.5];
 
