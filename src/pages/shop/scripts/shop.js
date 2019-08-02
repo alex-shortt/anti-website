@@ -599,7 +599,7 @@ const Checkout = ({
 
 const useAudio = () => {
   const [audio] = React.useState(
-    new Audio("../../../assets/music/speeding+looped.mp3")
+    new Audio("https://d369ls1rsdbvlu.cloudfront.net/music/speeding%2Blooped.mp3")
   );
   const [playing, setPlaying] = React.useState(true);
   const [hasPlayed, setHasPlayed] = React.useState(true);
