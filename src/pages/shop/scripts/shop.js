@@ -206,10 +206,10 @@ const Nav = ({
           </button>
         </Link>
       ) : (
-        <a href="/index.html" className="return">
-          return
+          <a href="/index.html" className="return">
+            return
         </a>
-      )}
+        )}
       <img
         className="cart"
         onClick={() => setCheckoutStatus(true)}
@@ -290,8 +290,8 @@ const TubeHologram = ({
           </Link>
         </div>
       ) : (
-        <img className="product" alt="" width="300px" />
-      )}
+          <img className="product" alt="" width="300px" />
+        )}
       <button
         className="shop-page__column-one__button button__add"
         onClick={indexOptions.add}
@@ -445,8 +445,8 @@ const Product = ({
 };
 
 const ProductImages = ({ currentProduct }) => {
-  const currentProductImages = currentProduct.images;
-  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const currentProductImages = currentProduct.images.slice(0, currentProduct.images.length - 1)
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0)
 
   const imageIndexOptions = {
     add: () => {
@@ -464,20 +464,23 @@ const ProductImages = ({ currentProduct }) => {
   return (
     <div
       className="shop-page__product-column zoom"
-      style={{ flexDirection: "column" }}
-    >
+      style={{ flexDirection: "column" }}>
+      <button
+        onClick={imageIndexOptions.sub}
+        className="image-button image-button__sub">
+        {"<"}
+      </button>
       <InnerImageZoom
         className="product-image"
         src={currentProductImages[currentImageIndex].src}
-        // style={{ objectFit: "cover", "objectPosition": "center top" }}
+      // style={{ objectFit: "cover", "objectPosition": "center top" }}
       />
+      <button
+        onClick={imageIndexOptions.add}
+        className="image-button image-button__add">
+        {">"}
+      </button>
       <div className="shop-other__images">
-        <button
-          onClick={imageIndexOptions.sub}
-          className="image-button image-button__sub"
-        >
-          {"<"}
-        </button>
         {currentProductImages.map((image, i) => {
           return (
             <img
@@ -490,12 +493,6 @@ const ProductImages = ({ currentProduct }) => {
             />
           );
         })}
-        <button
-          onClick={imageIndexOptions.add}
-          className="image-button image-button__add"
-        >
-          {">"}
-        </button>
       </div>
     </div>
   );
@@ -565,8 +562,8 @@ const Checkout = ({
                 );
               })
             ) : (
-              <h4 className="checkout-empty"> YOUR CART IS EMPTY</h4>
-            )}
+                <h4 className="checkout-empty"> YOUR CART IS EMPTY</h4>
+              )}
           </div>
         </div>
         <div className="checkout-footer">
@@ -589,6 +586,7 @@ const useAudio = () => {
   const toggle = () => setPlaying(!playing);
 
   React.useEffect(() => {
+    audio.loop = true
     playing ? audio.play() : audio.pause();
   }, [playing]);
 
@@ -597,11 +595,13 @@ const useAudio = () => {
 
 const Player = ({ url }) => {
   const [playing, toggle] = useAudio(url);
+
   return (
     <button className="player-toggle" onClick={toggle}>
       {playing ? <i className="fas fa-pause" /> : <i className="fas fa-play" />}
     </button>
   );
 };
+
 const domContainer = document.querySelector("#shop-page");
 ReactDOM.render(<Shop />, domContainer);

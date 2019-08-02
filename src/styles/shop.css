@@ -19,6 +19,7 @@ html {
 
 .nav {
   position: absolute;
+  top: 0;
   box-sizing: border-box;
   padding: 30px;
   display: flex;
@@ -97,6 +98,10 @@ html {
   margin-top: 50px;
 }
 
+.prod {
+  padding-bottom: 30px;
+}
+
 .product-info__absolute {
   position: absolute;
   bottom: 100px;
@@ -166,7 +171,14 @@ html {
   color: white;
   position: absolute;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
+}
+
+.fas {
+  font-size: 17px;
+  background-color: rgba(0, 0, 0, .75);
+  padding: 10px;
+
 }
 
 .player-toggle:hover {
@@ -351,6 +363,7 @@ html {
   align-items: center;
   object-fit: cover;
   object-position: top;
+  justify-content: center;
 }
 
 .unselected-image {
@@ -541,9 +554,6 @@ td {
 
 /* Media Queries */
 @media screen and (max-width: 1400px) {
-  .image-button {
-    display: none;
-  }
   .product-image {
     width: 350px;
     margin-top: 50px;
@@ -558,7 +568,22 @@ td {
   }
 }
 
+@media screen and (max-width: 1380px) {
+  .image-button__add {
+    right: -20px;
+  }
+  .image-button__sub {
+    left: -20px;
+  }
+}
+
 @media screen and (max-width: 1220px) {
+  .image-button__add {
+    right: -60px;
+  }
+  .image-button__sub {
+    left: -60px;
+  }
   .product-info__absolute {
     left: 85px;
     width: 180px;
@@ -593,6 +618,9 @@ td {
 }
 
 @media screen and (max-width: 1050px) {
+  .shop-page__product-column {
+    margin-top: 80px;
+  }
   .dimensions-shopify {
     font-size: 13px;
   }
@@ -665,9 +693,6 @@ td {
 }
 
 @media screen and (max-width: 650px) {
-  .product {
-    width: 300px;
-  }
   .shop-page__container {
     overflow: hidden;
   }
@@ -676,11 +701,10 @@ td {
   }
   .product-info__absolute {
     width: 100px;
-    bottom: 5px;
-    right: 20px;
-    left: auto;
-    font-size: 8px;
-    text-align: right;
+    bottom: 20px;
+    left: 20px;
+    font-size: 10px;
+    text-align: left;
   }
   .product-info__title {
     width: 100%;
@@ -696,6 +720,7 @@ td {
   }
   .product {
     width: 250px;
+    margin-top: 70px;
   }
   .product:hover {
     width: 275px;
@@ -713,8 +738,9 @@ td {
     width: 100%;
   }
   .nav {
+    z-index: 3;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.95);
   }
   .item-number__identifier {
     left: 25px;
@@ -736,7 +762,7 @@ td {
   }
   .checkout-container {
     width: 100%;
-    height: 100vh;
+    height: 75vh;
   }
   .checkout-row {
     display: none;
@@ -746,6 +772,7 @@ td {
   }
   .item-line h4 {
     width: 110px;
+    font-size: 12px;
   }
   .checkout-hyperlink {
     font-size: 15px;
