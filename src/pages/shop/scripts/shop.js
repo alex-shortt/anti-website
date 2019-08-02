@@ -265,70 +265,69 @@ const TubeHologram = ({
   };
 
   return (
-    <Swipeable {...swipeHandlers}>
-      <div className="shop-page__column-one column-image">
-        <button
-          className="shop-page__column-one__button button__sub"
-          onClick={indexOptions.sub}
+    <Swipeable
+      {...swipeHandlers}
+      className="shop-page__column-one column-image"
+    >
+      <button
+        className="shop-page__column-one__button button__sub"
+        onClick={indexOptions.sub}
+      >
+        {"<"}
+      </button>
+      <div className="shop-page__column-one__image-container">
+        <img
+          className="shop-page__column-one__image"
+          src="../assets/pictures/finaltube.png"
+        />
+      </div>
+      {currentProduct.images.length > 1 ? (
+        <div
+          className="product-container"
+          onClick={() => {
+            currentProduct.availableForSale
+              ? selectProduct()
+              : setDisplayOutOfStock(true);
+          }}
         >
-          {"<"}
-        </button>
-        <div className="shop-page__column-one__image-container">
-          <img
-            className="shop-page__column-one__image"
-            src="../assets/pictures/finaltube.png"
-          />
+          <Link to={`/${products[productIndex].id}`}>
+            <img
+              className="product"
+              src={images[productIndex]}
+              onClick={() => {
+                currentProduct.availableForSale
+                  ? selectProduct()
+                  : setDisplayOutOfStock(true);
+              }}
+            />
+          </Link>
         </div>
-        {currentProduct.images.length > 1 ? (
-          <div
-            className="product-container"
-            onClick={() => {
-              currentProduct.availableForSale
-                ? selectProduct()
-                : setDisplayOutOfStock(true);
-            }}
-          >
-            <Link to={`/${products[productIndex].id}`}>
-              <img
-                className="product"
-                src={images[productIndex]}
-                onClick={() => {
-                  currentProduct.availableForSale
-                    ? selectProduct()
-                    : setDisplayOutOfStock(true);
-                }}
-              />
-            </Link>
-          </div>
-        ) : (
-          <img className="product" alt="" width="300px" />
-        )}
-        <button
-          className="shop-page__column-one__button button__add"
-          onClick={indexOptions.add}
+      ) : (
+        <img className="product" alt="" width="300px" />
+      )}
+      <button
+        className="shop-page__column-one__button button__add"
+        onClick={indexOptions.add}
+      >
+        {">"}
+      </button>
+      <div className="product-info__absolute">
+        <h1
+          className={
+            displayOutOfStock
+              ? "product-info__status-available"
+              : "product-info__status-unavailable"
+          }
         >
-          {">"}
-        </button>
-        <div className="product-info__absolute">
-          <h1
-            className={
-              displayOutOfStock
-                ? "product-info__status-available"
-                : "product-info__status-unavailable"
-            }
-          >
-            Out of Stock
-          </h1>
-          <h2 className="product-info__title">
-            {products[productIndex].title}
-          </h2>
-          <h2 className="product-info__title">
-            {`$${products[productIndex].variants[0].price}`}
-          </h2>
-          <h2 className="item-number__identifier">
-            {productIndex + 1}/{products.length}
-          </h2>
-        </div>
+          Out of Stock
+        </h1>
+        <h2 className="product-info__title">{products[productIndex].title}</h2>
+        <h2 className="product-info__title">
+          {`$${products[productIndex].variants[0].price}`}
+        </h2>
+        <h2 className="item-number__identifier">
+          {productIndex + 1}/{products.length}
+        </h2>
       </div>
     </Swipeable>
   );
@@ -599,7 +598,9 @@ const Checkout = ({
 
 const useAudio = () => {
   const [audio] = React.useState(
-    new Audio("https://d369ls1rsdbvlu.cloudfront.net/music/speeding%2Blooped.mp3")
+    new Audio(
+      "https://d369ls1rsdbvlu.cloudfront.net/music/speeding%2Blooped.mp3"
+    )
   );
   const [playing, setPlaying] = React.useState(true);
   const [hasPlayed, setHasPlayed] = React.useState(true);
