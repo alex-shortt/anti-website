@@ -48,6 +48,7 @@
     "react-dom": "^16.8.6",
     "react-image-magnify": "^2.7.4",
     "react-inner-image-zoom": "^1.0.4",
-    "react-magnifier": "^3.0.1"
+    "react-magnifier": "^3.0.1",
+    "react-swipeable": "^5.4.0"
   }
 }

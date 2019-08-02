@@ -4,6 +4,7 @@ const Link = ReactRouterDOM.Link;
 const Switch = ReactRouterDOM.Switch;
 const history = History.createBrowserHistory();
 import InnerImageZoom from "react-inner-image-zoom";
+import { useSwipeable, Swipeable } from "react-swipeable";
 
 const Shop = () => {
   const [products, setProducts] = React.useState([]);
@@ -257,69 +258,79 @@ const TubeHologram = ({
     );
   }
   let images = gifs;
+
+  const swipeHandlers = {
+    onSwipedLeft: () => indexOptions.add(),
+    onSwipedRight: () => indexOptions.sub()
+  };
+
   return (
-    <div className="shop-page__column-one column-image">
-      <button
-        className="shop-page__column-one__button button__sub"
-        onClick={indexOptions.sub}
-      >
-        {"<"}
-      </button>
-      <div className="shop-page__column-one__image-container">
-        <img
-          className="shop-page__column-one__image"
-          src="../assets/pictures/finaltube.png"
-        />
-      </div>
-      {currentProduct.images.length > 1 ? (
-        <div
-          className="product-container"
-          onClick={() => {
-            currentProduct.availableForSale
-              ? selectProduct()
-              : setDisplayOutOfStock(true);
-          }}
+    <Swipeable {...swipeHandlers}>
+      <div className="shop-page__column-one column-image">
+        <button
+          className="shop-page__column-one__button button__sub"
+          onClick={indexOptions.sub}
         >
-          <Link to={`/${products[productIndex].id}`}>
-            <img
-              className="product"
-              src={images[productIndex]}
-              onClick={() => {
-                currentProduct.availableForSale
-                  ? selectProduct()
-                  : setDisplayOutOfStock(true);
-              }}
-            />
-          </Link>
+          {"<"}
+        </button>
+        <div className="shop-page__column-one__image-container">
+          <img
+            className="shop-page__column-one__image"
+            src="../assets/pictures/finaltube.png"
+          />
         </div>
-      ) : (
-        <img className="product" alt="" width="300px" />
-      )}
-      <button
-        className="shop-page__column-one__button button__add"
-        onClick={indexOptions.add}
-      >
-        {">"}
-      </button>
-      <div className="product-info__absolute">
-        <h1
-          className={
-            displayOutOfStock
-              ? "product-info__status-available"
-              : "product-info__status-unavailable"
-          }
+        {currentProduct.images.length > 1 ? (
+          <div
+            className="product-container"
+            onClick={() => {
+              currentProduct.availableForSale
+                ? selectProduct()
+                : setDisplayOutOfStock(true);
+            }}
+          >
+            <Link to={`/${products[productIndex].id}`}>
+              <img
+                className="product"
+                src={images[productIndex]}
+                onClick={() => {
+                  currentProduct.availableForSale
+                    ? selectProduct()
+                    : setDisplayOutOfStock(true);
+                }}
+              />
+            </Link>
+          </div>
+        ) : (
+          <img className="product" alt="" width="300px" />
+        )}
+        <button
+          className="shop-page__column-one__button button__add"
+          onClick={indexOptions.add}
         >
-          Out of Stock
-        </h1>
-        <h2 className="product-info__title">{products[productIndex].title}</h2>
-        <h2 className="product-info__title">
-          {`$${products[productIndex].variants[0].price}`}
-        </h2>
-        <h2 className="item-number__identifier">
-          {productIndex + 1}/{products.length}
-        </h2>
+          {">"}
+        </button>
+        <div className="product-info__absolute">
+          <h1
+            className={
+              displayOutOfStock
+                ? "product-info__status-available"
+                : "product-info__status-unavailable"
+            }
+          >
+            Out of Stock
+          </h1>
+          <h2 className="product-info__title">
+            {products[productIndex].title}
+          </h2>
+          <h2 className="product-info__title">
+            {`$${products[productIndex].variants[0].price}`}
+          </h2>
+          <h2 className="item-number__identifier">
+            {productIndex + 1}/{products.length}
+          </h2>
+        </div>
       </div>
-    </div>
+    </Swipeable>
   );
 };
 
