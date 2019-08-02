@@ -2,11 +2,12 @@ body,
 html {
   margin: 0;
   overflow: hidden;
+  height: 100%;
 }
 #shop-page {
   background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -176,9 +177,8 @@ html {
 
 .fas {
   font-size: 17px;
-  background-color: rgba(0, 0, 0, .75);
+  background-color: rgba(0, 0, 0, 0.75);
   padding: 10px;
-
 }
 
 .player-toggle:hover {
@@ -371,6 +371,8 @@ html {
   height: 55px;
   margin: 10px;
   cursor: pointer;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .selected-image {
@@ -379,6 +381,8 @@ html {
   margin: 10px;
   opacity: 0.5;
   transition: 0.2s;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .buy-button {
@@ -602,7 +606,7 @@ td {
   }
 }
 
-@media screen and (max-width: 1024px) and (max-height: 1366) {
+@media screen and (max-width: 1024px) and (max-height: 1366px) {
   .shop-other__images {
     width: 120%;
   }
