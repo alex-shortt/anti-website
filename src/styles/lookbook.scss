@@ -1,5 +1,14 @@
 $mobile: 650px;
 
+@keyframes pulse {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
 .lookbook {
   background-color: $containerBG;
 }
@@ -68,6 +77,26 @@ $mobile: 650px;
       &:hover {
         //cursor: pointer;
       }
+    }
+  }
+
+  & > .glowing {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.5);
+
+    &:before {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.6), 0 0 70px rgba(255, 255, 255, 0.7),
+        0 0 80px rgba(255, 255, 255, 0.8), 0 0 100px rgba(255, 255, 255, 0.9),
+        0 0 150px rgb(255, 255, 255);
+      position: absolute;
+      font-weight: 100;
+      top: 0;
+      color: #ffffff;
+      display: block;
+      content: "SHOP";
+      animation: pulse 1.3s alternate infinite ease-in;
     }
   }
 }
