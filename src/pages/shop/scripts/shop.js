@@ -590,12 +590,12 @@ const useAudio = () => {
   const [audio] = React.useState(
     new Audio("../../../assets/music/speeding+looped.mp3")
   );
-  const [playing, setPlaying] = React.useState(false);
-  const [hasPlayed, setHasPlayed] = React.useState(false);
+  const [playing, setPlaying] = React.useState(true);
+  const [hasPlayed, setHasPlayed] = React.useState(true);
 
   const toggle = () => {
-    setHasPlayed(true);
     setPlaying(!playing);
+    setHasPlayed(true);
   };
 
   const firstPlay = () => {
@@ -604,7 +604,21 @@ const useAudio = () => {
 
   React.useEffect(() => {
     audio.loop = true;
-    playing ? audio.play() : audio.pause();
+
+    const playPromise = playing ? audio.play() : audio.pause();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(function() {
+          // Automatic playback started!
+        })
+        .catch(function(error) {
+          // Automatic playback failed.
+          // Show a UI element to let the user manually start playback.
+          setPlaying(false);
+          setHasPlayed(false);
+        });
+    }
   }, [playing]);
 
   return [playing, toggle, firstPlay];
