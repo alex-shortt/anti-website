@@ -22,7 +22,7 @@ async function initAnti3D() {
       this.g = g
     }
     draw() {
-      ctx.fillStyle = "#f2f2f2"
+      ctx.fillStyle = "#f2f2f200"
       ctx.beginPath()
       ctx.arc(this.pos.x, this.pos.y, 4, 0, Math.PI * 2)
       ctx.fill()
