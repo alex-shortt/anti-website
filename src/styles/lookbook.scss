@@ -1,5 +1,14 @@
 $mobile: 650px;
 
+@keyframes pulse {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
 .lookbook {
   background-color: $containerBG;
 }
@@ -70,6 +79,26 @@ $mobile: 650px;
       }
     }
   }
+
+  & > .glowing {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.5);
+
+    &:before {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.6), 0 0 70px rgba(255, 255, 255, 0.7),
+        0 0 80px rgba(255, 255, 255, 0.8), 0 0 100px rgba(255, 255, 255, 0.9),
+        0 0 150px rgb(255, 255, 255);
+      position: absolute;
+      font-weight: 100;
+      top: 0;
+      color: #ffffff;
+      display: block;
+      content: "SHOP";
+      animation: pulse 1.3s alternate infinite ease-in;
+    }
+  }
 }
 
 .lookbook-bwinfection-container {
@@ -107,7 +136,7 @@ $mobile: 650px;
   flex-direction: row;
   width: 90%;
   max-width: 960px;
-  height: 80%;
+  height: 90%;
   max-height: 700px;
   margin: auto;
   position: relative;
@@ -171,8 +200,8 @@ $mobile: 650px;
     margin-bottom: 10px;
     margin: 0;
 
-    @media screen and (max-width: 525px) {
-      font-size: 1.7em;
+    @media screen and (max-width: $mobile) {
+      font-size: 0.8rem;
     }
   }
 
@@ -181,7 +210,12 @@ $mobile: 650px;
     line-height: 1em;
 
     @media screen and (max-width: 525px) {
-      font-size: 1.2em;
+      margin-top: 15px;
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: $mobile) {
+      font-size: 0.8rem;
     }
   }
 

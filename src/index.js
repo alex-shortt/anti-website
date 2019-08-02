@@ -30,6 +30,14 @@ async function loadButtonNav(sphere) {
   var x = sphere.currX;
   var y = sphere.currY;
 
+  $(".welcome-top-link").click(() => {
+    sphere.zoomOut();
+    sphere.currX = 0;
+    sphere.currY = -1;
+    loadChecks.popupLoad = true;
+    sphere.moveTo(sphere.currX, sphere.currY);
+  });
+
   //HOME
   var buttons = $(".landing-links").children();
   buttons.click(function() {

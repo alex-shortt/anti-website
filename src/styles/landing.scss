@@ -42,6 +42,23 @@
   transform: translate3d(0, 0, 0);
   cursor: pointer;
 
+  &-top-link {
+    @include no-select;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%) translateY(-0.5vh);
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+    opacity: 0;
+    cursor: pointer;
+
+    @media screen and (max-height: 575px) {
+      font-size: 22px;
+    }
+  }
+
   &-logo {
     height: 250px;
     width: 200px;
@@ -68,10 +85,11 @@
   }
 
   &-text {
-    @include no-select display: flex;
+    @include no-select;
+    display: flex;
     justify-content: center;
     align-items: center;
-    font-family: loves;
+    font-family: "VCR", loves, sans-serif;
     color: white;
     transform: translateY(300px);
     width: 100%;
@@ -269,7 +287,8 @@
 }
 
 .landing-links {
-  @include no-select opacity: 0;
+  @include no-select;
+  opacity: 0;
   display: flex;
   font-family: "Open Sans", sans-serif;
   color: $secondColor;
@@ -277,10 +296,7 @@
   text-align: center;
   z-index: 9999;
 
-  &-home-top,
-  &-home-bot,
-  &-home-left,
-  &-home-right {
+  & > * {
     display: flex;
     position: absolute;
     @media screen and (max-width: 1500px) {
@@ -330,8 +346,8 @@
     }
 
     @media screen and (max-width: 650px) {
-      left: 0;
-      transform: rotateZ(-90deg) translateY(-50%);
+      left: 5vw;
+      transform: translateX(-50%) rotateZ(-90deg) translateY(50%);
     }
   }
 
@@ -346,12 +362,8 @@
     }
 
     @media screen and (max-width: 650px) {
-      right: -30px;
-      transform: rotateZ(90deg) translateY(-50%);
-    }
-    @media screen and (max-width: 320px) {
-      right: -35px;
-      transform: rotateZ(90deg) translateY(-50%);
+      right: 5vw;
+      transform: translateX(50%) rotateZ(90deg) translateY(50%);
     }
   }
 }

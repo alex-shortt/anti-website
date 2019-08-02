@@ -1,4 +1,3 @@
-import { delay } from "../../common/promises.js"
 import initGlitch from "../../components/glitchyimage.js"
 
 var sources = []
