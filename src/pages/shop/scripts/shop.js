@@ -75,6 +75,8 @@ const Shop = () => {
 
   // console.log(checkoutGifs)
 
+  const [playing, toggle, firstPlay] = useAudio();
+
   if (mounted) {
     return (
       <Router history={history}>
@@ -85,8 +87,9 @@ const Shop = () => {
             overflowY: "auto",
             overflowX: "hidden"
           }}
+          onClick={firstPlay}
         >
-          <Player />
+          <Player playing={playing} toggle={toggle} />
           <Nav
             onProductPage={onProductPage}
             setOnProductPage={setOnProductPage}
@@ -206,10 +209,10 @@ const Nav = ({
           </button>
         </Link>
       ) : (
-          <a href="/index.html" className="return">
-            return
+        <a href="/index.html" className="return">
+          return
         </a>
-        )}
+      )}
       <img
         className="cart"
         onClick={() => setCheckoutStatus(true)}
@@ -290,8 +293,8 @@ const TubeHologram = ({
           </Link>
         </div>
       ) : (
-          <img className="product" alt="" width="300px" />
-        )}
+        <img className="product" alt="" width="300px" />
+      )}
       <button
         className="shop-page__column-one__button button__add"
         onClick={indexOptions.add}
@@ -445,8 +448,11 @@ const Product = ({
 };
 
 const ProductImages = ({ currentProduct }) => {
-  const currentProductImages = currentProduct.images.slice(0, currentProduct.images.length - 1)
-  const [currentImageIndex, setCurrentImageIndex] = React.useState(0)
+  const currentProductImages = currentProduct.images.slice(
+    0,
+    currentProduct.images.length - 1
+  );
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   const imageIndexOptions = {
     add: () => {
@@ -464,20 +470,23 @@ const ProductImages = ({ currentProduct }) => {
   return (
     <div
       className="shop-page__product-column zoom"
-      style={{ flexDirection: "column" }}>
+      style={{ flexDirection: "column" }}
+    >
       <button
         onClick={imageIndexOptions.sub}
-        className="image-button image-button__sub">
+        className="image-button image-button__sub"
+      >
         {"<"}
       </button>
       <InnerImageZoom
         className="product-image"
         src={currentProductImages[currentImageIndex].src}
-      // style={{ objectFit: "cover", "objectPosition": "center top" }}
+        // style={{ objectFit: "cover", "objectPosition": "center top" }}
       />
       <button
         onClick={imageIndexOptions.add}
-        className="image-button image-button__add">
+        className="image-button image-button__add"
+      >
         {">"}
       </button>
       <div className="shop-other__images">
@@ -540,7 +549,7 @@ const Checkout = ({
         </div>
         <div className="checkout-content">
           <div className="checkout-list">
-            {checkout.lineItems.length > 0 ? (
+            {checkout.lineItems && checkout.lineItems.length > 0 ? (
               checkout.lineItems.map((item, i) => {
                 return (
                   <div className="item-line" key={item.id}>
@@ -562,8 +571,8 @@ const Checkout = ({
                 );
               })
             ) : (
-                <h4 className="checkout-empty"> YOUR CART IS EMPTY</h4>
-              )}
+              <h4 className="checkout-empty"> YOUR CART IS EMPTY</h4>
+            )}
           </div>
         </div>
         <div className="checkout-footer">
@@ -581,21 +590,27 @@ const useAudio = () => {
   const [audio] = React.useState(
     new Audio("../../../assets/music/speeding+looped.mp3")
   );
-  const [playing, setPlaying] = React.useState(true);
+  const [playing, setPlaying] = React.useState(false);
+  const [hasPlayed, setHasPlayed] = React.useState(false);
 
-  const toggle = () => setPlaying(!playing);
+  const toggle = () => {
+    setHasPlayed(true);
+    setPlaying(!playing);
+  };
+
+  const firstPlay = () => {
+    if (!hasPlayed) toggle();
+  };
 
   React.useEffect(() => {
-    audio.loop = true
+    audio.loop = true;
     playing ? audio.play() : audio.pause();
   }, [playing]);
 
-  return [playing, toggle];
+  return [playing, toggle, firstPlay];
 };
 
-const Player = ({ url }) => {
-  const [playing, toggle] = useAudio(url);
-
+const Player = ({ playing, toggle }) => {
   return (
     <button className="player-toggle" onClick={toggle}>
       {playing ? <i className="fas fa-pause" /> : <i className="fas fa-play" />}
