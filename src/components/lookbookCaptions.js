@@ -23,7 +23,7 @@ export default {
   4: {
     location: "Harlem, New York",
     model: "Bloody Osiris",
-    piece: "Woven Cashmere Sweater, K9 Hoodie"
+    piece: "K9 Hoodie, Woven Cashmere Sweater"
   },
   5: {
     location: "Paris, France",
@@ -64,7 +64,7 @@ export default {
   12: {
     location: "Harlem, New York",
     model: "Sash",
-    piece: "Woven Cashmere Sweater, Flower SuitPant"
+    piece: "Woven Cashmere Sweater, Flower Suit Pant"
   },
   13: {
     location: "Paris, France",
