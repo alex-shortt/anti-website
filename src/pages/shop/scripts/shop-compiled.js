@@ -549,24 +549,29 @@ var ProductImages = function ProductImages(_ref5) {
     "div",
     {
       className: "shop-page__product-column zoom",
-      style: { flexDirection: "column" }
-    },
+      style: { flexDirection: "column" } },
+    React.createElement(
+      "button",
+      {
+        onClick: imageIndexOptions.sub,
+        className: "image-button image-button__sub" },
+      "<"
+    ),
     React.createElement(InnerImageZoom, {
       className: "product-image",
       src: currentProductImages[currentImageIndex].src
       // style={{ objectFit: "cover", "objectPosition": "center top" }}
     }),
     React.createElement(
+      "button",
+      {
+        onClick: imageIndexOptions.add,
+        className: "image-button image-button__add" },
+      ">"
+    ),
+    React.createElement(
       "div",
       { className: "shop-other__images" },
-      React.createElement(
-        "button",
-        {
-          onClick: imageIndexOptions.sub,
-          className: "image-button image-button__sub"
-        },
-        "<"
-      ),
       currentProductImages.map(function (image, i) {
         return React.createElement("img", {
           key: i,
@@ -576,15 +581,7 @@ var ProductImages = function ProductImages(_ref5) {
             return setCurrentImageIndex(i);
           }
         });
-      }),
-      React.createElement(
-        "button",
-        {
-          onClick: imageIndexOptions.add,
-          className: "image-button image-button__add"
-        },
-        ">"
-      )
+      })
     )
   );
 };
@@ -751,6 +748,7 @@ var useAudio = function useAudio() {
   };
 
   React.useEffect(function () {
+    audio.loop = true;
     playing ? audio.play() : audio.pause();
   }, [playing]);
 
@@ -771,5 +769,6 @@ var Player = function Player(_ref7) {
     playing ? React.createElement("i", { className: "fas fa-pause" }) : React.createElement("i", { className: "fas fa-play" })
   );
 };
+
 var domContainer = document.querySelector("#shop-page");
 ReactDOM.render(React.createElement(Shop, null), domContainer);

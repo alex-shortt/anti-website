@@ -18,8 +18,7 @@ html {
 }
 
 .nav {
-  position: -webkit-sticky;
-  position: sticky;
+  position: absolute;
   top: 0;
   box-sizing: border-box;
   padding: 30px;
@@ -170,10 +169,9 @@ html {
   border: none;
   outline: none;
   color: white;
-  position: -webkit-sticky;
-  position: sticky;
+  position: absolute;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
 }
 
 .fas {
@@ -581,10 +579,10 @@ td {
 
 @media screen and (max-width: 1220px) {
   .image-button__add {
-    right: -45px;
+    right: -60px;
   }
   .image-button__sub {
-    left: -45px;
+    left: -60px;
   }
   .product-info__absolute {
     left: 85px;
@@ -620,6 +618,9 @@ td {
 }
 
 @media screen and (max-width: 1050px) {
+  .shop-page__product-column {
+    margin-top: 80px;
+  }
   .dimensions-shopify {
     font-size: 13px;
   }
@@ -692,9 +693,6 @@ td {
 }
 
 @media screen and (max-width: 650px) {
-  .product {
-    width: 300px;
-  }
   .shop-page__container {
     overflow: hidden;
   }
@@ -703,11 +701,10 @@ td {
   }
   .product-info__absolute {
     width: 100px;
-    bottom: 5px;
-    right: 20px;
-    left: auto;
+    bottom: 20px;
+    left: 20px;
     font-size: 10px;
-    text-align: right;
+    text-align: left;
   }
   .product-info__title {
     width: 100%;
@@ -723,6 +720,7 @@ td {
   }
   .product {
     width: 250px;
+    margin-top: 70px;
   }
   .product:hover {
     width: 275px;
