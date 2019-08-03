@@ -63,17 +63,19 @@ $mobile: 875px;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  width: 90%;
+  width: 100%;
   max-width: 960px;
-  height: 85%;
+  height: 100%;
   position: relative;
+  object-fit: contain;
+  object-position: center;
 
-  @media screen and (max-width: $mobile) {
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 92.5%;
-  }
+  //@media screen and (max-width: $mobile) {
+  //  align-items: center;
+  //  justify-content: center;
+  //  flex-direction: column;
+  //  height: 92.5%;
+  //}
 }
 
 .popup-image-container {
