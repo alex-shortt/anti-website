@@ -45,6 +45,24 @@ const Shop = () => {
     });
   }, []);
 
+  $.fn.force_redraw = function() {
+    return this.hide(0, function() {
+      $(this).show();
+    });
+  };
+
+  for (let i = 0; i < 5; i++) {
+    // this makes the capsule show on ios safari because fuck ios safari with a passion
+    setTimeout(() => {
+      const fuckingbrokencontainer = $(
+        ".shop-page__column-one__image-container"
+      );
+
+      fuckingbrokencontainer.hide(0, function() {
+        $(this).show();
+      });
+    }, 200 * i);
+  }
   // function _setCheckoutGifs(products) {
   //   let tempArr = []
   //   products.map(product => {
@@ -611,7 +629,23 @@ const useAudio = () => {
   };
 
   const firstPlay = () => {
-    if (!hasPlayed) toggle();
+    if (!hasPlayed) {
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(function() {
+            setHasPlayed(true);
+            setPlaying(true);
+          })
+          .catch(function(error) {
+            // Automatic playback failed.
+            // Show a UI element to let the user manually start playback.
+            setPlaying(false);
+            setHasPlayed(false);
+          });
+      }
+    }
   };
 
   React.useEffect(() => {
@@ -622,9 +656,10 @@ const useAudio = () => {
     if (playPromise !== undefined) {
       playPromise
         .then(function() {
-          // Automatic playback started!
+          console.log("auto playback started");
         })
         .catch(function(error) {
+          console.log("auto playback failed");
           // Automatic playback failed.
           // Show a UI element to let the user manually start playback.
           setPlaying(false);

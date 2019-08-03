@@ -222,6 +222,9 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  transform: translateZ(0);
 }
 
 .image-button:hover {
