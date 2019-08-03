@@ -152,6 +152,10 @@ html {
 .shop-page__column-one,
 .shop-page__product-column {
   width: 700px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,6 +215,10 @@ html {
   outline: none;
   border: none;
   color: white;
+}
+
+.shop-page__column-one__image-container {
+  flex: 1;
 }
 
 .image-button:hover {
