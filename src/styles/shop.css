@@ -156,11 +156,11 @@ html {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
   height: 100%;
+  position: relative;
 }
 
 .shop-page__column-one__image {
@@ -219,6 +219,9 @@ html {
 
 .shop-page__column-one__image-container {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-button:hover {
