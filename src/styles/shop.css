@@ -156,7 +156,7 @@ html {
   justify-content: center;
   align-items: center;
   z-index: 1;
-  position: relative;
+  height: 100%;
 }
 
 .shop-page__column-one__image {
@@ -705,7 +705,7 @@ td {
   }
   .product-info__absolute {
     width: 100px;
-    bottom: 40px;
+    bottom: 20px;
     left: 20px;
     font-size: 10px;
     text-align: left;
