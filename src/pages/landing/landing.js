@@ -107,13 +107,12 @@ function printCredits() {
   Alex Shortt
       https://instagram.com/alexander.shortt
       https://twitter.com/_alexshortt
+      
+  Rael Bernardino
+      https://www.linkedin.com/in/rael-bernardino-290447168/
 
   Steven Huynh-Tran
       https://instagram.com/stevnotran
-      https://www.linkedin.com/in/stevenht/
-      
-   Rael Bernardino
-      https://www.linkedin.com/in/rael-bernardino-290447168/
   `;
   console.log(credits);
 }
