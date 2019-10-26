@@ -5,6 +5,12 @@ html {
   height: 100%;
 }
 
+#shop-page {
+  height: 100%;
+  font-family: "VCR", sans-serif;
+  color: white;
+}
+
 .shop-page__content-container {
   width: 100%;
   height: 80%;

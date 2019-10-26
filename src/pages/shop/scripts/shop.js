@@ -11,11 +11,6 @@ import Player from "./components/Player";
 import ProductPage from "./scenes/ProductPage";
 import { useAudio } from "./services/audio";
 
-const Container = styled.div`
-  width: 100%;
-  min-height: 100%;
-`;
-
 const Background = styled.div`
   background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
   width: 100%;
@@ -24,6 +19,11 @@ const Background = styled.div`
   z-index: -1;
   top: 0;
   left: 0;
+`;
+
+const Container = styled.div`
+  height: 100%;
+  overflow-y: auto;
 `;
 
 const Shop = () => {
