@@ -9,7 +9,6 @@ import { ShopifyProvider } from "./services/shopify";
 import Checkout from "./components/Checkout";
 import TubeHologram from "./scenes/TubeHologram";
 import Player from "./components/Player";
-import Nav from "./components/Nav";
 import ProductPage from "./scenes/ProductPage";
 import { useAudio } from "./services/audio";
 
@@ -29,8 +28,7 @@ const Shop = () => {
           onClick={audio.firstPlay}
         >
           <Player audio={audio} />
-          {/*<Nav />*/}
-          {/*<Checkout />*/}
+          <Checkout />
           <div>
             <Switch>
               <Route exact path="/" render={TubeHologram} />
