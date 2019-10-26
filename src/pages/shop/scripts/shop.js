@@ -1,43 +1,52 @@
 import React from "react";
-import ReactDOM from "react-dom"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-
-const history = History.createBrowserHistory();
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 
 import { ShopifyProvider } from "./services/shopify";
 
 import Checkout from "./components/Checkout";
-import TubeHologram from "./scenes/TubeHologram";
+import ProductsPage from "./scenes/ProductsPage";
 import Player from "./components/Player";
 import ProductPage from "./scenes/ProductPage";
 import { useAudio } from "./services/audio";
+
+const Container = styled.div`
+  width: 100%;
+  min-height: 100%;
+`;
+
+const Background = styled.div`
+  background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+`;
 
 const Shop = () => {
   const audio = useAudio();
 
   return (
-    <ShopifyProvider>
-      <Router history={history}>
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            overflowY: "auto",
-            overflowX: "hidden"
-          }}
-          onClick={audio.firstPlay}
-        >
-          <Player audio={audio} />
-          <Checkout />
-          <div>
-            <Switch>
-              <Route exact path="/" render={TubeHologram} />
-              {/*<Route path="/:id" render={ProductPage} />*/}
-            </Switch>
+    <Container>
+      <Background />
+      <ShopifyProvider>
+        <Router>
+          <div onClick={audio.firstPlay}>
+            <Player audio={audio} />
+            <Checkout />
+            <div>
+              <Switch>
+                <Route exact path="/shop/" component={ProductsPage} />
+                <Route path="/shop/:id" component={ProductPage} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
-    </ShopifyProvider>
+        </Router>
+      </ShopifyProvider>
+    </Container>
   );
 };
 

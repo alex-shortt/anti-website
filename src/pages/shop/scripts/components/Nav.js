@@ -1,19 +1,8 @@
 import React from "react";
-const { Link } = ReactRouterDOM;
-
+import { Link } from "react-router-dom";
 
 export default function Nav(props) {
-  const {
-    onProductPage,
-    setOnProductPage,
-    setProductDescriptionDisplay,
-    setProductVariants,
-    currentProduct,
-    setSelectedVariant,
-    displayProductDetails,
-    setDisplayProductDetails,
-    setCheckoutStatus
-  } = props;
+  const {} = props;
 
   function returnToView() {
     setProductVariants(

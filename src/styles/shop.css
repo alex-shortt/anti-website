@@ -4,14 +4,6 @@ html {
   overflow: hidden;
   height: 100%;
 }
-#shop-page {
-  background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .shop-page__content-container {
   width: 100%;
