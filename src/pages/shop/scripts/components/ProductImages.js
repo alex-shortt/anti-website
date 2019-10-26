@@ -1,24 +1,26 @@
+import React, { useCallback, useState } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
 
-export default function ProductImages({ currentProduct }) {
-  const currentProductImages = currentProduct.images.slice(
-    0,
-    currentProduct.images.length - 1
-  );
-  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+export default function ProductImages(props) {
+  const { product } = props;
 
-  const imageIndexOptions = {
-    add: () => {
-      currentImageIndex !== currentProductImages.length - 1
-        ? setCurrentImageIndex(currentImageIndex + 1)
-        : setCurrentImageIndex(0);
+  //remove gif
+  const images = product.images.slice(0, product.images.length - 1);
+  const [index, setIndex] = useState(0);
+
+  const changeIndex = useCallback(
+    diff => {
+      let newIndex = index + diff;
+      if (newIndex < 0) {
+        newIndex = images.length - 1;
+      }
+      if (newIndex > images.length - 1) {
+        newIndex = 0;
+      }
+      setIndex(newIndex);
     },
-    sub: () => {
-      currentImageIndex > 0
-        ? setCurrentImageIndex(currentImageIndex - 1)
-        : setCurrentImageIndex(currentProductImages.length - 1);
-    }
-  };
+    [index]
+  );
 
   return (
     <div
@@ -26,32 +28,26 @@ export default function ProductImages({ currentProduct }) {
       style={{ flexDirection: "column" }}
     >
       <button
-        onClick={imageIndexOptions.sub}
+        onClick={() => changeIndex(-1)}
         className="image-button image-button__sub"
       >
         {"<"}
       </button>
-      <InnerImageZoom
-        className="product-image"
-        src={currentProductImages[currentImageIndex].src}
-        // style={{ objectFit: "cover", "objectPosition": "center top" }}
-      />
+      <InnerImageZoom className="product-image" src={images[index].src} />
       <button
-        onClick={imageIndexOptions.add}
+        onClick={() => changeIndex(1)}
         className="image-button image-button__add"
       >
         {">"}
       </button>
       <div className="shop-other__images">
-        {currentProductImages.map((image, i) => {
+        {images.map((image, i) => {
           return (
             <img
               key={i}
               src={image.src}
-              className={
-                i === currentImageIndex ? "selected-image" : "unselected-image"
-              }
-              onClick={() => setCurrentImageIndex(i)}
+              className={i === index ? "selected-image" : "unselected-image"}
+              onClick={() => setIndex(i)}
             />
           );
         })}

@@ -1,36 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Product(props) {
-  const {
-    checkout,
-    setCheckout,
-    setCheckoutStatus,
-    client,
-    currentProduct,
-    setCurrentProduct,
-    selectedVariant,
-    setSelectedVariant
-  } = props;
+  const { product, checkout, setCheckout, client } = props;
 
-  function checkSelected(id) {
-    setSelectedVariant(id);
-    setCurrentProduct({
-      ...currentProduct,
-      variants: currentProduct.variants.map(v =>
-        v.id === id
-          ? (v = { ...v, selected: true })
-          : (v = { ...v, selected: false })
-      )
-    });
-  }
+  const [variant, setVariant] = useState(0);
 
   function addToCheckout() {
-    let lineItemsToAdd = { variantId: selectedVariant, quantity: 1 };
+    let lineItemsToAdd = { variantId: variant, quantity: 1 };
     const checkoutId = checkout.id;
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(checkout => {
       setCheckout(checkout);
     });
-    selectedVariant !== "" ? setCheckoutStatus(true) : setCheckoutStatus(false);
   }
 
   function displayDimensions() {
@@ -42,20 +22,22 @@ export default function Product(props) {
       : (dimensionsClass[0].style.display = "block");
   }
 
+  const { title, variants, descriptionHtml } = product;
+
   return (
     <div className="shop-page__column-two">
       <div className="shop-page__column-two-section">
-        <h1>{currentProduct.title}</h1>
+        <h1>{title}</h1>
       </div>
       <div className="shop-page__column-two-section">
-        <h2>${currentProduct.variants[0].price}</h2>
+        <h2>${variants[0].price}</h2>
         <div className="variant-button__container">
-          {currentProduct.variants.map((variant, i) => {
+          {variants.map((variant, i) => {
             return (
               <button
                 key={i}
                 onClick={() =>
-                  variant.available ? checkSelected(variant.id) : null
+                  variant.available ? setVariant(variant.id) : null
                 }
                 className={
                   variant.available
@@ -79,9 +61,7 @@ export default function Product(props) {
         >
           DIMENSIONS
         </button>
-        <div
-          dangerouslySetInnerHTML={{ __html: currentProduct.descriptionHtml }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
       </div>
     </div>
   );

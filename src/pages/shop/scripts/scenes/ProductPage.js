@@ -1,45 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import ProductImages from "../components/ProductImages";
 import Product from "../components/Product";
+import { ShopifyContext } from "../services/shopify";
+import styled from "styled-components";
+
+const LoadingText = styled.h1`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 export default function ProductPage(props) {
   const {
-    setOnProductPage,
-    products,
-    checkout,
-    setCheckout,
-    setCheckoutStatus,
-    client,
-    currentProduct,
-    setCurrentProduct,
-    selectedVariant,
-    setProductVariants,
-    setSelectedVariant,
-    match
+    match: {
+      params: { handle }
+    }
   } = props;
 
-  useEffect(() => {
-    setOnProductPage(true);
-    products.map((p, i) => {
-      if (p.id === match.params.id) {
-        setCurrentProduct(p);
-      }
-    });
-  }, []);
+  const shopify = useContext(ShopifyContext);
+
+  if (!shopify.products) {
+    return <LoadingText>Loading...</LoadingText>;
+  }
+
+  const product = shopify.products.find(prod => prod.handle === handle);
+
+  console.log(product);
 
   return (
     <div className="shop-page__container-responsive-product">
-      <ProductImages currentProduct={currentProduct} />
-      <Product
-        checkout={checkout}
-        setCheckout={setCheckout}
-        setCheckoutStatus={setCheckoutStatus}
-        client={client}
-        currentProduct={currentProduct}
-        setCurrentProduct={setCurrentProduct}
-        selectedVariant={selectedVariant}
-        setSelectedVariant={setSelectedVariant}
-      />
+      <ProductImages product={product} />
+      <Product product={product} {...shopify} />
     </div>
   );
 }

@@ -13,8 +13,6 @@ const Container = styled.div`
 `;
 
 const LoadingText = styled.h1`
-  font-family: "VCR", sans-serif;
-  color: white;
   position: absolute;
   top: 50%;
   left: 50%;

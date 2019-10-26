@@ -30,20 +30,16 @@ const Shop = () => {
   const audio = useAudio();
 
   return (
-    <Container>
+    <Container onClick={audio.firstPlay}>
       <Background />
       <ShopifyProvider>
         <Router>
-          <div onClick={audio.firstPlay}>
-            <Player audio={audio} />
-            <Checkout />
-            <div>
-              <Switch>
-                <Route exact path="/shop/" component={ProductsPage} />
-                <Route path="/shop/:id" component={ProductPage} />
-              </Switch>
-            </div>
-          </div>
+          <Player audio={audio} />
+          <Checkout />
+          <Switch>
+            <Route exact path="/shop/" component={ProductsPage} />
+            <Route path="/shop/:handle" component={ProductPage} />
+          </Switch>
         </Router>
       </ShopifyProvider>
     </Container>

@@ -80,7 +80,7 @@ function getGif(images) {
 export default function ProductListing(props) {
   const { product } = props;
 
-  const { images, title, id } = product;
+  const { images, title, handle } = product;
   const { price } = product.variants[0];
 
   const gifURL = getGif(images);
@@ -91,7 +91,7 @@ export default function ProductListing(props) {
       <Description>
         <Title>{title}</Title>
         <Subtitle>${price}</Subtitle>
-        <ShopNow to={`/shop/${id}`}>Shop Style</ShopNow>
+        <ShopNow to={`/shop/${handle}`}>Shop Style</ShopNow>
       </Description>
     </Container>
   );
