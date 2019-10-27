@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export const ShopifyContext = React.createContext();
 
@@ -12,6 +12,7 @@ export function ShopifyProvider(props) {
 
   const [products, setProducts] = useState();
   const [checkout, setCheckout] = useState();
+  const [checkoutOpen, setCheckoutOpen] = useState("false");
 
   useEffect(() => {
     if (!products && !checkout) {
@@ -24,7 +25,14 @@ export function ShopifyProvider(props) {
     }
   }, [products, checkout]);
 
-  const providerValue = { client, products, checkout, setCheckout };
+  const providerValue = {
+    client,
+    products,
+    checkout,
+    setCheckout,
+    checkoutOpen,
+    setCheckoutOpen
+  };
 
   return (
     <ShopifyContext.Provider value={providerValue}>

@@ -23,9 +23,7 @@ function Item(props) {
 
 export default function Checkout(props) {
   const {} = props;
-  const { checkout, client, setCheckout } = useContext(ShopifyContext);
-
-  const [open, setOpen] = useState("false");
+  const { checkout, setCheckout, checkoutOpen, setCheckoutOpen, client } = useContext(ShopifyContext);
 
   const removeFromCheckout = useCallback(
     itemId => {
@@ -41,19 +39,19 @@ export default function Checkout(props) {
   );
 
   if (!checkout) {
-    return <>no checkout yet!</>;
+    return <></>;
   }
 
   const { lineItems, subtotalPrice, webUrl } = checkout;
 
   return (
-    <div className={`checkout ${open === "true" ? "visible" : "invisible"}`}>
+    <div className={`checkout ${checkoutOpen === "true" ? "visible" : "invisible"}`}>
       <div className="checkout-container">
         <div className="checkout-header">
           <button
             className="checkout-exit"
             onClick={() => {
-              setOpen("false");
+              setCheckoutOpen("false");
             }}
           >
             x

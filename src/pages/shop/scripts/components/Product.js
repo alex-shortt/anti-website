@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Product(props) {
-  const { product, checkout, setCheckout, client } = props;
+  const { product, checkout, setCheckout, client, setCheckoutOpen } = props;
 
   const [variant, setVariant] = useState(0);
 
@@ -10,6 +10,7 @@ export default function Product(props) {
     const checkoutId = checkout.id;
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(checkout => {
       setCheckout(checkout);
+      setCheckoutOpen("true");
     });
   }
 
@@ -36,9 +37,10 @@ export default function Product(props) {
             return (
               <button
                 key={i}
-                onClick={() =>
-                  variant.available ? setVariant(variant.id) : null
-                }
+                onClick={() => {
+                  console.log(variant);
+                  variant.available ? setVariant(variant.id) : null;
+                }}
                 className={
                   variant.available
                     ? variant.selected
