@@ -5,7 +5,6 @@ export function useHash() {
   const [hash, setHash] = useState("");
 
   useEffect(() => {
-    console.log("should re-render!");
     setHash(window.location.hash);
   }, [window.location.hash, window.location]);
 

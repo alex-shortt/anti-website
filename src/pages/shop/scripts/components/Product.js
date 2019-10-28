@@ -1,12 +1,30 @@
 import React, { useState } from "react";
 
+function Variant(props) {
+  const { variant, curVariantId, setCurVariantId } = props;
+  const { available, id, title } = variant;
+
+  let className = available ? null : "out-of-stock__variant";
+  if (!className) {
+    className = curVariantId === id ? "selected-variant" : "variant";
+  }
+
+  const onClick = () => (available ? setCurVariantId(id) : null);
+
+  return (
+    <button key={id} onClick={onClick} className={className}>
+      {title}
+    </button>
+  );
+}
+
 export default function Product(props) {
   const { product, checkout, setCheckout, client, setCheckoutOpen } = props;
 
-  const [variant, setVariant] = useState(0);
+  const [curVariantId, setCurVariantId] = useState(0);
 
   function addToCheckout() {
-    let lineItemsToAdd = { variantId: variant, quantity: 1 };
+    let lineItemsToAdd = { variantId: curVariantId, quantity: 1 };
     const checkoutId = checkout.id;
     client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(checkout => {
       setCheckout(checkout);
@@ -33,26 +51,13 @@ export default function Product(props) {
       <div className="shop-page__column-two-section">
         <h2>${variants[0].price}</h2>
         <div className="variant-button__container">
-          {variants.map((variant, i) => {
-            return (
-              <button
-                key={i}
-                onClick={() => {
-                  console.log(variant);
-                  variant.available ? setVariant(variant.id) : null;
-                }}
-                className={
-                  variant.available
-                    ? variant.selected
-                      ? "selected-variant"
-                      : "variant"
-                    : "out-of-stock__variant"
-                }
-              >
-                {variant.title}
-              </button>
-            );
-          })}
+          {variants.map(variant => (
+            <Variant
+              variant={variant}
+              curVariantId={curVariantId}
+              setCurVariantId={setCurVariantId}
+            />
+          ))}
         </div>
         <button className="buy-button" onClick={() => addToCheckout()}>
           ADD TO CART
