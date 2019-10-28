@@ -51,6 +51,7 @@
     "react-magnifier": "^3.0.1",
     "react-router-dom": "^5.1.2",
     "react-swipeable": "^5.4.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "use-react-router": "^1.0.7"
   }
 }

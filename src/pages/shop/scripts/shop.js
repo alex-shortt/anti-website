@@ -10,7 +10,7 @@ import ProductsPage from "./scenes/ProductsPage";
 import Player from "./components/Player";
 import ProductPage from "./scenes/ProductPage";
 import { useAudio } from "./services/audio";
-import { useHash } from "./services/hash";
+import HashUpdater, { useHash } from "./services/hash";
 
 const Background = styled.div`
   background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
@@ -29,13 +29,14 @@ const Container = styled.div`
 
 const Shop = () => {
   const audio = useAudio();
-  const { hash, validHash } = useHash();
+  const { hash, setHash, validHash } = useHash();
 
   return (
     <Container onClick={audio.firstPlay}>
       <Background />
       <ShopifyProvider>
         <Router>
+          <HashUpdater setHash={setHash} />
           <Player audio={audio} />
           <Checkout />
           <Switch>
