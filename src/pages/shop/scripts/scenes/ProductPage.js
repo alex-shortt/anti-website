@@ -12,19 +12,24 @@ const LoadingText = styled.h1`
 `;
 
 export default function ProductPage(props) {
-  const {
-    match: {
-      params: { handle }
-    }
-  } = props;
-
   const shopify = useContext(ShopifyContext);
+  const handle = window.location.hash.replace("#", "");
 
   if (!shopify.products) {
     return <LoadingText>Loading...</LoadingText>;
   }
 
   const product = shopify.products.find(prod => prod.handle === handle);
+
+  if (!product) {
+    return (
+      <LoadingText>
+        We couldn't find the product you're looking for...
+        <br/>
+        <a onClick={() => window.location.hash = ""}>Return to Shop</a>
+      </LoadingText>
+    );
+  }
 
   console.log(product);
 

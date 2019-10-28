@@ -91,7 +91,7 @@ export default function ProductListing(props) {
       <Description>
         <Title>{title}</Title>
         <Subtitle>${price}</Subtitle>
-        <ShopNow to={`/shop/${handle}`}>Shop Style</ShopNow>
+        <ShopNow to={`/shop/#${handle}`}>Shop Style</ShopNow>
       </Description>
     </Container>
   );

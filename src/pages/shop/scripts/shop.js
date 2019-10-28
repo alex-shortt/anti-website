@@ -10,6 +10,7 @@ import ProductsPage from "./scenes/ProductsPage";
 import Player from "./components/Player";
 import ProductPage from "./scenes/ProductPage";
 import { useAudio } from "./services/audio";
+import { useHash } from "./services/hash";
 
 const Background = styled.div`
   background-image: url("https://d369ls1rsdbvlu.cloudfront.net/pictures/stars.png");
@@ -28,6 +29,7 @@ const Container = styled.div`
 
 const Shop = () => {
   const audio = useAudio();
+  const { hash, validHash } = useHash();
 
   return (
     <Container onClick={audio.firstPlay}>
@@ -37,8 +39,12 @@ const Shop = () => {
           <Player audio={audio} />
           <Checkout />
           <Switch>
-            <Route exact path="/shop/" component={ProductsPage} />
-            <Route path="/shop/:handle" component={ProductPage} />
+            <Route
+              path="/shop"
+              component={validHash ? ProductPage : ProductsPage}
+              hash={hash}
+            />
+            {/*<Route path="/shop/:handle" component={ProductPage} />*/}
           </Switch>
         </Router>
       </ShopifyProvider>
