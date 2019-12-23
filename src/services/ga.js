@@ -1,6 +1,6 @@
 import ReactGA from "react-ga"
 
-ReactGA.initialize("")
+ReactGA.initialize("UA-142765691-1")
 
 const production = process.env.NODE_ENV === "production"
 
