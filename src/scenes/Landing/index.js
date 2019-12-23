@@ -1,12 +1,18 @@
 import React from "react"
 import styled from "styled-components/macro"
 
-import Helmet from "components/Helmet"
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export default function Landing(props) {
   return (
-    <>
-      <Helmet title="Landing" />
-    </>
+    <Container>
+      <h1>ANTI</h1>
+    </Container>
   )
 }
