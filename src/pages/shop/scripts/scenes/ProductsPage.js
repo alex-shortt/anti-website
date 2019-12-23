@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ShopifyContext } from "../services/shopify";
 import styled from "styled-components";
 import ProductListing from "../components/ProductListing";
+import Nav from "../components/Nav";
 
 const Container = styled.div`
   margin: 20px auto;
@@ -22,6 +23,10 @@ const LoadingText = styled.h1`
 const Title = styled.h1`
   text-align: center;
   font-size: 3rem;
+
+  @media screen and (max-width: 700px) {
+    margin-top: 7rem;
+  }
 `;
 
 export default function ProductsPage(props) {
@@ -34,6 +39,7 @@ export default function ProductsPage(props) {
 
   return (
     <>
+      <Nav toHome />
       <Title>Anti E-Shop</Title>
       <Container>
         {products.map(product => (

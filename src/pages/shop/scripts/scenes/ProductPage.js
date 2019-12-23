@@ -3,6 +3,8 @@ import ProductImages from "../components/ProductImages";
 import Product from "../components/Product";
 import { ShopifyContext } from "../services/shopify";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Nav from "../components/Nav";
 
 const LoadingText = styled.h1`
   position: absolute;
@@ -25,16 +27,16 @@ export default function ProductPage(props) {
     return (
       <LoadingText>
         We couldn't find the product you're looking for...
-        <br/>
-        <a onClick={() => window.location.hash = ""}>Return to Shop</a>
+        <br />
+        <br />
+        <Link to="/shop/">Return to Shop</Link>
       </LoadingText>
     );
   }
 
-  console.log(product);
-
   return (
     <div className="shop-page__container-responsive-product">
+      <Nav toShop />
       <ProductImages product={product} />
       <Product product={product} {...shopify} />
     </div>

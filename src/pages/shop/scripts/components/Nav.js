@@ -1,36 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ShopifyContext } from "../services/shopify";
 
 export default function Nav(props) {
-  const {} = props;
+  const { toHome, toShop } = props;
 
-  function returnToView() {
-    setProductVariants(
-      currentProduct.variants.map(v => (v = { ...v, selected: false }))
-    );
-    setOnProductPage(!onProductPage);
-    setSelectedVariant("");
-    setDisplayProductDetails(false);
-    setProductDescriptionDisplay(false);
-    document.getElementsByClassName("dimensions-shopify")[0].style.display =
-      "none";
-  }
+  const { setCheckoutOpen } = useContext(ShopifyContext);
+
   return (
     <div className="nav">
-      {onProductPage ? (
-        <Link to="/" className="return">
-          <button onClick={() => returnToView()} className="return">
-            return
-          </button>
+      {toShop && (
+        <Link to="/shop/" className="return">
+          <button className="return">return</button>
         </Link>
-      ) : (
-        <a href="/index.html" className="return">
+      )}
+      {toHome && (
+        <a href="/" className="return">
           return
         </a>
       )}
       <img
         className="cart"
-        onClick={() => setCheckoutStatus(true)}
+        onClick={() => setCheckoutOpen("true")}
         src={"../assets/pictures/svg/cart-white.svg"}
       />
     </div>
