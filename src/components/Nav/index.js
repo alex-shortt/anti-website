@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 import styled from "styled-components/macro"
+import { Link } from "react-router-dom"
 
 import cartSVG from "assets/svg/cart.svg"
 
@@ -27,7 +28,17 @@ const LogoVideo = styled.video`
   margin-right: 40px;
 `
 
-const Link = styled.a`
+const NavLink = styled.a`
+  color: white;
+  text-decoration: none;
+  transition: 0.15s;
+
+  &:hover {
+    color: orange;
+  }
+`
+
+const LinkTo = styled(Link)`
   color: white;
   text-decoration: none;
   transition: 0.15s;
@@ -57,7 +68,7 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
 `
 
 export default function Nav(props) {
-  const { fadein, sticky } = props
+  const { main, product } = props
 
   const [setEvent, setSetEvent] = useState("false")
   const [opacity, setOpacity] = useState(0)
@@ -84,8 +95,26 @@ export default function Nav(props) {
     }
   }, [setEvent, updateOpacity])
 
+  if (product) {
+    return (
+      <Container>
+        <LogoVideo autoPlay playsinline muted loop>
+          <source
+            type="video/mp4"
+            src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
+          />
+        </LogoVideo>
+        <LinkContainer>
+          <LinkTo to="/">BACK</LinkTo>
+        </LinkContainer>
+        <CartIcon />
+      </Container>
+    )
+  }
+
+  // main
   return (
-    <Container opacity={fadein ? opacity : 1}>
+    <Container opacity={opacity}>
       <LogoVideo autoPlay playsinline muted loop>
         <source
           type="video/mp4"
@@ -93,9 +122,9 @@ export default function Nav(props) {
         />
       </LogoVideo>
       <LinkContainer>
-        <Link href="#shop">SHOP</Link>
-        <Link href="#contact">CONTACT</Link>
-        <Link href="#socials">SOCIALS</Link>
+        <NavLink href="#shop">SHOP</NavLink>
+        <NavLink href="#contact">CONTACT</NavLink>
+        <NavLink href="#socials">SOCIALS</NavLink>
       </LinkContainer>
       <CartIcon />
     </Container>

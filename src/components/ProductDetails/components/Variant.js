@@ -25,9 +25,15 @@ const VariantButton = styled.button`
 `
 
 const UnavailableVariant = styled(VariantButton)`
-  border: 2px black solid;
-  background-color: rgb(41, 41, 41);
-  color: black;
+  border: 2px solid transparent;
+  background-color: transparent;
+  color: red;
+  cursor: auto !important;
+
+  &:hover {
+    background-color: transparent;
+    color: red;
+  }
 `
 
 export default function Variant(props) {

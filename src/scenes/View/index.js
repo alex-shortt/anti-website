@@ -17,7 +17,7 @@ export default function View(props) {
   return (
     <Container>
       <Helmet title="View" />
-      <Nav fadein />
+      <Nav main />
       <Landing />
       <Shop />
       <Contact />

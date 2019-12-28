@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 
 import ProductImages from "components/ProductImages"
 import ProductDetails from "components/ProductDetails"
+import Nav from "components/Nav"
 import { ShopifyContext } from "services/shopify"
 
 const LoadingText = styled.h1`
@@ -54,6 +55,7 @@ export default function Product(props) {
 
   return (
     <Container>
+      <Nav product />
       <ProductImages product={product} />
       <ProductDetails product={product} {...shopify} />
     </Container>
