@@ -99,6 +99,7 @@ export default function ProductDetails(props) {
         <h1>{title}</h1>
       </div>
       <div>
+        <h2>${variants[0].price}</h2>
         <VariantContainer>
           {variants.map(variant => (
             <Variant
