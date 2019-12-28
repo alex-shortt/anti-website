@@ -4,7 +4,7 @@ import styled from "styled-components/macro"
 const Container = styled.div`
   width: 100%;
   padding: 0 3rem;
-  padding-top: 70px;
+  padding-top: 80px;
   box-sizing: border-box;
 `
 

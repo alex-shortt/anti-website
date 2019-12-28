@@ -95,7 +95,6 @@ export default function Nav(props) {
       <LinkContainer>
         <Link href="#shop">SHOP</Link>
         <Link href="#contact">CONTACT</Link>
-        <Link href="#lookbook">LOOKBOOK</Link>
         <Link href="#socials">SOCIALS</Link>
       </LinkContainer>
       <CartIcon />

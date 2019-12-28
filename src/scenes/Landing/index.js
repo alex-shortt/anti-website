@@ -8,7 +8,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background: black;
-  margin-bottom: 100px;
 `
 
 const LogoVideo = styled.video`
