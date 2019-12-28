@@ -4,15 +4,7 @@ import styled from "styled-components/macro"
 import ProductListing from "components/ProductListing"
 import { ShopifyContext } from "services/shopify"
 import SectionHeader from "components/SectionHeader"
-import Helmet from "components/Helmet"
-
-const Container = styled.div`
-  margin: 20px auto;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`
+import SectionContainer from "components/SectionContainer"
 
 const LoadingText = styled.h1`
   width: 100%;
@@ -33,13 +25,12 @@ export default function Shop(props) {
 
   return (
     <>
-      <Helmet title="Shop" />
       <SectionHeader title="Shop" />
-      <Container>
+      <SectionContainer>
         {products.map(product => (
           <ProductListing product={product} />
         ))}
-      </Container>
+      </SectionContainer>
     </>
   )
 }
