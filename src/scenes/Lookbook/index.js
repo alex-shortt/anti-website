@@ -6,9 +6,9 @@ import SectionContainer from "components/SectionContainer"
 
 export default function Lookbook(props) {
   return (
-    <>
+    <div id="lookbook">
       <SectionHeader title="Lookbook" />
       <SectionContainer />
-    </>
+    </div>
   )
 }

@@ -22,7 +22,7 @@ export default function Landing(props) {
       <LogoVideo autoPlay playsinline muted loop>
         <source
           type="video/mp4"
-          src="https://d369ls1rsdbvlu.cloudfront.net/video/ANTI_RotatingText-compressed.mp4"
+          src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
         />
       </LogoVideo>
     </Container>

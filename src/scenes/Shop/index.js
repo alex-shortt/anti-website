@@ -24,13 +24,13 @@ export default function Shop(props) {
   }
 
   return (
-    <>
+    <div id="shop">
       <SectionHeader title="Shop" />
       <SectionContainer>
         {products.map(product => (
           <ProductListing product={product} />
         ))}
       </SectionContainer>
-    </>
+    </div>
   )
 }

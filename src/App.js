@@ -7,6 +7,7 @@ import FullScreenLoading from "components/FullScreenLoading"
 import ScrollToTop from "components/ScrollToTop"
 import GA from "services/ga"
 import { ShopifyProvider } from "services/shopify"
+import Nav from "components/Nav"
 
 const View = React.lazy(() => import("scenes/View"))
 const Product = React.lazy(() => import("scenes/Product"))

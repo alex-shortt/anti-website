@@ -6,9 +6,9 @@ import SectionContainer from "components/SectionContainer"
 
 export default function Socials(props) {
   return (
-    <>
+    <div id="socials">
       <SectionHeader title="Socials" />
       <SectionContainer />
-    </>
+    </div>
   )
 }

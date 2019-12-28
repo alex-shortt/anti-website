@@ -3,8 +3,8 @@ import styled from "styled-components/macro"
 
 const Container = styled.div`
   width: 100%;
-  margin-top: 2rem;
   padding: 0 3rem;
+  padding-top: 70px;
   box-sizing: border-box;
 `
 
