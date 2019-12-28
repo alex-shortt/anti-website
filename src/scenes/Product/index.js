@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 
 import ProductImages from "components/ProductImages"
-import Product from "components/Product"
+import ProductDetails from "components/ProductDetails"
 import { ShopifyContext } from "services/shopify"
 
 const LoadingText = styled.h1`
@@ -20,9 +20,13 @@ const Container = styled.div`
   width: 100%;
   flex-direction: row;
   overflow: auto;
+
+  @media screen and (max-width: 875px) {
+    display: block;
+  }
 `
 
-export default function ProductPage(props) {
+export default function Product(props) {
   const {
     match: {
       params: { handle }
@@ -51,7 +55,7 @@ export default function ProductPage(props) {
   return (
     <Container>
       <ProductImages product={product} />
-      <Product product={product} {...shopify} />
+      <ProductDetails product={product} {...shopify} />
     </Container>
   )
 }

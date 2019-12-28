@@ -3,9 +3,13 @@ import styled from "styled-components/macro"
 import InnerImageZoom from "react-inner-image-zoom"
 
 const MainImage = styled(InnerImageZoom)`
-  & > img {
-    width: 350px;
-    margin-top: 50px;
+  width: 350px;
+  margin-top: 50px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 500px) {
+    width: 250px;
   }
 `
 
@@ -13,29 +17,43 @@ const Thumbnail = styled.img`
   width: 55px;
   height: 55px;
   margin: 10px;
-  opacity: 0.5;
   transition: 0.2s;
   object-fit: cover;
   object-position: top center;
-  ${props => props.selected && "cursor: pointer"};
+  ${props => !props.selected && "cursor: pointer"};
+  opacity: ${props => (props.selected ? 0.5 : 1)};
 `
 
 const Container = styled.div`
-  width: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
   height: 100%;
   position: relative;
+  flex-direction: column;
+
+  @media screen and (max-width: 875px) {
+    height: auto;
+  }
 `
 
 const PaginateButton = styled.button`
-  font-size: 25px;
+  font-size: 35px;
   background-color: transparent;
   outline: none;
   border: none;
-  color: white;
+  color: black;
+  cursor: pointer;
+  margin: 0 20px;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`
+
+const SubContainer = styled.div`
+  display: flex;
 `
 
 export default function ProductImages(props) {
@@ -61,9 +79,11 @@ export default function ProductImages(props) {
 
   return (
     <Container>
-      <PaginateButton onClick={() => changeIndex(-1)}>{"<"}</PaginateButton>
-      <MainImage className="product-image" src={images[index].src} />
-      <PaginateButton onClick={() => changeIndex(1)}>{">"}</PaginateButton>
+      <SubContainer>
+        <PaginateButton onClick={() => changeIndex(-1)}>{"<"}</PaginateButton>
+        <MainImage className="product-image" src={images[index].src} />
+        <PaginateButton onClick={() => changeIndex(1)}>{">"}</PaginateButton>
+      </SubContainer>
       <div className="shop-other__images">
         {images.map((image, i) => {
           return (

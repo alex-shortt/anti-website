@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import styled from "styled-components/macro"
+import ReactHtmlParser from "react-html-parser"
 
 import Variant from "./components/Variant"
 
@@ -8,15 +9,40 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 125px;
-  height: 80%;
-  width: 33%;
+  width: 40%;
+  max-width: 420px;
+  padding: 100px 2px;
+  height: 100%;
   text-transform: uppercase;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  & > * {
+    td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+
+    table {
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (max-width: 875px) {
+    height: auto;
+    padding: 0 1px;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0 20px;
+  }
 `
 
 const VariantContainer = styled.div`
   display: flex;
-  width: 80%;
   margin-top: 20px;
 `
 
@@ -26,11 +52,11 @@ const BuyButton = styled.button`
   color: white;
   margin: 20px 0px 5px 0px;
   width: 100%;
-  border: white solid 2px;
   padding: 15px 20px 15px 20px;
   transition: 0.5s;
   text-align: center;
   font-size: 20px;
+  border: 1px solid black;
 
   &:hover {
     background-color: white;
@@ -44,10 +70,11 @@ const DimensionsButton = styled(BuyButton)`
   margin-bottom: 20px;
 `
 
-export default function Product(props) {
+export default function ProductDetails(props) {
   const { product, checkout, setCheckout, client, setCheckoutOpen } = props
 
   const [curVariantId, setCurVariantId] = useState(0)
+  const [dimsOpen, setDimsOpen] = useState("false")
 
   function addToCheckout() {
     const lineItemsToAdd = { variantId: curVariantId, quantity: 1 }
@@ -60,14 +87,9 @@ export default function Product(props) {
       })
   }
 
-  function displayDimensions() {
-    const dimensionsClass = document.getElementsByClassName(
-      "dimensions-shopify"
-    )
-    dimensionsClass[0].style.display === "block"
-      ? (dimensionsClass[0].style.display = "none")
-      : (dimensionsClass[0].style.display = "block")
-  }
+  const toggleDims = useCallback(() => {
+    setDimsOpen(dimsOpen === "true" ? "false" : "true")
+  }, [dimsOpen])
 
   const { title, variants, descriptionHtml } = product
 
@@ -87,10 +109,11 @@ export default function Product(props) {
           ))}
         </VariantContainer>
         <BuyButton onClick={() => addToCheckout()}>ADD TO CART</BuyButton>
-        <DimensionsButton onClick={() => displayDimensions()}>
+        <DimensionsButton onClick={() => toggleDims()}>
           DIMENSIONS
         </DimensionsButton>
-        <div dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+        {dimsOpen === "true" && ReactHtmlParser(descriptionHtml)[1]}
+        {ReactHtmlParser(descriptionHtml)[2]}
       </div>
     </Container>
   )
