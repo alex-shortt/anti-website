@@ -11,6 +11,7 @@ import Socials from "scenes/Socials"
 
 const Container = styled.div`
   width: 100%;
+  padding-bottom: 100px;
 `
 
 export default function View(props) {

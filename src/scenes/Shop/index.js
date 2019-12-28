@@ -15,6 +15,12 @@ const LoadingText = styled.h1`
   align-items: center;
 `
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`
+
 export default function Shop(props) {
   const { products } = useContext(ShopifyContext)
   console.log(products)
@@ -27,9 +33,11 @@ export default function Shop(props) {
     <div id="shop">
       <SectionHeader title="Shop" />
       <SectionContainer>
-        {products.map(product => (
-          <ProductListing product={product} />
-        ))}
+        <Container>
+          {products.map(product => (
+            <ProductListing product={product} />
+          ))}
+        </Container>
       </SectionContainer>
     </div>
   )
