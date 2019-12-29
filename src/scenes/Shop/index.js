@@ -23,7 +23,6 @@ const Container = styled.div`
 
 export default function Shop(props) {
   const { products } = useContext(ShopifyContext)
-  console.log(products)
 
   if (!products) {
     return <LoadingText>Loading...</LoadingText>

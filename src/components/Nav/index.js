@@ -6,6 +6,10 @@ import cartSVG from "assets/svg/cart.svg"
 import { ShopifyContext } from "services/shopify"
 import Cart from "components/Cart"
 
+import HamburgerIcon from "./components/HamburgerIcon"
+import NavOptions from "./components/NavOptions"
+import MobileMenu from "./components/MobileMenu"
+
 const Container = styled.div.attrs(props => ({
   style: {
     opacity: props.opacity
@@ -23,37 +27,31 @@ const Container = styled.div.attrs(props => ({
   z-index: 1;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
+
+  @media screen and (max-width: 600px) {
+    height: auto;
+  }
+`
+
+const PrimaryMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 `
 
 const LogoVideo = styled.video`
   height: 70%;
   margin-right: 40px;
-`
+  cursor: pointer;
 
-const NavLink = styled.a`
-  color: white;
-  text-decoration: none;
-  transition: 0.15s;
-
-  &:hover {
-    color: orange;
+  @media screen and (max-width: 600px) {
+    height: 45px;
+    margin-top: 9px;
+    margin-bottom: 9px;
   }
-`
-
-const LinkTo = styled(Link)`
-  color: white;
-  text-decoration: none;
-  transition: 0.15s;
-
-  &:hover {
-    color: orange;
-  }
-`
-
-const LinkContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
 `
 
 const CartIcon = styled.img.attrs({ src: cartSVG })`
@@ -67,7 +65,13 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
   &:hover {
     opacity: 1;
   }
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `
+
+const VideoLink = styled(Link)``
 
 export default function Nav(props) {
   const { main, product } = props
@@ -76,6 +80,7 @@ export default function Nav(props) {
 
   const [setEvent, setSetEvent] = useState("false")
   const [opacity, setOpacity] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState("false")
 
   const updateOpacity = useCallback(() => {
     const dist = document.getElementById("html").scrollTop
@@ -99,42 +104,33 @@ export default function Nav(props) {
     }
   }, [setEvent, updateOpacity])
 
-  if (product) {
-    return (
-      <>
-        <Container>
-          <LogoVideo autoPlay playsinline muted loop>
-            <source
-              type="video/mp4"
-              src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
-            />
-          </LogoVideo>
-          <LinkContainer>
-            <LinkTo to="/#shop">BACK</LinkTo>
-          </LinkContainer>
-          <CartIcon onClick={() => setCheckoutOpen("true")} />
-        </Container>
-        <Cart />
-      </>
-    )
-  }
-
-  // main
   return (
     <>
-      <Container opacity={opacity}>
-        <LogoVideo autoPlay playsinline muted loop>
-          <source
-            type="video/mp4"
-            src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
+      <Container opacity={main ? opacity : 1}>
+        <PrimaryMenu>
+          <VideoLink to="/">
+            <LogoVideo autoPlay playsinline muted loop>
+              <source
+                type="video/mp4"
+                src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
+              />
+            </LogoVideo>
+          </VideoLink>
+          VideoLink>
+          <NavOptions {...props} />
+          <HamburgerIcon
+            open={mobileMenuOpen}
+            onClick={() =>
+              setMobileMenuOpen(mobileMenuOpen === "true" ? "false" : "true")
+            }
           />
-        </LogoVideo>
-        <LinkContainer>
-          <NavLink href="#shop">SHOP</NavLink>
-          <NavLink href="#contact">CONTACT</NavLink>
-          <NavLink href="#socials">SOCIALS</NavLink>
-        </LinkContainer>
-        <CartIcon onClick={() => setCheckoutOpen("true")} />
+          <CartIcon onClick={() => setCheckoutOpen("true")} />
+        </PrimaryMenu>
+        <MobileMenu
+          open={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen("false")}
+          {...props}
+        />
       </Container>
       <Cart />
     </>
