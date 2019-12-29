@@ -43,15 +43,7 @@ const PrimaryMenu = styled.div`
 `
 
 const LogoVideo = styled.video`
-  height: 70%;
-  margin-right: 40px;
-  cursor: pointer;
-
-  @media screen and (max-width: 600px) {
-    height: 45px;
-    margin-top: 9px;
-    margin-bottom: 9px;
-  }
+  height: 100%;
 `
 
 const CartIcon = styled.img.attrs({ src: cartSVG })`
@@ -71,7 +63,17 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
   }
 `
 
-const VideoLink = styled(Link)``
+const VideoLink = styled(Link)`
+  height: 70%;
+  margin-right: 40px;
+  cursor: pointer;
+
+  @media screen and (max-width: 600px) {
+    height: 45px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+  }
+`
 
 export default function Nav(props) {
   const { main, product } = props
@@ -116,7 +118,6 @@ export default function Nav(props) {
               />
             </LogoVideo>
           </VideoLink>
-          VideoLink>
           <NavOptions {...props} />
           <HamburgerIcon
             open={mobileMenuOpen}
