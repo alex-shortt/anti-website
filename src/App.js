@@ -11,6 +11,9 @@ import Nav from "components/Nav"
 
 const View = React.lazy(() => import("scenes/View"))
 const Product = React.lazy(() => import("scenes/Product"))
+const Privacy = React.lazy(() => import("scenes/Privacy"))
+const Tax = React.lazy(() => import("scenes/Tax"))
+const Terms = React.lazy(() => import("scenes/Terms"))
 
 const GoogleAnalytics = () => {
   const { location } = useReactRouter()
@@ -25,13 +28,14 @@ export default function App() {
       <React.Suspense fallback={<FullScreenLoading />}>
         <Router>
           <GoogleAnalytics />
-          <ScrollToTop>
-            <Switch>
-              <Route path="/" exact component={View} />
-              <Route path="/:handle" component={Product} />
-              {/* TODO: 404 Page */}
-            </Switch>
-          </ScrollToTop>
+          <Switch>
+            <Route path="/" exact component={View} />
+            <Route path="/privacy" exact component={Privacy} />
+            <Route path="/tax" exact component={Tax} />
+            <Route path="/terms" exact component={Terms} />
+            <Route path="/:handle" component={Product} />
+            {/* TODO: 404 Page */}
+          </Switch>
         </Router>
       </React.Suspense>
     </ShopifyProvider>

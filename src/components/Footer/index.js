@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components/macro"
+import { Link } from "react-router-dom"
 
 const Container = styled.div`
   background: black;
@@ -24,7 +25,7 @@ const LinkContainer = styled.div`
   justify-content: center;
 `
 
-const Link = styled.a`
+const StyledLink = styled(Link)`
   color: white;
   margin: 0 10px;
   font-size: 10pt;
@@ -35,9 +36,9 @@ export default function Footer(props) {
     <Container>
       <Name>ANTI</Name>
       <LinkContainer>
-        <Link href="#">Terms</Link>
-        <Link href="#">Privacy</Link>
-        <Link href="#">Tax</Link>
+        <StyledLink to="/terms">Terms</StyledLink>
+        <StyledLink to="/privacy">Privacy</StyledLink>
+        <StyledLink to="/tax">Tax</StyledLink>
       </LinkContainer>
     </Container>
   )
