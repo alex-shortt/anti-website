@@ -34,7 +34,7 @@ export default function Shop(props) {
       <SectionContainer>
         <Container>
           {products.map(product => (
-            <ProductListing product={product} />
+            <ProductListing product={product} key={product.handle} />
           ))}
         </Container>
       </SectionContainer>

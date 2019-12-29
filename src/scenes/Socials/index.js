@@ -62,7 +62,11 @@ export default function Socials(props) {
         <ImageContainer>
           {images &&
             images.map(image => (
-              <Image src={image.src} onClick={() => window.open(image.url)} />
+              <Image
+                src={image.src}
+                key={image.src}
+                onClick={() => window.open(image.url)}
+              />
             ))}
         </ImageContainer>
       </SectionContainer>
