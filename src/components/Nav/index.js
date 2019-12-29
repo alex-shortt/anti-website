@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useContext } from "react"
 import styled from "styled-components/macro"
 import { Link } from "react-router-dom"
 
 import cartSVG from "assets/svg/cart.svg"
+import { ShopifyContext } from "services/shopify"
+import Cart from "components/Cart"
 
 const Container = styled.div.attrs(props => ({
   style: {
@@ -70,6 +72,8 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
 export default function Nav(props) {
   const { main, product } = props
 
+  const { setCheckoutOpen } = useContext(ShopifyContext)
+
   const [setEvent, setSetEvent] = useState("false")
   const [opacity, setOpacity] = useState(0)
 
@@ -97,7 +101,28 @@ export default function Nav(props) {
 
   if (product) {
     return (
-      <Container>
+      <>
+        <Container>
+          <LogoVideo autoPlay playsinline muted loop>
+            <source
+              type="video/mp4"
+              src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
+            />
+          </LogoVideo>
+          <LinkContainer>
+            <LinkTo to="/#shop">BACK</LinkTo>
+          </LinkContainer>
+          <CartIcon onClick={() => setCheckoutOpen("true")} />
+        </Container>
+        <Cart />
+      </>
+    )
+  }
+
+  // main
+  return (
+    <>
+      <Container opacity={opacity}>
         <LogoVideo autoPlay playsinline muted loop>
           <source
             type="video/mp4"
@@ -105,28 +130,13 @@ export default function Nav(props) {
           />
         </LogoVideo>
         <LinkContainer>
-          <LinkTo to="/">BACK</LinkTo>
+          <NavLink href="#shop">SHOP</NavLink>
+          <NavLink href="#contact">CONTACT</NavLink>
+          <NavLink href="#socials">SOCIALS</NavLink>
         </LinkContainer>
-        <CartIcon />
+        <CartIcon onClick={() => setCheckoutOpen("true")} />
       </Container>
-    )
-  }
-
-  // main
-  return (
-    <Container opacity={opacity}>
-      <LogoVideo autoPlay playsinline muted loop>
-        <source
-          type="video/mp4"
-          src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
-        />
-      </LogoVideo>
-      <LinkContainer>
-        <NavLink href="#shop">SHOP</NavLink>
-        <NavLink href="#contact">CONTACT</NavLink>
-        <NavLink href="#socials">SOCIALS</NavLink>
-      </LinkContainer>
-      <CartIcon />
-    </Container>
+      <Cart />
+    </>
   )
 }

@@ -2,6 +2,20 @@ import React, { useCallback, useState } from "react"
 import styled from "styled-components/macro"
 import InnerImageZoom from "react-inner-image-zoom"
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  flex-direction: column;
+
+  @media screen and (max-width: 875px) {
+    height: auto;
+    margin-top: 70px;
+  }
+`
+
 const MainImage = styled(InnerImageZoom)`
   width: 350px;
   margin-top: 50px;
@@ -22,20 +36,6 @@ const Thumbnail = styled.img`
   object-position: top center;
   ${props => !props.selected && "cursor: pointer"};
   opacity: ${props => (props.selected ? 0.5 : 1)};
-`
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  height: 100%;
-  position: relative;
-  flex-direction: column;
-
-  @media screen and (max-width: 875px) {
-    height: auto;
-  }
 `
 
 const PaginateButton = styled.button`

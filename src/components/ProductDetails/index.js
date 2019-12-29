@@ -5,7 +5,6 @@ import ReactHtmlParser from "react-html-parser"
 import Variant from "./components/Variant"
 
 const Container = styled.div`
-  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
