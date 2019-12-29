@@ -4,10 +4,8 @@ import useReactRouter from "use-react-router"
 
 import GlobalStyles from "styles/globalStyles"
 import FullScreenLoading from "components/FullScreenLoading"
-import ScrollToTop from "components/ScrollToTop"
 import GA from "services/ga"
 import { ShopifyProvider } from "services/shopify"
-import Nav from "components/Nav"
 
 const View = React.lazy(() => import("scenes/View"))
 const Product = React.lazy(() => import("scenes/Product"))
@@ -22,6 +20,8 @@ const GoogleAnalytics = () => {
 }
 
 export default function App() {
+  printCredits()
+
   return (
     <ShopifyProvider>
       <GlobalStyles />
@@ -40,4 +40,20 @@ export default function App() {
       </React.Suspense>
     </ShopifyProvider>
   )
+}
+
+function printCredits() {
+  const credits = `
+   ______     __   __     ______   __
+  /\\  __ \\   /\\ "-.\\ \\   /\\__  _\\ /\\ \\
+  \\ \\  __ \\  \\ \\ \\-.  \\  \\/_/\\ \\/ \\ \\ \\
+   \\ \\_\\ \\_\\  \\ \\_\\\\"\\_\\    \\ \\_\\  \\ \\_\\
+    \\/_/\\/_/   \\/_/ \\/_/     \\/_/   \\/_/
+
+
+  Alex Shortt
+      https://instagram.com/alexander.shortt
+      https://twitter.com/_alexshortt
+  `
+  console.log(credits)
 }
