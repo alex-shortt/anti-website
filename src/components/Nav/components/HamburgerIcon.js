@@ -20,7 +20,7 @@ const Hamburger = styled.a`
     width: calc(100% + 2px);
     height: 20%;
     border: none;
-    background-color: ${props => (props.open === "true" ? "orange" : "white")};
+    background-color: ${props => (props.open === "true" ? "#f78320" : "white")};
     transition: all 0.2s ease;
     transform: ${props =>
       props.open === "true" ? "rotate(45deg)" : "translateZ(0)"};

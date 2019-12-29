@@ -9,6 +9,7 @@ const Container = styled.div`
   align-items: center;
   background: black;
   position: relative;
+  margin-bottom: 100px;
 `
 
 const LogoVideo = styled.video`
@@ -34,7 +35,7 @@ const AngleDown = styled.div`
   bottom: 10vh;
   width: 25px;
   height: 25px;
-  border: 5px solid orange;
+  border: 5px solid #f78320;
   border-left: 0;
   border-top: 0;
   transform: rotate(45deg);

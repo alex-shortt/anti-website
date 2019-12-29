@@ -8,7 +8,7 @@ const LinkTo = styled(Link)`
   transition: 0.15s;
 
   &:hover {
-    color: orange;
+    color: #f78320;
   }
 `
 
@@ -28,7 +28,7 @@ const NavLink = styled.a`
   transition: 0.15s;
 
   &:hover {
-    color: orange;
+    color: #f78320;
   }
 `
 

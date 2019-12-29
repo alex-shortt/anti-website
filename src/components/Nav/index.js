@@ -20,7 +20,7 @@ const Container = styled.div.attrs(props => ({
   position: fixed;
   top: 0;
   left: 0;
-  border-bottom: 2px solid orange;
+  border-bottom: 2px solid #f78320;
   box-sizing: border-box;
   display: flex;
   background: black;

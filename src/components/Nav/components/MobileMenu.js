@@ -26,7 +26,7 @@ const LinkStyle = css`
   user-select: none;
 
   &:hover {
-    color: orange;
+    color: #f78320;
   }
 `
 

@@ -17,8 +17,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   height: 100%;
   cursor: pointer;
-  margin: 0 30px;
-  border: 1px solid black;
+  padding: 0 30px;
   box-sizing: border-box;
 `
 
@@ -32,7 +31,7 @@ const SocialLink = styled.a`
   transition: 0.15s;
 
   &:hover {
-    color: orange;
+    color: #f78320;
   }
 `
 

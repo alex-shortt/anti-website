@@ -16,7 +16,7 @@ const Container = styled.div`
 export default function View(props) {
   return (
     <Container>
-      <Helmet title="View" />
+      <Helmet title="ANTI" />
       <Nav main />
       <Landing />
       <Shop />
