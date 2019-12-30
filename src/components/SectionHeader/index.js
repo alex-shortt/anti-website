@@ -6,6 +6,10 @@ const Container = styled.div`
   padding: 0 3rem;
   padding-top: 80px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 1rem;
+  }
 `
 
 const Title = styled.h1`

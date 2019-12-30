@@ -6,6 +6,12 @@ export const InputContainer = styled.div`
   border-left: 2px solid black;
   min-width: 380px;
   margin: 20px 50px;
+
+  @media screen and (max-width: 500px) {
+    min-width: 0;
+    margin: 20px 0px;
+    width: 100%;
+  }
 `
 
 export const SendButton = styled.button`
