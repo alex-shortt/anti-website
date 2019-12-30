@@ -7,6 +7,6 @@ const Container = styled.div`
 `
 
 export default function SectionContainer(props) {
-  const { children } = props
-  return <Container>{children}</Container>
+  const { children, ...restProps } = props
+  return <Container {...restProps}>{children}</Container>
 }
