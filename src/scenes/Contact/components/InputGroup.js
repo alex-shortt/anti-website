@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import styled, { css } from "styled-components/macro"
 
 const Container = styled.div`
@@ -44,12 +44,20 @@ const TextBox = styled.textarea`
 `
 
 export default function InputGroup(props) {
-  const { multiline, title, ...restProps } = props
+  const { multiline, title, value, setValue, ...restProps } = props
+
+  const handleChange = useCallback(event => setValue(event.target.value), [
+    setValue
+  ])
 
   return (
     <Container>
       <Title>{title}</Title>
-      {multiline ? <TextBox {...restProps} /> : <Text {...restProps} />}
+      {multiline ? (
+        <TextBox value={value} onChange={handleChange} {...restProps} />
+      ) : (
+        <Text value={value} onChange={handleChange} {...restProps} />
+      )}
     </Container>
   )
 }
