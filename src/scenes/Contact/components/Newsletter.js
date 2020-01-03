@@ -15,7 +15,7 @@ export default function Newsletter(props) {
 
   return (
     <InputContainer>
-      <Title>Sign up for our newsletter</Title>
+      <Title>Join the Anti Mailing List</Title>
       <InputGroup title="Email" value={email} setValue={setEmail} />
       <SendButton onClick={onSubmit}>SUBMIT</SendButton>
     </InputContainer>

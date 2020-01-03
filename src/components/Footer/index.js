@@ -9,8 +9,8 @@ const Container = styled.div`
   flex-direction: column;
   display: flex;
   justify-content: center;
-  height: 250px;
-  margin-top: 150px;
+  height: 175px;
+  margin-top: 100px;
 `
 
 const Name = styled.h1`

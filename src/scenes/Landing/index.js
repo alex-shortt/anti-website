@@ -32,14 +32,22 @@ const bounceAnim = keyframes`
 const AngleDown = styled.div`
   position: absolute;
   opacity: 0.5;
-  bottom: 10vh;
+  bottom: 15vh;
   width: 25px;
   height: 25px;
   border: 5px solid #f78320;
   border-left: 0;
   border-top: 0;
   transform: rotate(45deg);
+  cursor: pointer;
   animation: ${bounceAnim} 3.5s infinite;
+
+  & > a {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 `
 
 export default function Landing(props) {
@@ -48,7 +56,9 @@ export default function Landing(props) {
   return (
     <Container>
       <LogoGif src={gifURL} />
-      <AngleDown />
+      <AngleDown>
+        <a href="#shop" />
+      </AngleDown>
     </Container>
   )
 }
