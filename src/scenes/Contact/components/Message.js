@@ -7,8 +7,11 @@ const MessageContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 20px 35px;
+  padding: 20px 15px;
   border: 1px solid black;
+  width: 75%;
+  text-align: center;
+  max-width: 300px;
 `
 
 const Dismiss = styled.button`

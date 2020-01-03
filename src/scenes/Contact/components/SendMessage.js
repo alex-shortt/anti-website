@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react"
+import axios from "axios"
 
 import { InputContainer, Title, SendButton } from "./styledComponents"
 import InputGroup from "./InputGroup"
@@ -10,9 +11,23 @@ export default function SendMessage(props) {
   const [email, setEmail] = useState("")
   const [massage, setMassage] = useState("")
   const onSubmit = useCallback(async () => {
-    console.log(email)
-    setMessage(email)
-  }, [email, setMessage])
+    if (email === "" || name === "" || massage === "") {
+      return
+    }
+
+    const endpoint = "https://formspree.io/xbjdwerv"
+
+    axios.post(endpoint, {
+      email,
+      name,
+      message: massage
+    })
+
+    setMessage("Thank you for your message")
+    setName("")
+    setEmail("")
+    setMassage("")
+  }, [email, massage, name, setMessage])
 
   return (
     <InputContainer>
