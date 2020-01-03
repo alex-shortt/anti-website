@@ -41,13 +41,3 @@ export function ShopifyProvider(props) {
     </ShopifyContext.Provider>
   )
 }
-
-export function findGifs(products) {
-  const tempArr = products.map(
-    product => product.images[product.images.length - 1].src
-  )
-  tempArr.forEach(picture => {
-    const img = new Image()
-    img.src = picture
-  })
-}

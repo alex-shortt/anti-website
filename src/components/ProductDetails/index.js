@@ -12,7 +12,6 @@ const Container = styled.div`
   max-width: 420px;
   padding: 100px 2px;
   height: 100%;
-  text-transform: uppercase;
   box-sizing: border-box;
   overflow-y: auto;
 

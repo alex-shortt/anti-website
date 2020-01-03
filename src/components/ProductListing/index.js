@@ -70,27 +70,15 @@ const ShopNow = styled(Link)`
   }
 `
 
-function getGif(images) {
-  for (const img of images) {
-    if (img.src.includes("gif")) {
-      return img.src
-    }
-  }
-
-  return images[0].src
-}
-
 export default function ProductListing(props) {
   const { product } = props
 
   const { images, title, handle } = product
   const { price } = product.variants[0]
 
-  const gifURL = getGif(images)
-
   return (
     <Container>
-      <Image src={gifURL} />
+      <Image src={images[0].src} />
       <Description>
         <Title>{title}</Title>
         <Subtitle>${price}</Subtitle>
