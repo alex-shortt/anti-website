@@ -12,7 +12,7 @@ const Container = styled.div`
   margin-bottom: 100px;
 `
 
-const LogoVideo = styled.video`
+const LogoGif = styled.img`
   width: 90%;
   max-width: 500px;
 `
@@ -43,14 +43,11 @@ const AngleDown = styled.div`
 `
 
 export default function Landing(props) {
+  const gifURL = "https://d369ls1rsdbvlu.cloudfront.net/gifs/anti-logo.gif"
+
   return (
     <Container>
-      <LogoVideo autoPlay playsinline muted loop>
-        <source
-          type="video/mp4"
-          src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
-        />
-      </LogoVideo>
+      <LogoGif src={gifURL} />
       <AngleDown />
     </Container>
   )

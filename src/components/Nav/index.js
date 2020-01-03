@@ -42,7 +42,7 @@ const PrimaryMenu = styled.div`
   width: 100%;
 `
 
-const LogoVideo = styled.video`
+const LogoGif = styled.img`
   height: 100%;
 `
 
@@ -63,7 +63,7 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
   }
 `
 
-const VideoLink = styled(Link)`
+const LogoLink = styled(Link)`
   height: 70%;
   margin-right: 40px;
   cursor: pointer;
@@ -83,6 +83,8 @@ export default function Nav(props) {
   const [setEvent, setSetEvent] = useState("false")
   const [opacity, setOpacity] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState("false")
+
+  const gifURL = "https://d369ls1rsdbvlu.cloudfront.net/gifs/anti-logo.gif"
 
   const updateOpacity = useCallback(() => {
     const dist = document.getElementById("html").scrollTop
@@ -110,14 +112,9 @@ export default function Nav(props) {
     <>
       <Container opacity={main ? opacity : 1}>
         <PrimaryMenu>
-          <VideoLink to="/">
-            <LogoVideo autoPlay playsinline muted loop>
-              <source
-                type="video/mp4"
-                src="https://d369ls1rsdbvlu.cloudfront.net/video/anti-logo-rotate.mp4"
-              />
-            </LogoVideo>
-          </VideoLink>
+          <LogoLink to="/">
+            <LogoGif src={gifURL} />
+          </LogoLink>
           <NavOptions {...props} />
           <HamburgerIcon
             open={mobileMenuOpen}
