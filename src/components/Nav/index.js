@@ -40,6 +40,10 @@ const PrimaryMenu = styled.div`
   justify-content: space-between;
   height: 100%;
   width: 100%;
+
+  @media screen and (max-width: 600px) {
+    justify-content: space-evenly;
+  }
 `
 
 const LogoGif = styled.img`
@@ -59,7 +63,9 @@ const CartIcon = styled.img.attrs({ src: cartSVG })`
   }
 
   @media screen and (max-width: 600px) {
-    display: none;
+    height: 28px;
+    margin: 0;
+    opacity: 1;
   }
 `
 
@@ -70,8 +76,7 @@ const LogoLink = styled(Link)`
 
   @media screen and (max-width: 600px) {
     height: 45px;
-    margin-top: 9px;
-    margin-bottom: 9px;
+    margin: 9px 0;
   }
 `
 
@@ -112,16 +117,16 @@ export default function Nav(props) {
     <>
       <Container opacity={main ? opacity : 1}>
         <PrimaryMenu>
-          <LogoLink to="/">
-            <LogoGif src={gifURL} />
-          </LogoLink>
-          <NavOptions {...props} />
           <HamburgerIcon
             open={mobileMenuOpen}
             onClick={() =>
               setMobileMenuOpen(mobileMenuOpen === "true" ? "false" : "true")
             }
           />
+          <LogoLink to="/">
+            <LogoGif src={gifURL} />
+          </LogoLink>
+          <NavOptions {...props} />
           <CartIcon onClick={() => setCheckoutOpen("true")} />
         </PrimaryMenu>
         <MobileMenu

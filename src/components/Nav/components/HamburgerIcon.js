@@ -10,7 +10,7 @@ const Hamburger = styled.a`
   transition: all 0.2s ease;
   cursor: pointer;
   z-index: 100;
-  margin: 0 20px;
+  margin: 0;
 
   &:before,
   &:after {
@@ -24,6 +24,7 @@ const Hamburger = styled.a`
     transition: all 0.2s ease;
     transform: ${props =>
       props.open === "true" ? "rotate(45deg)" : "translateZ(0)"};
+    border-radius: 4px;
   }
 
   &:before {

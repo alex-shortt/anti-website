@@ -51,9 +51,6 @@ export default function NavOptions(props) {
     return (
       <Container {...props}>
         <LinkTo to="/#shop">BACK</LinkTo>
-        <NavLink href="#" onClick={() => setCheckoutOpen("true")}>
-          CART
-        </NavLink>
       </Container>
     )
   }
@@ -63,9 +60,6 @@ export default function NavOptions(props) {
       <NavLink href="#shop">SHOP</NavLink>
       <NavLink href="#contact">CONTACT</NavLink>
       <NavLink href="#socials">SOCIALS</NavLink>
-      <NavLink href="#" onClick={() => setCheckoutOpen("true")}>
-        CART
-      </NavLink>
     </Container>
   )
 }
