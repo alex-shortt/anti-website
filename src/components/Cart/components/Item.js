@@ -39,6 +39,12 @@ const RemoveButton = styled.button`
 const Image = styled.img`
   width: 100px;
   padding-left: 40px;
+  @media screen and (max-width: 650px) {
+    width: 50px;
+  }
+  @media screen and (max-width: 850px) {
+    padding-left: 0;
+  }
 `
 
 export default function Item(props) {

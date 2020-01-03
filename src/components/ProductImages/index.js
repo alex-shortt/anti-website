@@ -25,6 +25,10 @@ const MainImage = styled(InnerImageZoom)`
   @media screen and (max-width: 500px) {
     width: 250px;
   }
+
+  @media screen and (max-width: 400px) {
+    width: 220px;
+  }
 `
 
 const Thumbnail = styled.img`
@@ -49,6 +53,10 @@ const PaginateButton = styled.button`
 
   &:hover {
     opacity: 0.6;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin: 0 5px;
   }
 `
 
@@ -81,7 +89,7 @@ export default function ProductImages(props) {
     <Container>
       <SubContainer>
         <PaginateButton onClick={() => changeIndex(-1)}>{"<"}</PaginateButton>
-        <MainImage className="product-image" src={images[index].src} />
+        <MainImage src={images[index].src} />
         <PaginateButton onClick={() => changeIndex(1)}>{">"}</PaginateButton>
       </SubContainer>
       <div className="shop-other__images">

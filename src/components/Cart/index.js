@@ -99,6 +99,14 @@ const Footer = styled.div`
       color: white;
       transition: 0.3s;
     }
+
+    @media screen and (max-width: 650px) {
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    width: 90%;
   }
 `
 
