@@ -76,20 +76,26 @@ export default function ProductDetails(props) {
 
   function addToCheckout() {
     const lineItemsToAdd = { variantId: curVariantId, quantity: 1 }
-    const checkoutId = checkout.id
-    client.checkout
-      .addLineItems(checkoutId, lineItemsToAdd)
-      .then(newCheckout => {
-        setCheckout(newCheckout)
-        setCheckoutOpen("true")
-      })
+    const checkoutId = checkout.id.then(newCheckout => {
+      client.checkout.addLineItems(checkoutId, lineItemsToAdd)
+      setCheckout(newCheckout)
+      setCheckoutOpen("true")
+    })
   }
-
   const toggleDims = useCallback(() => {
     setDimsOpen(dimsOpen === "true" ? "false" : "true")
   }, [dimsOpen])
 
   const { title, variants, descriptionHtml } = product
+
+  const dimensionsHTML = ReactHtmlParser(descriptionHtml).find(
+    obj => obj.props.className === "dimensions-shopify"
+  )
+  const detailsHTML = ReactHtmlParser(descriptionHtml).find(
+    obj => obj.props.className === "prod"
+  )
+
+  console.log(ReactHtmlParser(descriptionHtml))
 
   return (
     <Container>
@@ -111,8 +117,8 @@ export default function ProductDetails(props) {
         <DimensionsButton onClick={() => toggleDims()}>
           DIMENSIONS
         </DimensionsButton>
-        {dimsOpen === "true" && ReactHtmlParser(descriptionHtml)[1]}
-        {ReactHtmlParser(descriptionHtml)[2]}
+        {dimsOpen === "true" && dimensionsHTML}
+        {detailsHTML}
       </div>
     </Container>
   )
