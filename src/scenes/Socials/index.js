@@ -7,13 +7,13 @@ import SectionContainer from "components/SectionContainer"
 import { fetchImages } from "services/instagram"
 
 const ImageContainer = styled.div`
+  position: relative;
   height: 300px;
   width: 100%;
   box-sizing: border-box;
   overflow-x: auto;
-  padding: 0 40px;
+  margin: 0;
   display: flex;
-  padding-bottom: 10px;
 
   &::-webkit-scrollbar {
     background-color: black;
@@ -31,8 +31,9 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   height: 100%;
   cursor: pointer;
-  padding: 0 30px;
+  padding: 10px 30px;
   box-sizing: border-box;
+  object-fit: contain;
 `
 
 const SocialLink = styled.a`
@@ -55,6 +56,35 @@ const SocialIcon = styled(FontAwesomeIcon)`
   margin-right: 20px;
 `
 
+const LeftArrow = styled.button`
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 0 25px;
+  height: 100%;
+  background: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 3rem;
+  outline: none;
+  border: none;
+  box-shadow: 8px 0px 7px -7px #0000008f;
+
+  @media screen and (max-width: 500px) {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+`
+
+const RightArrow = styled(LeftArrow)`
+  left: unset;
+  right: 0;
+  box-shadow: -8px 0px 7px -7px #0000008f;
+`
+
 export default function Socials(props) {
   const [images, setImages] = useState()
 
@@ -69,6 +99,10 @@ export default function Socials(props) {
     }
   })
 
+  const scroll = diff => {
+    document.getElementById("images").scrollLeft += diff
+  }
+
   return (
     <div id="socials">
       <SectionHeader title="Socials" />
@@ -79,7 +113,8 @@ export default function Socials(props) {
         </SocialLink>
         <br />
         <br />
-        <ImageContainer>
+        <ImageContainer id="images">
+          <LeftArrow onClick={() => scroll(-200)}>{"<"}</LeftArrow>
           {images &&
             images.map(image => (
               <Image
@@ -88,6 +123,7 @@ export default function Socials(props) {
                 onClick={() => window.open(image.url)}
               />
             ))}
+          <RightArrow onClick={() => scroll(200)}>{">"}</RightArrow>
         </ImageContainer>
       </SectionContainer>
     </div>
