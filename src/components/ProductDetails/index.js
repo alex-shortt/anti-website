@@ -74,13 +74,14 @@ export default function ProductDetails(props) {
   const [curVariantId, setCurVariantId] = useState(0)
   const [dimsOpen, setDimsOpen] = useState("false")
 
-  function addToCheckout() {
+  async function addToCheckout() {
     const lineItemsToAdd = { variantId: curVariantId, quantity: 1 }
-    const checkoutId = checkout.id.then(newCheckout => {
-      client.checkout.addLineItems(checkoutId, lineItemsToAdd)
-      setCheckout(newCheckout)
-      setCheckoutOpen("true")
-    })
+    const newCheckout = await client.checkout.addLineItems(
+      checkout.id,
+      lineItemsToAdd
+    )
+    setCheckout(newCheckout)
+    setCheckoutOpen("true")
   }
   const toggleDims = useCallback(() => {
     setDimsOpen(dimsOpen === "true" ? "false" : "true")
