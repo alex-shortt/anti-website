@@ -73,6 +73,7 @@ const LogoLink = styled(Link)`
   height: 70%;
   margin-right: 40px;
   cursor: pointer;
+  width: 135px;
 
   @media screen and (max-width: 600px) {
     height: 45px;
