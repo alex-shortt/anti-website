@@ -88,14 +88,13 @@ export default function ProductDetails(props) {
 
   const { title, variants, descriptionHtml } = product
 
-  const dimensionsHTML = ReactHtmlParser(descriptionHtml).find(
-    obj => obj.props.className === "dimensions-shopify"
-  )
-  const detailsHTML = ReactHtmlParser(descriptionHtml).find(
-    obj => obj.props.className === "prod"
+  const description = ReactHtmlParser(descriptionHtml).filter(
+    obj => obj.type !== "meta" && obj.type !== "table"
   )
 
-  console.log(ReactHtmlParser(descriptionHtml))
+  const dims = ReactHtmlParser(descriptionHtml).find(
+    obj => obj.type === "table"
+  ) || <b>Dimensions not available.</b>
 
   return (
     <Container>
@@ -117,8 +116,8 @@ export default function ProductDetails(props) {
         <DimensionsButton onClick={() => toggleDims()}>
           DIMENSIONS
         </DimensionsButton>
-        {dimsOpen === "true" && dimensionsHTML}
-        {detailsHTML}
+        {dimsOpen === "true" && dims}
+        {description}
       </div>
     </Container>
   )
